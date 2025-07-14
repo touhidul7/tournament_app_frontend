@@ -4,6 +4,8 @@ import MyMatches from "../pages/MyMatches";
 import Results from "../pages/Results";
 import Profile from "../pages/Profile";
 import MainLayout from "../layout/MainLayout";
+import SignUp from "../auth/SignUp";
+import Login from "../auth/Login";
 
 const MainRoutes = createBrowserRouter([{
     path: "/",
@@ -25,6 +27,16 @@ const MainRoutes = createBrowserRouter([{
          {
             path: "/my-matches",
             element: <MyMatches />
+         },
+
+         {
+            path: "/signup",
+            element: <SignUp />
+         },
+
+         {
+            path: "/login",
+            element: <Login />
          },
         
          
