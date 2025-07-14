@@ -1,1 +1,12 @@
 @import "tailwindcss";
+@font-face {
+    font-family: PlusJakartaSans;
+    src: url(./fonts/PlusJakartaSans-Regular.ttf);
+}
+@theme{
+    --font-Jakarta: PlusJakartaSans, "sans-serif";
+    --color-mainbg: #202A3F;
+    --color-cardbg: #111827;
+    --color-hoverbg: #AFB6C5;
+}
+

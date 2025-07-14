@@ -2,8 +2,8 @@ import React from 'react';
 
 const SignUp = () => {
     return (
-        <div>
-            
+        <div className='max-w-md mx-auto'>
+            <div></div>
         </div>
     );
 };
