@@ -30,7 +30,7 @@ const Home = () => {
                         </div>
                         <div className='bg-cardbg  p-2  rounded-xl text-white'>
                             <img className='rounded-md' src="./image/class-squad.jpg" alt="" />
-                            <p className='font-semibold text-md mt-2'>CLASS SQUAA</p>
+                            <p className='font-semibold text-md mt-2'>CLASS SQUAD</p>
                             <p className='text-sm font-light'>9 Match Found</p>
                         </div>
                         <div className='bg-cardbg  p-2  rounded-xl text-white'>
@@ -47,7 +47,7 @@ const Home = () => {
                     <div className='bg-cardbg text-white text-lg font-medium text-center py-1 rounded-md mt-6'><p>BR AND LONEWOLF MATCH</p></div>
                     <div className='grid grid-cols-2 gap-3 mt-6'>
                         <div className='bg-cardbg  p-2  rounded-xl text-white'>
-                            <img className='rounded-md' src="./image/free-match.jpg" alt="" />
+                            <img className='rounded-md' src="./public/image/free-match.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>FREE MATCH</p>
                             <p className='text-sm font-light'>25 Match Found</p>
                         </div>
