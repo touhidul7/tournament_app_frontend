@@ -48,16 +48,25 @@ const Login = () => {
                                 </label>
                                 <p><a href="#" className="underline text-white">Forgot Password</a></p>
                             </div>
+                            <div className="flex flex-col gap-4 items-center justify-center">
                             <button
                                 type="submit"
                                 className="w-40 items-center justify-items-center bg-white border text-mainbg px-8 py-2 rounded-md text-xl font-semibold shadow-lg shadow-gray-800"
                             >
                                 Log In
                             </button>
+                            <h2 className="text-center text-sm font-light">
+                            I Don't have an account?
+                            </h2>
+                            <button
+                                type="submit"
+                                className="w-40 bg-cardbg border text-white px-8 py-2 rounded-md text-xl font-semibold shadow-lg shadow-gray-800"
+                            >
+                                Sign up
+                            </button>
+                            </div>
                         </form>
-                        <h2 className="text-center text-sm font-light mt-4">
-                            Don't have an account?
-                        </h2>
+                        
                     
                    </div>
                 </div>
