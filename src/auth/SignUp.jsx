@@ -14,7 +14,7 @@ const SignUp = () => {
                     <h2 className="text-3xl font-semibold">Welcome👋</h2>
                     <p className="text-lg">Please enter your details</p>
                 </div>
-            <section className="h- bg-mainbg justify-items-center pt-12 pb-24 rounded-t-[40px]">
+            <section className="h- bg-mainbg justify-items-center pt-12 pb-12 rounded-t-[40px]">
                 <div className="w-[80%]">
                     <div className="flex flex-col items-center justify-center text-center">
                     <h2 className="text-3xl ">Sign Up</h2>
