@@ -26,7 +26,7 @@ const SignUp = () => {
                                 <div className="flex items-center mt-3 gap-3 bg-white p-1 rounded text-white shadow-lg shadow-gray-800">
                                     <FontAwesomeIcon icon={faUser} className="text-mainbg pl-1" />
                                     <input type="text"
-                                    placeholder="Enter your first name" 
+                                    placeholder="Enter Your First Name" 
                                     className="focus:outline-none bg-white text-mainbg w-full p-2 rounded"
                                     required
                                     />
@@ -36,7 +36,7 @@ const SignUp = () => {
                                 <div className="flex items-center mt-3 gap-3 bg-white p-1 rounded text-white shadow-lg shadow-gray-800">
                                     <FontAwesomeIcon icon={faUser} className="text-mainbg pl-1" />
                                     <input type="text"
-                                    placeholder="Enter your last name" 
+                                    placeholder="Enter Your Last Name" 
                                     className="focus:outline-none bg-white text-mainbg w-full p-2 rounded"
                                     required
                                     />
@@ -56,7 +56,7 @@ const SignUp = () => {
                                     <FontAwesomeIcon icon={faKey} className="text-mainbg pl-1" />
                                     <input
                                         type={showPassword ? "text" : "password"}
-                                        placeholder="Enter your Password"
+                                        placeholder="Enter Your Password"
                                         className="w-full bg-white p-2 rounded text-mainbg  focus:outline-none"
                                         required
                                     />
