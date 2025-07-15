@@ -26,7 +26,7 @@ const Login = () => {
                            <div className="flex items-center gap-2 bg-dark-card p-2 rounded-xl bg-white text-mainbg shadow-lg shadow-gray-800">
                              <FontAwesomeIcon icon={faAt}/>
                             <input
-                                type="email"
+                                type="email"    
                                 placeholder="Email or Username"
                                 className="w-full bg-dark-card p-1 text-lg rounded text-mainbg border-none focus:outline-none"
                                 required
@@ -37,7 +37,7 @@ const Login = () => {
                                 <input
                                 type="password"
                                 placeholder="Password"
-                                className="w-full bg-dark-card p-1 text-lg rounded text-mainbg border-none focus:outline-none"
+                                className="w-full bg-dark-card  p-1 text-lg rounded text-mainbg border-none focus:outline-none"
                                 required
                             />
                             </div>
