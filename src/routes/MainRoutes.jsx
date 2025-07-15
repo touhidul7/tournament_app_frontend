@@ -6,6 +6,7 @@ import Profile from "../pages/Profile";
 import MainLayout from "../layout/MainLayout";
 import SignUp from "../auth/SignUp";
 import Login from "../auth/Login";
+import BrMatches from "../pages/BrMatches"
 
 const MainRoutes = createBrowserRouter([{
     path: "/",
@@ -37,6 +38,10 @@ const MainRoutes = createBrowserRouter([{
          {
             path: "/login",
             element: <Login />
+         },
+         {
+            path: "/brmatches",
+            element: <BrMatches/>
          },
         
          

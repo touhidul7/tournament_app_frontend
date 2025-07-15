@@ -1,0 +1,95 @@
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const BrMatches = () => {
+    return (
+        <div className="max-w-md mx-auto h-screen font-Jakarta bg-mainbg">
+            <div className=" bg-mainbg relative flex items-start justify-center">
+                {/* Top white curved section */}
+                <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
+                    <div className="flex items-center gap-4">
+                        <FontAwesomeIcon className=" text-2xl" icon={faChevronLeft}/>
+                        <button className="bg-cardbg text-white px-6 py-2 rounded-xl font-medium shadow">
+                            BR Matches
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {/* === BR Matches Card Section === */}
+            <section className="w-full h-22 mt-24 justify-items-center">
+                {/* === Cards === */}
+                <div className="relative w-[95%] bg-cardbg rounded-lg p-2">
+                    <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
+                    <div className="flex items-center gap-2">
+                        <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
+                        <div className="flex flex-col gap-1.5">
+                            <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
+                            <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
+                        </div>
+                    </div>
+                    {/* pricing mini card */}
+                    <div className='grid grid-cols-3 gap-3 items-center justify-center mt-4'>
+                        <div className=''>
+                            <div className='bg-green-500 text-white text-center rounded-t-md'>
+                                <h2>+ WIN PRIZE</h2>
+                            </div>
+                            <div className='bg-white  text-center rounded-b-md'>
+                                <h2>800</h2>
+                            </div>
+                        </div>
+                        <div>
+                            <div className='bg-blue-500 text-white text-center rounded-t-md'>
+                                <h2>+ PER KILL</h2>
+                            </div>
+                            <div className='bg-white text-center rounded-b-md'>
+                                <h2>10</h2>
+                            </div>
+                        </div>
+                        <div>
+                            <div className='bg-red-500 text-white text-center rounded-t-md'>
+                                <h2>+ ENTRY FEE</h2>
+                            </div>
+                            <div className='bg-white text-center rounded-b-md'>
+                                <h2>20</h2>
+                            </div>
+                        </div>
+                    </div>
+                    {/* match details */}
+                    <div className='grid grid-cols-3 mt-5 '>
+                        <div className='flex flex-col items-center'>
+                            <h2 className='text-hoverbg font-medium'>ENTRY TYPE</h2>
+                            <h2 className='text-white font-semibold'>100</h2>
+                        </div>
+                        <div className='flex flex-col items-center'>
+                            <h2 className='text-hoverbg font-medium'>MAP</h2>
+                            <h2 className='text-white font-semibold'>Bermuda</h2>
+                        </div>
+                        <div className='flex flex-col items-center'>
+                            <h2 className='text-hoverbg font-medium'>VERSION</h2>
+                            <h2 className='text-white font-semibold'>Mobile</h2>
+                        </div>
+                    </div>
+                    {/* === Progres Bar and Joining === */}
+                    <div className="flex items-center justify-between gap-4">
+                        {/* === Bar === */}
+                        <div className="mt-5 w-3/4">
+                            <div className="w-full h-5 rounded-full bg-hoverbg">
+                                <div className="bg-green-500 h-5 w-10 rounded-full"></div>
+                            </div>
+                            <div className="flex items-center justify-between text-white text-sm mt-1 pr-12">
+                                <p>Only 42 spots are left</p>
+                                <p>10/38</p>
+                            </div>
+                        </div>
+                        {/* === Joining === */}
+                        <div className="w-1/4">
+                            <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">Join</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
+};
+
+export default BrMatches;
