@@ -4,7 +4,7 @@ import BottomNav from '../components/BottomNav';
 
 const MainLayout = () => {
     return (
-        <div>
+        <div className='max-w-md mx-auto'>
             <Outlet/>
             <BottomNav />
         </div>
