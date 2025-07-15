@@ -14,16 +14,16 @@ const Carousel = () => {
   };
 
   return (
-    <div className="">
+    <div className="max-w-sm mx-auto">
       <Slider {...settings}>
-        <div className="h-40 w-full rounded-md">
-          <img className='rounded-md' src="/public/image/banner-01.jpg" alt="" />
+        <div className="h-40 rounded-md">
+          <img className='rounded-md' src="./image/banner-01.jpg" alt="" />
         </div>
-        <div className="h-40 w-full rounded-md">
-            <img className='rounded-md' src="/public/image/banner-02.jpg" alt="" />
+        <div className="h-40 rounded-md">
+            <img className='rounded-md' src="./image/banner-02.jpg" alt="" />
         </div>
-        <div className="h-40 w-full rounded-md">
-            <img className='rounded-md' src="/public/image/banner-03.jpg" alt="" />
+        <div className="h-40 rounded-md">
+            <img className='rounded-md' src="./image/banner-03.jpg" alt="" />
         </div>
       </Slider>
     </div>
