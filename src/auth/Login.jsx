@@ -6,15 +6,16 @@ import { NavLink } from "react-router";
 
 const Login = () => {
     return (
-        <div className='min-h-screen bg-main-bg text-white p-3 md:p-8 font-poppins flex items-center justify-center'>
-            <section className="max-w-xl w-full h-auto mx-auto bg-dark-bg p-10 rounded-lg shadow-md">
-                <div className="flex flex-col items-center justify-center text-center">
-                    <h2 className="text-3xl ">Welcome Back 👋</h2>
+        <div className='w-full h-screen text-white font-Jakarta items-center justify-center'>
+                <div className="flex flex-col items-center justify-center text-center text-cardbg py-12">
+                    <h2 className="text-3xl font-semibold">Welcome Back 👋</h2>
                     <p className="text-lg">Please enter you details</p>
                 </div>
-                <div className="flex items-center justify-center gap-4 mt-6 p-2 bg-dark-card rounded-lg cursor-pointer hover:bg-purple-600 transition-colors border border-card-border">
-                    <FontAwesomeIcon icon={faGoogle} className="text-3xl text-white" />
-                    <p>Log in with Google</p>
+            <section className="w-full h-screen bg-mainbg justify-items-center pt-12 rounded-t-[40px]">
+                <div className="w-[80%]">
+                <div className="flex items-center justify-center gap-4 mt-6 p-2 bg-white rounded-md cursor-pointer text-mainbg">
+                    <FontAwesomeIcon icon={faGoogle} className="text-3xl" />
+                    <p className="text-lg">Log in with Google</p>
                 </div>
                 <div>
                    <h2 className="text-center text-md font-light mt-4">
@@ -22,34 +23,34 @@ const Login = () => {
                    </h2>
                    <div>
                         <form className="flex flex-col gap-4 mt-4">
-                           <div className="flex items-center gap-2 bg-dark-card p-2 rounded text-white border border-card-border">
+                           <div className="flex items-center gap-2 bg-dark-card p-2 rounded-xl bg-white text-mainbg shadow-lg shadow-gray-800">
                              <FontAwesomeIcon icon={faAt}/>
                             <input
                                 type="email"
                                 placeholder="Email or Username"
-                                className="w-full bg-dark-card p-2 rounded text-white border-none"
+                                className="w-full bg-dark-card p-1 text-lg rounded text-mainbg border-none focus:outline-none"
                                 required
                             />
                            </div>
-                            <div className="flex items-center gap-2 bg-dark-card p-2 rounded text-white border border-card-border">
-                                <FontAwesomeIcon icon={faKey} className="text-white" />
+                            <div className="flex items-center gap-2 bg-dark-card p-2 rounded-xl bg-white text-mainbg shadow-lg shadow-gray-800">
+                                <FontAwesomeIcon icon={faKey} className="text-mainbg" />
                                 <input
                                 type="password"
                                 placeholder="Password"
-                                className="w-full bg-dark-card p-2 rounded text-white border-none"
+                                className="w-full bg-dark-card p-1 text-lg rounded text-mainbg border-none focus:outline-none"
                                 required
                             />
                             </div>
                             <div className="flex items-center justify-between text-sm text-gray-400 mt-5">
                                 <label className="flex items-center gap-2 text-sm text-white">
-                                    <input type="checkbox" className="accent-purple-600" />
+                                    <input type="checkbox" className="accent-cardbg" />
                                     Remember me
                                 </label>
                                 <p><a href="#" className="underline text-white">Forgot Password</a></p>
                             </div>
                             <button
                                 type="submit"
-                                className="w-full bg-purple-600 p-2 py-3 text-lg mt-3 rounded text-white hover:bg-purple-700 transition-colors"
+                                className="w-40 items-center justify-items-center bg-white border text-mainbg px-8 py-2 rounded-md text-xl font-semibold shadow-lg shadow-gray-800"
                             >
                                 Log In
                             </button>
@@ -58,11 +59,8 @@ const Login = () => {
                             Don't have an account?
                         </h2>
                     
-                        <NavLink to="/signup"
-                         className="w-full flex justify-center items-center border border-purple-600 p-2 py-3 text-lg mt-3 rounded text-white hover:bg-purple-600 transition-colors">
-                            Sign Up
-                        </NavLink>
                    </div>
+                </div>
                 </div>
             </section>
         </div>
