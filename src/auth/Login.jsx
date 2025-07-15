@@ -11,7 +11,7 @@ const Login = () => {
                     <h2 className="text-3xl font-semibold">Welcome Back 👋</h2>
                     <p className="text-lg">Please enter you details</p>
                 </div>
-            <section className="w-full bg-mainbg justify-items-center pt-12 pb-12 rounded-t-[40px]">
+            <section className="w-full bg-mainbg justify-items-center pt-12 pb-24 rounded-t-[40px]">
                 <div className="w-[80%]">
                 <div className="flex items-center justify-center gap-4 mt-6 p-2 bg-white rounded-md cursor-pointer text-mainbg">
                     <FontAwesomeIcon icon={faGoogle} className="text-3xl" />
