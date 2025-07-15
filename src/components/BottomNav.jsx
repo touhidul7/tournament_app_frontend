@@ -12,30 +12,30 @@ const BottomNav = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `inline-flex flex-col items-center justify-center px-1 group ${
+              `inline-flex flex-col items-center justify-center px-1 group transition-all duration-300 delay-75 ease-in-out ${
                 isActive
-                  ? "bg-hoverbg text-mainbg rounded-2xl "
+                  ? "bg-hoverbg text-mainbg rounded-2xl  "
                   : "hover:bg-hoverbg rounded-2xl"
               }`
             }
           >
-          <FontAwesomeIcon icon={faGamepad}/>
-            <span>Play</span>
+          <FontAwesomeIcon icon={faGamepad} className="text-2xl"/>
+            <span className="font-bold">Play</span>
           </NavLink>
 
           {/* my matches */}
           <NavLink
             to="/my-matches"
              className={({ isActive }) =>
-              `inline-flex flex-col items-center justify-center px-1 group ${
+              `inline-flex flex-col items-center justify-center px-1 group transition-all duration-300 delay-75 ease-in-out ${
                 isActive
                   ? "bg-hoverbg text-mainbg rounded-2xl "
                   : "hover:bg-hoverbg  text-mainbg rounded-2xl"
               }`
             }
           >
-           <FontAwesomeIcon icon={faListCheck}/>
-            <span>My Matches</span>
+           <FontAwesomeIcon icon={faListCheck} className="text-2xl"/>
+            <span className="text-sm font-bold">My Matches</span>
           </NavLink>
 
          
@@ -44,30 +44,30 @@ const BottomNav = () => {
           <NavLink
             to="/results"
                 className={({ isActive }) =>
-                `inline-flex flex-col items-center justify-center px-1 group ${
+                `inline-flex flex-col items-center justify-center px-1 group transition-all duration-300 delay-75 ease-in-out ${
                     isActive
                     ? "bg-hoverbg text-mainbg rounded-2xl "
                     : "hover:bg-hoverbg  text-mainbg rounded-2xl"
                 }`
                 }
             >
-            <FontAwesomeIcon icon={faChartSimple} />
-            <span>Result</span>
+            <FontAwesomeIcon icon={faChartSimple} className="text-2xl"/>
+            <span className="font-bold">Result</span>
           </NavLink>
 
           {/* profile */}
           <NavLink
             to="/profile"
                 className={({ isActive }) =>
-                `inline-flex flex-col items-center justify-center px-1 group ${
+                `inline-flex flex-col items-center justify-center px-1 group transition-all duration-300 delay-75 ease-in-out ${
                     isActive
                     ? "bg-hoverbg text-mainbg rounded-2xl "
                     : "hover:bg-hoverbg  text-mainbg rounded-2xl"
                 }`
                 }
             >
-           <FontAwesomeIcon icon={faUser} />
-            <span>Profile</span>
+           <FontAwesomeIcon icon={faUser} className="text-2xl"/>
+            <span className="font-bold">Profile</span>
           </NavLink>
         </div>
       </div>
