@@ -9,7 +9,7 @@ const Home = () => {
             <section className='w-[95%]'>
                 <div className='py-2 flex items-center justify-between border-b border-cardbg'>
                     <div className='flex items-center gap-2'>
-                        <img className='w-[50px] h-[50px] rounded-full' src="/public/image/profile-image.jpg" alt="Profilepic" />
+                        <img className='w-[50px] h-[50px] rounded-full' src="./image/profile-image.jpg" alt="Profilepic" />
                         <h2 className='text-white font-medium text-lg'>App Name</h2>
                     </div>
                     <div className='flex items-center gap-2 text-white bg-cardbg px-4 py-2 rounded-full'> <FontAwesomeIcon className='text-2xl' icon={faWallet}/> <p><FontAwesomeIcon icon={faBangladeshiTakaSign}/> 0.0TK</p></div>
@@ -24,22 +24,22 @@ const Home = () => {
                     {/* === CARD === */}
                     <div className='grid grid-cols-2 gap-3'>
                         <div className='bg-cardbg  p-2  rounded-xl text-white'>
-                            <img className='rounded-md' src="/public/image/br-banner.jpg" alt="" />
+                            <img className='rounded-md' src="./image/br-banner.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>BR MATCH</p>
                             <p className='text-sm font-light'>5 Match Found</p>
                         </div>
                         <div className='bg-cardbg  p-2  rounded-xl text-white'>
-                            <img className='rounded-md' src="/public/image/class-squad.jpg" alt="" />
+                            <img className='rounded-md' src="./image/class-squad.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>CLASS SQUAA</p>
                             <p className='text-sm font-light'>9 Match Found</p>
                         </div>
                         <div className='bg-cardbg  p-2  rounded-xl text-white'>
-                            <img className='rounded-md' src="/public/image/lonewolf.jpg" alt="" />
+                            <img className='rounded-md' src="./image/lonewolf.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>LONE WOLF</p>
                             <p className='text-sm font-light'>3 Match Found</p>
                         </div>
                         <div className='bg-cardbg  p-2  rounded-xl text-white'>
-                            <img className='rounded-md' src="/public/image/vs.jpg" alt="" />
+                            <img className='rounded-md' src="./image/vs.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>CS 1V1, 2V2</p>
                             <p className='text-sm font-light'>10 Match Found</p>
                         </div>
@@ -47,7 +47,7 @@ const Home = () => {
                     <div className='bg-cardbg text-white text-lg font-medium text-center py-1 rounded-md mt-6'><p>BR AND LONEWOLF MATCH</p></div>
                     <div className='grid grid-cols-2 gap-3 mt-6'>
                         <div className='bg-cardbg  p-2  rounded-xl text-white'>
-                            <img className='rounded-md' src="/public/image/free-match.jpg" alt="" />
+                            <img className='rounded-md' src="./image/free-match.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>FREE MATCH</p>
                             <p className='text-sm font-light'>25 Match Found</p>
                         </div>
