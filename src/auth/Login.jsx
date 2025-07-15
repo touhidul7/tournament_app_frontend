@@ -6,7 +6,7 @@ import { NavLink } from "react-router";
 
 const Login = () => {
     return (
-        <div className='w-full h-screen text-white font-Jakarta items-center justify-center'>
+        <div className='max-w-md mx-auto h-screen text-white font-Jakarta items-center justify-center'>
                 <div className="flex flex-col items-center justify-center text-center text-cardbg py-12">
                     <h2 className="text-3xl font-semibold">Welcome Back 👋</h2>
                     <p className="text-lg">Please enter you details</p>
