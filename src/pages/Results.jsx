@@ -1,6 +1,7 @@
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { NavLink } from 'react-router';
 
 const Results = () => {
     return (
@@ -31,7 +32,7 @@ const Results = () => {
                         </h2>
                     </div>
                 </div>
-                <div className='flex items-center gap-2 p-2'>
+                <NavLink to='/resultdetails' className='flex items-center gap-2 p-2'>
                     <div className='bg-white rounded-full h-10 w-10 flex items-center justify-center'>
                         {/*  */}
                         <FontAwesomeIcon icon={faUser}/>
@@ -40,7 +41,7 @@ const Results = () => {
                         <h2 className='text-white font-medium'>Solo Mobile survival - only headshot</h2>
                         <p className='text-yellow-500 text-sm'>2025-07-15 at 06:00pm</p>
                     </div>
-                </div>
+                </NavLink>
                 {/* pricing mini card */}
                 <div className='grid grid-cols-3 gap-3 items-center justify-center m-4'>
                     <div className=''>
