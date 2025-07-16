@@ -438,7 +438,7 @@ const BrMatches = () => {
                 </div>
             </section>
             {/* ==== Pop Up === */}
-            <div className="showPrizeDetails hidden fixed bottom-18 w-full justify-items-center z-80">
+            <div className="showPrizeDetails fixed bottom-18 w-full justify-items-center z-80">
                 {/* === Cross icon === */}
                 <div>
                     <FontAwesomeIcon className="text-3xl text-red-500" icon={faCircleXmark}/>
