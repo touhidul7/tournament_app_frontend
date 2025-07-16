@@ -8,6 +8,11 @@ import SignUp from "../auth/SignUp";
 import Login from "../auth/Login";
 import BrMatches from "../pages/BrMatches"
 import MatcheDetails from "../pages/MatcheDetails";
+import Wallet from "../pages/Wallet";
+import ProfileEdit from "../pages/ProfileEdit";
+import Withdraw from "../pages/Withdraw";
+import Rules from "../pages/Rules";
+import TopPlayers from "../pages/TopPlayers";
 
 const MainRoutes = createBrowserRouter([{
     path: "/",
@@ -47,6 +52,31 @@ const MainRoutes = createBrowserRouter([{
          {
             path: "/matchdetails",
             element : <MatcheDetails/>
+         },
+        
+         {
+            path: "/wallet",
+            element : <Wallet/>
+         },
+        
+         {
+            path: "/profile-edit",
+            element : <ProfileEdit/>
+         },
+        
+         {
+            path: "/withdraw",
+            element : <Withdraw/>
+         },
+        
+         {
+            path: "/rules",
+            element : <Rules/>
+         },
+        
+         {
+            path: "/top-players",
+            element : <TopPlayers/>
          },
         
          

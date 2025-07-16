@@ -1,6 +1,7 @@
-import { faBangladeshiTakaSign, faChartBar, faChartDiagram, faChartSimple, faScaleBalanced, faShare, faShareAlt, faUser, faUserCircle, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faBangladeshiTakaSign, faChartSimple, faScaleBalanced, faShareAlt,  faUserCircle, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons/faHandHoldingDollar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { NavLink } from 'react-router';
 
 
 const Profile = () => {
@@ -38,40 +39,40 @@ const Profile = () => {
             </div>
             <div className='space-y-4'>
                 {/* wallet div */}
-                <div className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
+                <NavLink to='/wallet' className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
                     <FontAwesomeIcon icon={faWallet} className='text-3xl text-white' />
                     <h2 className='text-white text-xl font-medium'>
                         Wallet
                     </h2>
-                </div>
+                </NavLink>
                 {/* withdraw section */}
-               <div className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
+               <NavLink to='/withdraw' className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
                     <FontAwesomeIcon icon={faHandHoldingDollar} className='text-3xl text-white' />
                     <h2 className='text-white text-xl font-medium'>
                         Withdraw
                     </h2>
-                </div>
+                </NavLink>
                 {/* Profile details section */}
-               <div className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
+               <NavLink to='/profile-edit' className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
                     <FontAwesomeIcon icon={faUserCircle} className='text-3xl text-white' />
                     <h2 className='text-white text-xl font-medium'>
                         Profile
                     </h2>
-                </div>
+                </NavLink>
                 {/* Rules section */}
-               <div className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
+               <NavLink to='/rules' className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
                     <FontAwesomeIcon icon={faScaleBalanced} className='text-3xl text-white' />
                     <h2 className='text-white text-xl font-medium'>
                         Rules
                     </h2>
-                </div>
+                </NavLink>
                 {/* Top Player Section */}
-               <div className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
+               <NavLink to='/top-players' className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
                     <FontAwesomeIcon icon={faChartSimple} className='text-3xl text-white' />
                     <h2 className='text-white text-xl font-medium'>
                         Top Players
                     </h2>
-                </div>
+                </NavLink>
 
                <div className='w-[90%] mx-auto bg-cardbg px-3 py-3 flex items-center gap-5 rounded-lg'>
                     <FontAwesomeIcon icon={faShareAlt} className='text-3xl text-white' />
