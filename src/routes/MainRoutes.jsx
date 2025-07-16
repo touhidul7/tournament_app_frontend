@@ -13,6 +13,7 @@ import ProfileEdit from "../pages/ProfileEdit";
 import Withdraw from "../pages/Withdraw";
 import Rules from "../pages/Rules";
 import TopPlayers from "../pages/TopPlayers";
+import ResultDetails from "../pages/ResultDetails";
 
 const MainRoutes = createBrowserRouter([{
     path: "/",
@@ -77,6 +78,10 @@ const MainRoutes = createBrowserRouter([{
          {
             path: "/top-players",
             element : <TopPlayers/>
+         },
+         {
+            path: "/resultdetails",
+            element : <ResultDetails/>
          },
         
          

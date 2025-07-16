@@ -4,11 +4,19 @@ import { NavLink } from "react-router";
 
 const MatcheDetails = () => {
     return (
-        <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg justify-items-center pb-40">
-                <NavLink to='/brmatches' className="w-full flex items-center gap-8 bg-cardbg pl-3 text-white py-2 sticky top-0">
-                    <FontAwesomeIcon className="font-medium text-xl" icon={faChevronLeft}/>
-                    <h1 className="font-medium text-xl">Match Details</h1>
-                </NavLink>
+        <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
+            <div className="pb-24">
+                <div className=" bg-mainbg relative flex items-start justify-center">
+                    {/* Top white curved section */}
+                    <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
+                        <NavLink to='/' className="bg-cardbg text-white px-6 py-2 rounded-xl text-lg font-medium shadow flex items-center gap-3 ">
+                            <span><FontAwesomeIcon className=" text-xl" icon={faChevronLeft} /></span>
+                            Match Details
+                        </NavLink>
+                    </div>
+                </div>
+            </div>
+            <div className="max-w-md mx-auto justify-items-center">
                 {/* === Match Details Section === */}
                 <section className="w-[95%] bg-cardbg mt-3 rounded-md py-2 text-white">
                     <h2 className="border-b border-b-hoverbg pb-2 pl-2 text-md font-semibold mb-2">Solo Time | Mobile | Regular</h2>
@@ -107,6 +115,7 @@ const MatcheDetails = () => {
                     <h2 className="border-b border-b-hoverbg pb-2">1. Subas Hembrom</h2>
                     <h2 className="border-b border-b-hoverbg py-2">2. Juwel Hossain</h2>
                 </div>
+            </div>
         </div>
     );
 };
