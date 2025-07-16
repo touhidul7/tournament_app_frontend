@@ -1,4 +1,4 @@
-import { faChevronDown, faChevronLeft, faClock, faKey, faTrophy } from "@fortawesome/free-solid-svg-icons";
+import { faAward, faChevronDown, faChevronLeft, faCircleXmark, faClock, faCrown, faFire, faHandPeace, faKey, faMedal, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const BrMatches = () => {
@@ -423,7 +423,7 @@ const BrMatches = () => {
                             <p><FontAwesomeIcon className="text-md mr-1" icon={faKey}/> Room Details</p>
                             <FontAwesomeIcon icon={faChevronDown}/>
                         </div>
-                        <div className="w-full flex items-center justify-between border-2 border-blue-500 text-white text-md rounded-md text-md p-2">
+                        <div className="prizeDetails w-full flex items-center justify-between border-2 border-blue-500 text-white text-md rounded-md text-md p-2">
                             <p><FontAwesomeIcon className="text-md mr-1" icon={faTrophy}/>Prize Details</p>
                             <FontAwesomeIcon icon={faChevronDown}/>
                         </div>
@@ -433,6 +433,28 @@ const BrMatches = () => {
                     </div>
                 </div>
             </section>
+            {/* ==== Pop Up === */}
+            <div className="showPrizeDetails hidden fixed bottom-18 w-full justify-items-center z-80">
+                {/* === Cross icon === */}
+                <div>
+                    <FontAwesomeIcon className="text-3xl text-red-500" icon={faCircleXmark}/>
+                </div>
+                <div className="w-[70%] text-center mt-3">
+                    <div className="bg-blue-500 rounded-t-md py-2">
+                        <h2 className="font-bold text-xl text-white">TOTAL WINPRIZE</h2>
+                        <p className="text-sm text-white mt-1">Dou Time | Mobile | Regular</p>
+                    </div>
+                    <div className="bg-white rounded-b-md py-2 flex flex-col gap-0.5">
+                        <p className="font-medium text-lg text-gray-700"> <FontAwesomeIcon className="text-xl text-amber-400" icon={faCrown}/> Winner - 100 Taka</p>
+                        <p className="font-medium text-lg text-gray-700"> <FontAwesomeIcon className="text-xl text-orange-300" icon={faTrophy}/> 2nd Position - 80 Taka</p>
+                        <p className="font-medium text-lg text-gray-700"> <FontAwesomeIcon className="text-xl text-amber-300" icon={faAward}/> 3rd Position - 50 Taka</p>
+                        <p className="font-medium text-lg text-gray-700"> <FontAwesomeIcon className="text-xl text-amber-300" icon={faMedal}/> 4th Position - 40 Taka</p>
+                        <p className="font-medium text-lg text-gray-700"> <FontAwesomeIcon className="text-xl text-amber-300" icon={faMedal}/> 5th Position - 30 Taka</p>
+                        <p className="font-medium text-lg text-gray-700"> <FontAwesomeIcon className="text-xl text-amber-500" icon={faFire}/> Per Kill: 10 Taka</p>
+                        <p className="font-medium text-lg text-gray-700"> <FontAwesomeIcon className="text-xl text-amber-500" icon={faHandPeace}/> Total Prize Pool: 800 Taka</p>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
