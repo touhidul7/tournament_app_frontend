@@ -1,5 +1,6 @@
 import { faAward, faChevronDown, faChevronLeft, faCircleXmark, faClock, faCrown, faFire, faHandPeace, faKey, faMedal, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router";
 
 const BrMatches = () => {
     return (
@@ -7,26 +8,28 @@ const BrMatches = () => {
             <div className=" bg-mainbg relative flex items-start justify-center">
                 {/* Top white curved section */}
                 <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
-                    <div className="flex items-center gap-4">
-                        <FontAwesomeIcon className=" text-2xl" icon={faChevronLeft}/>
-                        <button className="bg-cardbg text-white px-6 py-2 rounded-xl font-medium shadow">
+                    
+                        
+                        <NavLink to='/' className="bg-cardbg text-white px-6 py-2 rounded-xl text-lg font-medium shadow flex items-center gap-3 ">
+                            <span><FontAwesomeIcon className=" text-xl" icon={faChevronLeft}/></span>
                             BR Matches
-                        </button>
-                    </div>
+                        </NavLink>
+                    
                 </div>
             </div>
             {/* === BR Matches Card Section === */}
             <section className="w-full mt-24 justify-items-center">
                 {/* === Cards === */}
-                <div className="relative w-[95%] bg-cardbg rounded-lg p-2">
+                <div className="w-[95%]">
+                    <div className="relative bg-cardbg rounded-lg p-2">
                     <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                    <div className="flex items-center gap-2">
+                    <NavLink to='/matchdetails' className="flex items-center gap-2">
                         <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
                         <div className="flex flex-col gap-1.5">
                             <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
                             <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
                         </div>
-                    </div>
+                    </NavLink>
                     {/* pricing mini card */}
                     <div className='grid grid-cols-3 gap-3 items-center justify-center mt-4'>
                         <div className=''>
@@ -99,6 +102,7 @@ const BrMatches = () => {
                     <div className="absolute bottom-0 w-full left-0 text-white bg-green-500 p-2 rounded-b-lg">
                         <p className="flex items-center justify-center"><FontAwesomeIcon className="mr-2 text-2xl" icon={faClock}/>STARTS IN- <h2><input className="font-bold" type="time" /></h2></p>
                     </div>
+                </div>
                 </div>
                 {/* === Cards Two === */}
                 <div className="relative w-[95%] bg-cardbg rounded-lg p-2 mt-6">

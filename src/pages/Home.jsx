@@ -2,6 +2,7 @@ import { faBangladeshiTakaSign, faFire, faWallet } from '@fortawesome/free-solid
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import Carousel from '../components/Carousel';
+import { NavLink } from 'react-router';
 
 const Home = () => {
     return (
@@ -23,11 +24,11 @@ const Home = () => {
                 <div>
                     {/* === CARD === */}
                     <div className='grid grid-cols-2 gap-3'>
-                        <div className='bg-cardbg  p-2  rounded-xl text-white'>
+                        <NavLink to='/brmatches' className='bg-cardbg  p-2  rounded-xl text-white'>
                             <img className='rounded-md' src="./image/br-banner.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>BR MATCH</p>
                             <p className='text-sm font-light'>5 Match Found</p>
-                        </div>
+                        </NavLink>
                         <div className='bg-cardbg  p-2  rounded-xl text-white'>
                             <img className='rounded-md' src="./image/class-squad.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>CLASS SQUAD</p>
