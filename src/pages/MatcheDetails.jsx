@@ -5,12 +5,12 @@ import { NavLink } from "react-router";
 const MatcheDetails = () => {
     return (
         <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg justify-items-center pb-40">
-                <NavLink to='/brmatches' className="w-full flex items-center gap-8 bg-cardbg pl-3 text-white py-2 fixed top-0">
+                <NavLink to='/brmatches' className="w-full flex items-center gap-8 bg-cardbg pl-3 text-white py-2 sticky top-0">
                     <FontAwesomeIcon className="font-medium text-xl" icon={faChevronLeft}/>
                     <h1 className="font-medium text-xl">Match Details</h1>
                 </NavLink>
                 {/* === Match Details Section === */}
-                <section className="w-[95%] bg-cardbg mt-4 rounded-md py-2 text-white">
+                <section className="w-[95%] bg-cardbg mt-3 rounded-md py-2 text-white">
                     <h2 className="border-b border-b-hoverbg pb-2 pl-2 text-md font-semibold mb-2">Solo Time | Mobile | Regular</h2>
                     <div className="grid gap-3">
                         <div className="flex items-center justify-between gap-3 mx-2">
