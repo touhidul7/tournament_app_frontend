@@ -2,9 +2,15 @@
 @font-face {
     font-family: PlusJakartaSans;
     src: url(./fonts/PlusJakartaSans-Regular.ttf);
+    
+}
+@font-face {
+    font-family: HindSiliguri;
+    src: url(./fonts/HindSiliguri-Regular.ttf);
 }
 @theme{
     --font-Jakarta: PlusJakartaSans, "sans-serif";
+    --font-Siliguri: HindSiliguri, "sans-serif";
     --color-mainbg: #202A3F;
     --color-cardbg: #111827;
     --color-hoverbg: #AFB6C5;
