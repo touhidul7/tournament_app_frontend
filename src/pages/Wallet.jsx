@@ -20,12 +20,12 @@ const Wallet = () => {
                     </h2>
             </div>
             {/* transaction section */}
-            <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center font-light'>
+            <NavLink to='/transaction-history' className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center font-light'>
                    <h2>
                         View Transaction History
                     </h2>
                     <FontAwesomeIcon icon={faChevronRight}/>
-            </div>
+            </NavLink>
             {/* winning balance */}
             <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-3 rounded-lg justify-between items-center font-light'>
                   <div className='flex flex-col gap-1'>

@@ -15,84 +15,89 @@ import Rules from "../pages/Rules";
 import TopPlayers from "../pages/TopPlayers";
 import ResultDetails from "../pages/ResultDetails";
 import AddMoney from "../pages/AddMoney";
+import TransactionHistory from "../pages/TransactionHistory";
 
 
 const MainRoutes = createBrowserRouter([{
-    path: "/",
-    element: <MainLayout />,
-    children: [
-        {
-        path: "/",
-        element: <Home/>
-         },
-         {
-            path: "/results",
-            element: <Results />
-         },
-         {
-            path: "/profile",
-            element: <Profile />
-         },
-        
-         {
-            path: "/my-matches",
-            element: <MyMatches />
-         },
+   path: "/",
+   element: <MainLayout />,
+   children: [
+      {
+         path: "/",
+         element: <Home />
+      },
+      {
+         path: "/results",
+         element: <Results />
+      },
+      {
+         path: "/profile",
+         element: <Profile />
+      },
 
-         {
-            path: "/signup",
-            element: <SignUp />
-         },
+      {
+         path: "/my-matches",
+         element: <MyMatches />
+      },
 
-         {
-            path: "/login",
-            element: <Login />
-         },
-         {
-            path: "/brmatches",
-            element: <BrMatches/>
-         },
-         {
-            path: "/matchdetails",
-            element : <MatcheDetails/>
-         },
-        
-         {
-            path: "/wallet",
-            element : <Wallet/>
-         },
-        
-         {
-            path: "/profile-edit",
-            element : <ProfileEdit/>
-         },
-        
-         {
-            path: "/withdraw",
-            element : <Withdraw/>
-         },
-        
-         {
-            path: "/rules",
-            element : <Rules/>
-         },
-        
-         {
-            path: "/top-players",
-            element : <TopPlayers/>
-         },
-         {
-            path: "/resultdetails",
-            element : <ResultDetails/>
-         },
-{
-   path: "/addmoney",
-   element : <AddMoney/>
-},
+      {
+         path: "/signup",
+         element: <SignUp />
+      },
 
-        
-         
-    ]
+      {
+         path: "/login",
+         element: <Login />
+      },
+      {
+         path: "/brmatches",
+         element: <BrMatches />
+      },
+      {
+         path: "/matchdetails",
+         element: <MatcheDetails />
+      },
 
-    }]);
+      {
+         path: "/wallet",
+         element: <Wallet />
+      },
+
+      {
+         path: "/profile-edit",
+         element: <ProfileEdit />
+      },
+
+      {
+         path: "/withdraw",
+         element: <Withdraw />
+      },
+
+      {
+         path: "/rules",
+         element: <Rules />
+      },
+
+      {
+         path: "/top-players",
+         element: <TopPlayers />
+      },
+      {
+         path: "/resultdetails",
+         element: <ResultDetails />
+      },
+      {
+         path: "/addmoney",
+         element: <AddMoney />
+      },
+      {
+         path: "/transaction-history",
+         element: <TransactionHistory/>
+      },
+
+
+
+   ]
+
+}]);
 export default MainRoutes;
