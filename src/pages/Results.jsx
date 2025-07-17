@@ -6,7 +6,6 @@ import { NavLink } from 'react-router';
 
 const Results = () => {
     return (
-        <>
             <div className='font-Jakarta bg-mainbg pb-30'>
                 <div className="bg-mainbg relative flex items-start justify-center">
                     {/* Top white curved section */}
@@ -16,14 +15,14 @@ const Results = () => {
                             Results
                         </NavLink>
                     </div>
-                    {/* === Category === */}
-                    <div className='mt-24 w-full justify-items-center'>
-                        <div className='w-[99%] flex items-center overflow-auto'>
-                            <NavLink><a href="#">BR MATCH</a></NavLink>
-                            <NavLink><a href="#">BR MATCH</a></NavLink>
-                            <NavLink><a href="#">BR MATCH</a></NavLink>
-                            <NavLink><a href="#">BR MATCH</a></NavLink>
-                            <NavLink><a href="#">BR MATCH</a></NavLink>
+                    {/* top navigation button */}
+                    <div className='mt-28'>
+                        <div className="md-w-[95%] grid grid-cols-3 gap-4 bg-cardbg py-2 px-2 rounded-lg shadow-sm shadow-gray-600">
+                            <NavLink className='w-full text-center p-2 bg-hoverbg rounded-lg text-cardbg font-semibold inset-shadow-sm inset-shadow-green-500/60 hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>BR MATCH</NavLink>
+                            <NavLink className='w-full text-center p-2 bg-hoverbg rounded-lg text-cardbg font-semibold inset-shadow-sm inset-shadow-green-500/60 hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>CS MATCH</NavLink>
+                            <NavLink className='w-full text-center p-2 bg-hoverbg rounded-lg text-cardbg font-semibold inset-shadow-sm inset-shadow-green-500/60 hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>LONE WOLF</NavLink>
+                            <NavLink className='w-full text-center p-2 bg-hoverbg rounded-lg text-cardbg font-semibold inset-shadow-sm inset-shadow-green-500/60 hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>CS 1V1,2V2</NavLink>
+                            <NavLink className='w-full text-center p-2 bg-hoverbg rounded-lg text-cardbg font-semibold inset-shadow-sm inset-shadow-green-500/60 hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>FREE MATCH</NavLink>
                         </div>
                     </div>
                 </div>
@@ -224,16 +223,7 @@ const Results = () => {
                         </div>
                     </div>
                 </div>
-            </div> 
-            {/* top navigation button */}
-            <div className="pt-30 md-w-[100%] flex overflow-auto gap-x-8 pb-24 bg-amber-400">
-                <button className='w-full px-2 py-3 bg-hoverbg rounded-lg text-cardbg font-semibold hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>BR MATCHE</button>
-                <button className='w-full px-2 py-3 bg-hoverbg rounded-lg text-cardbg font-semibold hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>CS MATCHE</button>
-                <button className='w-full px-2 py-3 bg-hoverbg rounded-lg text-cardbg font-semibold hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>LONE WOLF</button>
-                <button className='w-full px-2 py-3 bg-hoverbg rounded-lg text-cardbg font-semibold hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>CS 1V1,2V2</button>
-                <button className='w-full px-2 py-3 bg-hoverbg rounded-lg text-cardbg font-semibold hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>FREE MATCH</button>
-            </div> 
-        </>
+            </div>  
         
     );
 };

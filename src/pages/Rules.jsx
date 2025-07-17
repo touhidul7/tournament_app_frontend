@@ -14,11 +14,15 @@ const Rules = () => {
                     </NavLink>
                 </div>
                 {/* top navigation button */}
-                <div className="pt-30 w-full max-w-md flex gap-2 overflow-auto justify-around">
-                    <button className='px-2 py-3 bg-hoverbg rounded-lg text-cardbg font-semibold hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out'>BR MATCHES</button>
-                    <button className='px-2 py-3 bg-hoverbg rounded-lg text-cardbg font-semibold hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out'> CS MATCHES</button>
-                    <button className='px-2 py-3 bg-hoverbg rounded-lg text-cardbg font-semibold hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out'> LONE WOLF</button>
-                </div>   
+                <div className='mt-28'>
+                    <div className="md-w-[95%] grid grid-cols-3 gap-4 bg-cardbg py-2 px-2 rounded-lg shadow-sm shadow-gray-600">
+                        <NavLink className='w-full text-center p-2 bg-hoverbg rounded-lg text-cardbg font-semibold inset-shadow-sm inset-shadow-green-500/60 hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>BR MATCH</NavLink>
+                        <NavLink className='w-full text-center p-2 bg-hoverbg rounded-lg text-cardbg font-semibold inset-shadow-sm inset-shadow-green-500/60 hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>CS MATCH</NavLink>
+                        <NavLink className='w-full text-center p-2 bg-hoverbg rounded-lg text-cardbg font-semibold inset-shadow-sm inset-shadow-green-500/60 hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>LONE WOLF</NavLink>
+                        <NavLink className='w-full text-center p-2 bg-hoverbg rounded-lg text-cardbg font-semibold inset-shadow-sm inset-shadow-green-500/60 hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>CS 1V1,2V2</NavLink>
+                        <NavLink className='w-full text-center p-2 bg-hoverbg rounded-lg text-cardbg font-semibold inset-shadow-sm inset-shadow-green-500/60 hover:bg-cardbg hover:text-white transition-all duration-300 delay-75 ease-in-out' to=''>FREE MATCH</NavLink>
+                    </div>
+                </div> 
             </div>
             {/* === Rules === */}
             <div className='w-full justify-items-center'>
