@@ -2,7 +2,8 @@ import { faAward, faChevronLeft, faCircleXmark, faClock, faCrown, faFire, faHand
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router";
 import { useState } from 'react'
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
+import {} from '../css/BrMatch.css'
 
 
 
@@ -29,9 +30,9 @@ const BrMatches = () => {
                 <div className="w-[95%]">
                     <div className="relative bg-cardbg rounded-lg p-2">
                         <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                        <NavLink to='/matchdetails' className="flex items-center gap-2">
+                        <NavLink to='/matchdetails' className="match-box flex items-center gap-2">
                             <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
-                            <div className="flex flex-col gap-1.5">
+                            <div className="match-details flex flex-col gap-1.5">
                                 <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
                                 <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
                             </div>
@@ -163,9 +164,9 @@ const BrMatches = () => {
                 <div className="w-[95%] mt-6">
                     <div className="relative bg-cardbg rounded-lg p-2">
                         <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                        <NavLink to='/matchdetails' className="flex items-center gap-2">
+                        <NavLink to='/matchdetails' className="match-box flex items-center gap-2">
                             <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
-                            <div className="flex flex-col gap-1.5">
+                            <div className="match-details flex flex-col gap-1.5">
                                 <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
                                 <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
                             </div>
@@ -297,9 +298,9 @@ const BrMatches = () => {
                 <div className="w-[95%] mt-6">
                     <div className="relative bg-cardbg rounded-lg p-2">
                         <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                        <NavLink to='/matchdetails' className="flex items-center gap-2">
+                        <NavLink to='/matchdetails' className="match-box flex items-center gap-2">
                             <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
-                            <div className="flex flex-col gap-1.5">
+                            <div className="match-details flex flex-col gap-1.5">
                                 <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
                                 <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
                             </div>
@@ -431,9 +432,9 @@ const BrMatches = () => {
                 <div className="w-[95%] mt-6">
                     <div className="relative bg-cardbg rounded-lg p-2">
                         <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                        <NavLink to='/matchdetails' className="flex items-center gap-2">
+                        <NavLink to='/matchdetails' className="match-box flex items-center gap-2">
                             <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
-                            <div className="flex flex-col gap-1.5">
+                            <div className="match-details flex flex-col gap-1.5">
                                 <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
                                 <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
                             </div>
@@ -565,9 +566,9 @@ const BrMatches = () => {
                 <div className="w-[95%] mt-6">
                     <div className="relative bg-cardbg rounded-lg p-2">
                         <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                        <NavLink to='/matchdetails' className="flex items-center gap-2">
+                        <NavLink to='/matchdetails' className="match-box flex items-center gap-2">
                             <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
-                            <div className="flex flex-col gap-1.5">
+                            <div className="match-details flex flex-col gap-1.5">
                                 <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
                                 <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
                             </div>
