@@ -83,6 +83,10 @@ const MainRoutes = createBrowserRouter([{
             path: "/resultdetails",
             element : <ResultDetails/>
          },
+         {
+            path: "/testing",
+            element : <TestingSlide/>
+         },
         
          
     ]
