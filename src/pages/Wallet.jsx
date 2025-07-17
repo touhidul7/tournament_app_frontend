@@ -6,7 +6,7 @@ import { NavLink } from 'react-router';
 
 const Wallet = () => {
     return (
-        <div className='max-w-md mx-auto font-Jakarta bg-mainbg space-y-3 mt-2 pb-30'>
+        <div className='max-w-md mx-auto font-Jakarta bg-mainbg space-y-3 pb-30'>
             {/* wallet header */}
             <div className='w-[96%] mx-auto flex justify-between items-center py-3 px-4 font-medium text-white bg-cardbg rounded-lg'>
                 <NavLink to='/profile'><FontAwesomeIcon icon={faChevronLeft} className='text-xl'/></NavLink>
@@ -34,9 +34,9 @@ const Wallet = () => {
                     </div>
                     <h2 className='text-lg'>BDT 0</h2>
                   </div>
-                  <div className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
+                  <NavLink to='/withdraw' className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
                     <FontAwesomeIcon icon={faHandHoldingDollar} className='text-xl'/> <p>Withdraw</p>
-                  </div>
+                  </NavLink>
             </div>
             {/* Deposit cash section */}
             <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-3 rounded-lg justify-between items-center font-light'>
@@ -46,9 +46,9 @@ const Wallet = () => {
                     </div>
                     <h2 className='text-lg'>BDT 0</h2>
                   </div>
-                  <div className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
+                  <NavLink to='/addmoney' className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
                     <FontAwesomeIcon icon={faPlusCircle} className='text-xl'/> <p>Add Money</p>
-                  </div>
+                  </NavLink>
             </div>
             {/* HOW TO ADD MONEY? */}
             <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-3 rounded-lg justify-between items-center font-light'>

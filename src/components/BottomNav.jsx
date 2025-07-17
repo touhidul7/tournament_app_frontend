@@ -6,7 +6,7 @@ import { NavLink } from "react-router";
 const BottomNav = () => {
   return (
     <div className="max-w-md mx-auto">
-      <div className="fixed bottom-0 z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white  rounded-2xl left-1/2 font-Jakarta shadow-lg">
+      <div className="fixed bottom-0 z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white  rounded-t-2xl left-1/2 font-Jakarta shadow-lg">
         <div className="grid h-full max-w-lg grid-cols-4 mx-auto ">
           {/* Home */}
           <NavLink

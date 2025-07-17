@@ -1,4 +1,4 @@
-import { faBangladeshiTakaSign, faChartSimple, faScaleBalanced, faShareAlt,  faUserCircle, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faBangladeshiTakaSign, faChartSimple, faScaleBalanced, faShareAlt,  faUserCircle, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons/faHandHoldingDollar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router';
@@ -80,6 +80,12 @@ const Profile = () => {
                         Share This App
                     </h2>
                 </div>
+               {/* log out button */}
+               <div  className='bg-red-500 text-white py-3 px-5 rounded-2xl flex justify-center items-center gap-4 w-[50%] mx-auto mt-10'>
+                <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                 <a href="#">Log Out</a>
+                
+               </div>
                 <div className='flex flex-col items-center mt-10'>
                     <h2 className='text-gray-300 font-semibold text-lg'>Version 1.0</h2>
                 </div>
