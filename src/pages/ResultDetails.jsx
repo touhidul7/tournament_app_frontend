@@ -98,20 +98,20 @@ const ResultDetails = () => {
                             <td className="pl-2 py-1">100</td>
                         </tr>
                         <tr className="border-b text-start text-sm">
-                            <td className="text-center py-1">2</td>
-                            <td className="pl-2 py-1">Juwel Hossain</td>
+                            <td className="text-center py-1">3</td>
+                            <td className="pl-2 py-1">Md Babu</td>
                             <td className="text-center py-1">30</td>
                             <td className="pl-2 py-1">100</td>
                         </tr>
                         <tr className="border-b text-start text-sm">
-                            <td className="text-center py-1">2</td>
-                            <td className="pl-2 py-1">Juwel Hossain</td>
+                            <td className="text-center py-1">4</td>
+                            <td className="pl-2 py-1">Roton</td>
                             <td className="text-center py-1">30</td>
                             <td className="pl-2 py-1">100</td>
                         </tr>
                         <tr className="border-b text-start text-sm">
-                            <td className="text-center py-1 rounded-bl-md">2</td>
-                            <td className="pl-2 py-1">Juwel Hossain</td>
+                            <td className="text-center py-1 rounded-bl-md">5</td>
+                            <td className="pl-2 py-1">Bikrom</td>
                             <td className="text-center py-1">30</td>
                             <td className="pl-2 py-1 rounded-br-md">100</td>
                         </tr>
