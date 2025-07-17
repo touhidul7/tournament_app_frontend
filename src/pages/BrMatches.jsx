@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { faAward, faChevronDown, faChevronLeft, faCircleXmark, faClock, faCrown, faFire, faHandPeace, faKey, faTrophy } from "@fortawesome/free-solid-svg-icons";
-=======
-import { faAward, faChevronLeft, faCircleXmark, faClock, faCrown, faFire, faHandPeace, faKey, faMedal, faTrophy } from "@fortawesome/free-solid-svg-icons";
->>>>>>> 6d64bee2ca23e282abf5aea780e2771b7f8bb3e5
+import { faAward, faChevronLeft, faCircleXmark, faClock, faCrown, faFire, faHandPeace, faKey, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router";
 import { useState } from 'react'

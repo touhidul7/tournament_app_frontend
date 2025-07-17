@@ -84,15 +84,15 @@ const MainRoutes = createBrowserRouter([{
             path: "/resultdetails",
             element : <ResultDetails/>
          },
-         {
-<<<<<<< HEAD
-            path: "/addmoney",
-            element : <AddMoney/>
-=======
-            path: "/testing",
-            element : <TestingSlide/>
->>>>>>> 6d64bee2ca23e282abf5aea780e2771b7f8bb3e5
-         },
+{
+   path: "/addmoney",
+   element : <AddMoney/>
+},
+// If you want to keep the testing route, uncomment the next lines:
+// {
+//    path: "/testing",
+//    element : <TestingSlide/>
+// },
         
          
     ]
