@@ -14,6 +14,7 @@ import Withdraw from "../pages/Withdraw";
 import Rules from "../pages/Rules";
 import TopPlayers from "../pages/TopPlayers";
 import ResultDetails from "../pages/ResultDetails";
+import TestingSlide from "../pages/TestingSlide";
 
 const MainRoutes = createBrowserRouter([{
     path: "/",
@@ -82,10 +83,6 @@ const MainRoutes = createBrowserRouter([{
          {
             path: "/resultdetails",
             element : <ResultDetails/>
-         },
-         {
-            path: "/testing",
-            element : <TestingSlide/>
          },
         
          
