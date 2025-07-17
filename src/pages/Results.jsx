@@ -1,4 +1,5 @@
 import { faUser, } from '@fortawesome/free-regular-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { NavLink } from 'react-router';
@@ -9,9 +10,10 @@ const Results = () => {
             <div className=" bg-mainbg relative flex items-start justify-center">
                 {/* Top white curved section */}
                 <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
-                    <button className="bg-cardbg text-white px-6 py-2 rounded-xl font-medium shadow">
+                    <NavLink to='/' className="bg-cardbg text-white px-6 py-2 rounded-xl text-lg font-medium shadow flex items-center gap-3">
+                        <FontAwesomeIcon className='text-xl' icon={faChevronLeft}/>
                         Results
-                    </button>
+                    </NavLink>
                 </div>
                 {/* top navigation button */}
                 <div className="pt-30 w-full max-w-md flex gap-2 overflow-auto justify-around">
