@@ -1,4 +1,4 @@
-import { faChevronLeft, faUser, faUserPen, } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faUser, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router";
 const ProfileEdit = () => {
@@ -19,16 +19,13 @@ const ProfileEdit = () => {
                 <div>
                     <div className="relative bg-cardbg w-18 h-18 border border-white text-white rounded-full flex items-center justify-center">
                         <FontAwesomeIcon className="text-5xl" icon={faUser}/>
-                        <div className="absolute w-8 h-8 flex items-center justify-center -right-3 bottom-2 text-xl bg-cardbg border rounded-full">
-                            <FontAwesomeIcon className="text-md" icon={faUserPen}/>
-                        </div>
                     </div>
                 </div>
                 <div className="w-[95%] mt-4">
                     <h1 className="text-lg text-white font-semibold text-center">My Info</h1>
                     <h2 className="inset-shadow-sm inset-shadow-gray-100/70 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4">Subas Hembrom</h2>
-                    <input className="w-full focus:outline-none inset-shadow-sm inset-shadow-gray-100/70 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4" type="text" placeholder="suashebrom@gmail.com" />
-                    <input className="w-full focus:outline-none inset-shadow-sm inset-shadow-gray-100/70 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4" type="text" placeholder="+880 1315-291293" />
+                    <h2 className="inset-shadow-sm inset-shadow-gray-100/70 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4">+880 1315-291293</h2>
+                    <h2 className="inset-shadow-sm inset-shadow-gray-100/70 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4">subashebrom@gmail.com</h2>
                     <h1 className="text-lg text-white font-semibold text-center mt-6">Password Change</h1>
                     <input className="w-full focus:outline-none inset-shadow-sm inset-shadow-gray-100/70 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4" type="password" placeholder="Old Password" />
                     <input className="w-full focus:outline-none inset-shadow-sm inset-shadow-gray-100/70 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4" type="password" placeholder="New Password" />
