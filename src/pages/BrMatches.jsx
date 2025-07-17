@@ -97,10 +97,11 @@ const BrMatches = () => {
                             </div>
                         </div>
                         <div className="flex justify-center gap-2 mt-4 mb-12">
+                            {/* === Room Details Modal === */}
                             <div>
                                 <button
                                     onClick={() => setOpen(true)}
-                                    className="relative w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
+                                    className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
                                 >
                                     <FontAwesomeIcon icon={faKey}/>
 
@@ -116,7 +117,7 @@ const BrMatches = () => {
                                         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                             <DialogPanel
                                                 transition
-                                                className="transform overflow-hidden rounded-lg bg-mainbg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-in-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+                                                className="relative transform overflow-hidden rounded-lg bg-mainbg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-in-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
                                             >
                                                 <div className="bg-mainbg px-4 pt-2 pb-4 ">
                                                     <div className="">
