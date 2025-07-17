@@ -82,7 +82,6 @@ const Profile = () => {
                 </div>
                 <div className='flex flex-col items-center mt-10'>
                     <h2 className='text-gray-300 font-semibold text-lg'>Version 1.0</h2>
-                    <h2 className='text-slate-600'>Developed By SoftCodeLoop</h2>
                 </div>
             </div>
         </div>
