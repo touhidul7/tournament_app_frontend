@@ -85,8 +85,13 @@ const MainRoutes = createBrowserRouter([{
             element : <ResultDetails/>
          },
          {
+<<<<<<< HEAD
             path: "/addmoney",
             element : <AddMoney/>
+=======
+            path: "/testing",
+            element : <TestingSlide/>
+>>>>>>> 6d64bee2ca23e282abf5aea780e2771b7f8bb3e5
          },
         
          
