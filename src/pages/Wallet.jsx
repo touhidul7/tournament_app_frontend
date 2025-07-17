@@ -46,9 +46,9 @@ const Wallet = () => {
                     </div>
                     <h2 className='text-lg'>BDT 0</h2>
                   </div>
-                  <div className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
+                  <NavLink to='/addmoney' className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
                     <FontAwesomeIcon icon={faPlusCircle} className='text-xl'/> <p>Add Money</p>
-                  </div>
+                  </NavLink>
             </div>
             {/* HOW TO ADD MONEY? */}
             <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-3 rounded-lg justify-between items-center font-light'>
