@@ -16,6 +16,12 @@ import TopPlayers from "../pages/TopPlayers";
 import ResultDetails from "../pages/ResultDetails";
 import AddMoney from "../pages/AddMoney";
 import TransactionHistory from "../pages/TransactionHistory";
+import ClassSquad from "../pages/ClassSquad";
+import LoneWolf from "../pages/LoneWolf";
+import CsMatch from "../pages/CsMatch";
+import FreeMatch from "../pages/FreeMatch";
+import ClassSquadMatchDetails from "../pages/ClassSquadMatchDetails";
+import LoneWolfRules from "../pages/LoneWolfRules";
 
 
 const MainRoutes = createBrowserRouter([{
@@ -93,6 +99,30 @@ const MainRoutes = createBrowserRouter([{
       {
          path: "/transaction-history",
          element: <TransactionHistory/>
+      },
+      {
+         path: "/class-squad",
+         element: <ClassSquad/>
+      },
+      {
+         path: "/lone-wolf",
+         element: <LoneWolf/>
+      },
+      {
+         path: "/cs-match",
+         element: <CsMatch/>
+      },
+      {
+         path: "/free-match",
+         element: <FreeMatch/>
+      },
+      {
+         path: "/class-squad-details",
+         element: <ClassSquadMatchDetails/>
+      },
+      {
+         path: "/lone-wolf-details",
+         element: <LoneWolfRules/>
       },
 
 

@@ -77,29 +77,29 @@ const Home = () => {
                             <p className='font-semibold text-md mt-2'>BR MATCH</p>
                             <p className='text-sm font-light'>5 Match Found</p>
                         </NavLink>
-                        <div className='bg-cardbg  p-2  rounded-xl text-white'>
+                        <NavLink to='/class-squad' className='bg-cardbg  p-2  rounded-xl text-white'>
                             <img className='rounded-md' src="./image/class-squad.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>CLASS SQUAD</p>
                             <p className='text-sm font-light'>9 Match Found</p>
-                        </div>
-                        <div className='bg-cardbg  p-2  rounded-xl text-white'>
+                        </NavLink>
+                        <NavLink to='/lone-wolf' className='bg-cardbg  p-2  rounded-xl text-white'>
                             <img className='rounded-md' src="./image/lonewolf.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>LONE WOLF</p>
                             <p className='text-sm font-light'>3 Match Found</p>
-                        </div>
-                        <div className='bg-cardbg  p-2  rounded-xl text-white'>
+                        </NavLink>
+                        <NavLink to='/cs-match' className='bg-cardbg  p-2  rounded-xl text-white'>
                             <img className='rounded-md' src="./image/vs.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>CS 1V1, 2V2</p>
                             <p className='text-sm font-light'>10 Match Found</p>
-                        </div>
+                        </NavLink>
                     </div>
                     <div className='bg-cardbg text-white text-lg font-medium text-center py-1 rounded-md mt-6'><p>BR AND LONEWOLF MATCH</p></div>
                     <div className='grid grid-cols-2 gap-3 mt-6'>
-                        <div className='bg-cardbg  p-2  rounded-xl text-white'>
+                        <NavLink to='/free-match' className='bg-cardbg  p-2  rounded-xl text-white'>
                             <img className='rounded-md' src="./image/free-match.jpg" alt="" />
                             <p className='font-semibold text-md mt-2'>FREE MATCH</p>
                             <p className='text-sm font-light'>25 Match Found</p>
-                        </div>
+                        </NavLink>
                     </div>
                 </div>
             </section>
