@@ -15,8 +15,6 @@ const BrMatches = () => {
             <div className=" bg-mainbg relative flex items-start justify-center">
                 {/* Top white curved section */}
                 <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
-
-
                     <NavLink to='/' className="bg-cardbg text-white px-6 py-2 rounded-xl text-lg font-medium shadow flex items-center gap-3 ">
                         <span><FontAwesomeIcon className=" text-xl" icon={faChevronLeft} /></span>
                         BR Matches
@@ -92,9 +90,9 @@ const BrMatches = () => {
                                 </div>
                             </div>
                             {/* === Joining === */}
-                            <div className="w-1/4">
+                            <NavLink to='/br-match-join' className="w-1/4">
                                 <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">Join</h2>
-                            </div>
+                            </NavLink>
                         </div>
                         <div className="flex justify-center gap-2 mt-4 mb-12">
                             {/* === Room Details Modal === */}

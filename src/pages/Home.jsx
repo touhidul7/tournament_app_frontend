@@ -100,11 +100,9 @@ const Home = () => {
                             <p className='font-semibold text-md mt-2'>FREE MATCH</p>
                             <p className='text-sm font-light'>25 Match Found</p>
                         </NavLink>
-                    </div>
-                    <div className='grid grid-cols-2 gap-3 mt-6'>
-                        <NavLink to='/free-match' className='bg-cardbg  p-2  rounded-xl text-white'>
+                        <NavLink to='/br-squad-match' className='bg-cardbg  p-2  rounded-xl text-white'>
                             <img className='rounded-md' src="./image/free-match.jpg" alt="" />
-                            <p className='font-semibold text-md mt-2'>FREE MATCH</p>
+                            <p className='font-semibold text-md mt-2'>BR MATCH</p>
                             <p className='text-sm font-light'>25 Match Found</p>
                         </NavLink>
                     </div>

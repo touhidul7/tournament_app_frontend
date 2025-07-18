@@ -22,6 +22,9 @@ import CsMatch from "../pages/CsMatch";
 import FreeMatch from "../pages/FreeMatch";
 import ClassSquadMatchDetails from "../pages/ClassSquadMatchDetails";
 import LoneWolfRules from "../pages/LoneWolfRules";
+import BrSquad from "../pages/BrSquad";
+import BrSquadDetails from "../pages/BrSquadDetails";
+import BrMatchJoin from "../pages/BrMatchJoin";
 
 
 const MainRoutes = createBrowserRouter([{
@@ -124,6 +127,18 @@ const MainRoutes = createBrowserRouter([{
          path: "/lone-wolf-details",
          element: <LoneWolfRules/>
       },
+      {
+         path: "/br-squad-match",
+         element: <BrSquad/>
+      },
+      {
+         path: "/br-squad-details",
+         element: <BrSquadDetails/>
+      },
+      {
+         path: "/br-match-join",
+         element: <BrMatchJoin/>
+      }
 
 
 
