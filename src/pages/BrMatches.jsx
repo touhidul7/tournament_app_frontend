@@ -23,7 +23,7 @@ const BrMatches = () => {
   const[matchData, setMatchData] = useState([]);
   const [open, setOpen] = useState(false);
   const [match, setMatch] = useState([]);
-  const [isStarted, setIsStarted] = useState(false);
+  const [isStarted, setIsStarted] = useState(null);
   // get id data
   const { id } = useParams();
   //load data
@@ -89,7 +89,7 @@ const BrMatches = () => {
   }
 
 
-  const MatchTimer = ({ date, time }) => {
+  const MatchTimer = ({ date, time, matchId }) => {
     const [remaining, setRemaining] = useState("Loading...");
 
     useEffect(() => {
@@ -105,7 +105,7 @@ const BrMatches = () => {
 
         if (diff <= 0) {
           setRemaining("Match started");
-          setIsStarted(true);
+          setIsStarted(matchId);
           return;
         }
 
@@ -241,7 +241,7 @@ const BrMatches = () => {
                     <p>10/{match.max_player}</p>
                   </div>
                 </div>
-                {!isStarted ? (
+                {isStarted !== match.id ? (
                   <NavLink to={`/br-match-join/${match.id}`} className="w-1/4">
                     <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">
                       Join
@@ -284,7 +284,7 @@ const BrMatches = () => {
                 <p className="flex items-center justify-center">
                   <FontAwesomeIcon className="mr-2 text-2xl" icon={faClock} />
                   {/* use this props and make a timer {match.date} and {match.time} */}
-                  <MatchTimer date={match.date} time={match.time} />
+                  <MatchTimer date={match.date} time={match.time} matchId={match.id} />
                 </p>
               </div>
             </div>
