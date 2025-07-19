@@ -6,7 +6,7 @@ import { NavLink } from "react-router";
 const BottomNav = () => {
   return (
     <div className="max-w-md mx-auto">
-      <div className="fixed bottom-0 z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white  rounded-t-2xl left-1/2 font-Jakarta shadow-lg">
+      <div className="fixed bottom-0 z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white left-1/2 font-Jakarta shadow-lg">
         <div className="grid h-full max-w-lg grid-cols-4 mx-auto ">
           {/* Home */}
           <NavLink
@@ -14,8 +14,8 @@ const BottomNav = () => {
             className={({ isActive }) =>
               `inline-flex flex-col items-center justify-center px-1 group transition-all duration-300 delay-75 ease-in-out ${
                 isActive
-                  ? "bg-hoverbg text-mainbg rounded-2xl  "
-                  : "hover:bg-hoverbg rounded-2xl"
+                  ? "bg-hoverbg text-mainbg   "
+                  : "hover:bg-hoverbg "
               }`
             }
           >
@@ -29,8 +29,8 @@ const BottomNav = () => {
              className={({ isActive }) =>
               `inline-flex flex-col items-center justify-center px-1 group transition-all duration-300 delay-75 ease-in-out ${
                 isActive
-                  ? "bg-hoverbg text-mainbg rounded-2xl "
-                  : "hover:bg-hoverbg  text-mainbg rounded-2xl"
+                  ? "bg-hoverbg text-mainbg  "
+                  : "hover:bg-hoverbg  text-mainbg "
               }`
             }
           >
@@ -46,8 +46,8 @@ const BottomNav = () => {
                 className={({ isActive }) =>
                 `inline-flex flex-col items-center justify-center px-1 group transition-all duration-300 delay-75 ease-in-out ${
                     isActive
-                    ? "bg-hoverbg text-mainbg rounded-2xl "
-                    : "hover:bg-hoverbg  text-mainbg rounded-2xl"
+                    ? "bg-hoverbg text-mainbg  "
+                    : "hover:bg-hoverbg  text-mainbg "
                 }`
                 }
             >
@@ -61,8 +61,8 @@ const BottomNav = () => {
                 className={({ isActive }) =>
                 `inline-flex flex-col items-center justify-center px-1 group transition-all duration-300 delay-75 ease-in-out ${
                     isActive
-                    ? "bg-hoverbg text-mainbg rounded-2xl "
-                    : "hover:bg-hoverbg  text-mainbg rounded-2xl"
+                    ? "bg-hoverbg text-mainbg  "
+                    : "hover:bg-hoverbg  text-mainbg "
                 }`
                 }
             >

@@ -1,750 +1,303 @@
-import { faAward, faChevronLeft, faCircleXmark, faClock, faCrown, faFire, faHandPeace, faKey, faTrophy } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAward,
+  faChevronLeft,
+  faCircleXmark,
+  faClock,
+  faCrown,
+  faFire,
+  faHandPeace,
+  faKey,
+  faTrophy,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router";
-import { useState } from 'react'
-import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
-import {} from '../css/BrMatch.css'
-
-
+import { NavLink, useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
+import {} from "../css/BrMatch.css";
 
 const BrMatches = () => {
-    const [open, setOpen] = useState(true)
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const IMAGE_URL = import.meta.env.VITE_API_IMAGE_URL;
+  const [open, setOpen] = useState(false);
+  const [match, setMatch] = useState([]);
+  // get id data
+  const { id } = useParams();
+  //load data
+  useEffect(() => {
+    fetch(`${BASE_URL}/matches`)
+      .then((res) => res.json())
+      .then((data) => {
+        const found = data.filter((item) => item.category_id == id);
+        setMatch(found);
+      });
+  }, [id]);
 
-    return (
-        <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
-            <div className=" bg-mainbg relative flex items-start justify-center">
-                {/* Top white curved section */}
-                <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
-                    <NavLink to='/' className="bg-cardbg text-white px-6 py-2 rounded-xl text-lg font-medium shadow flex items-center gap-3 ">
-                        <span><FontAwesomeIcon className=" text-xl" icon={faChevronLeft} /></span>
-                        BR Matches
-                    </NavLink>
+  console.log(match);
 
-                </div>
-            </div>
-            {/* === BR Matches Card Section === */}
-            <section className="w-full mt-24 justify-items-center">
-                {/* === Cards === */}
-                <div className="w-[95%]">
-                    <div className="relative bg-cardbg rounded-lg p-2">
-                        <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                        <NavLink to='/matchdetails' className="match-box flex items-center gap-2">
-                            <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
-                            <div className="match-details flex flex-col gap-1.5">
-                                <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
-                                <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
-                            </div>
-                        </NavLink>
-                        {/* pricing mini card */}
-                        <div className='grid grid-cols-3 gap-3 items-center justify-center mt-4'>
-                            <div className=''>
-                                <div className='bg-green-500 text-white text-center rounded-t-md'>
-                                    <h2>+ WIN PRIZE</h2>
-                                </div>
-                                <div className='bg-white  text-center rounded-b-md'>
-                                    <h2>800</h2>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='bg-blue-500 text-white text-center rounded-t-md'>
-                                    <h2>+ PER KILL</h2>
-                                </div>
-                                <div className='bg-white text-center rounded-b-md'>
-                                    <h2>10</h2>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='bg-red-500 text-white text-center rounded-t-md'>
-                                    <h2>+ ENTRY FEE</h2>
-                                </div>
-                                <div className='bg-white text-center rounded-b-md'>
-                                    <h2>20</h2>
-                                </div>
-                            </div>
-                        </div>
-                        {/* match details */}
-                        <div className='grid grid-cols-3 mt-5 '>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>ENTRY TYPE</h2>
-                                <h2 className='text-white font-semibold'>100</h2>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>MAP</h2>
-                                <h2 className='text-white font-semibold'>Bermuda</h2>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>VERSION</h2>
-                                <h2 className='text-white font-semibold'>Mobile</h2>
-                            </div>
-                        </div>
-                        {/* === Progres Bar and Joining === */}
-                        <div className="flex items-center justify-between gap-4 mt-2">
-                            {/* === Bar === */}
-                            <div className="mt-5 w-3/4">
-                                <div className="w-full h-5 rounded-full bg-hoverbg">
-                                    <div className="bg-green-500 h-5 w-10 rounded-full"></div>
-                                </div>
-                                <div className="flex items-center justify-between text-white text-sm mt-1 pr-12">
-                                    <p>Only 42 spots are left</p>
-                                    <p>10/38</p>
-                                </div>
-                            </div>
-                            {/* === Joining === */}
-                            <NavLink to='/br-match-join' className="w-1/4">
-                                <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">Join</h2>
-                            </NavLink>
-                        </div>
-                        <div className="flex justify-center gap-2 mt-4 mb-12">
-                            {/* === Room Details Modal === */}
-                            <div>
-                                <button
-                                    onClick={() => setOpen(true)}
-                                    className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
-                                >
-                                    <FontAwesomeIcon icon={faKey}/>
+  if (!match) return <p className="text-white">Loading match...</p>;
 
-                                   Room Details
-                                </button>
-                                <Dialog open={open} onClose={setOpen} className="relative z-10">
-                                    <DialogBackdrop
-                                        transition
-                                        className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-                                    />
+  const {
+    match_id,
+    match_name,
+    map_name,
+    version,
+    game_type,
+    game_mood,
+    time,
+    date,
+    win_price,
+    kill_price,
+    entry_fee,
+    total_prize,
+    second_prize,
+    third_prize,
+    fourth_prize,
+    fifth_prize,
+    max_player,
+  } = match;
 
-                                    <div className="fixed top-4 z-10 w-sm overflow-y-auto">
-                                        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                                            <DialogPanel
-                                                transition
-                                                className="relative transform overflow-hidden rounded-lg bg-mainbg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-in-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-                                            >
-                                                <div className="bg-mainbg px-4 pt-2 pb-4 ">
-                                                    <div className="">
-                                                        <div className=" flex flex-col bg-cardbg items-center text-white rounded-md font-Jakarta py-2">
-                                                            <h2 className="font-semibold">TOTAL PRIZE</h2>
-                                                            <p className="text-sm ">Duo | Mobile | Regular</p>
-                                                        </div>
-                                                        <div className="mt-3 w-full text-center text-lg bg-cardbg text-white font-Jakarta flex flex-col gap-2 rounded-md px-3 py-3">
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faCrown} className="text-yellow-400" /> <span>Winner - 100Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faTrophy} className="text-yellow-400" /> <span>2nd Position - 80Tk</span></h2>
-                                                            <h2 className="flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>3rd Position - 50Tk</span></h2>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setOpen(false)}
-                                                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-                                                    >
-                                                       <FontAwesomeIcon icon={faCircleXmark} className="text-2xl"/>
-                                                    </button>
-                                                   
-                                                </div>
-                                            </DialogPanel>
-                                        </div>
-                                    </div>
-                                </Dialog>
-                            </div>
-                            {/* prize details modal */}
-                            <div>
-                                <button
-                                    onClick={() => setOpen(true)}
-                                    className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
-                                >
-                                    <FontAwesomeIcon icon={faTrophy}/>
+  console.log(match);
 
-                                   Prize Details
-                                </button>
-                                <Dialog open={open} onClose={setOpen} className="relative z-10">
-                                    <DialogBackdrop
-                                        transition
-                                        className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-                                    />
-
-                                    <div className="fixed top-4 z-10 w-sm overflow-y-auto">
-                                        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                                            <DialogPanel
-                                                transition
-                                                className="relative transform overflow-hidden rounded-lg bg-mainbg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-in-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-                                            >
-                                                <div className="bg-mainbg px-4 pt-2 pb-4 ">
-                                                    <div className="">
-                                                        <div className=" flex flex-col bg-cardbg items-center text-white rounded-md font-Jakarta py-2">
-                                                            <h2 className="font-semibold">TOTAL PRIZE</h2>
-                                                            <p className="text-sm ">Duo | Mobile | Regular</p>
-                                                        </div>
-                                                        <div className="mt-3 w-full text-center text-lg bg-cardbg text-white font-Jakarta flex flex-col gap-2 rounded-md px-3 py-3">
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faCrown} className="text-yellow-400" /> <span>Winner - 100Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faTrophy} className="text-yellow-400" /> <span>2nd Position - 80Tk</span></h2>
-                                                            <h2 className="flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>3rd Position - 50Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>4th Position - 40Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> 5th Position - 30Tk</h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faFire} className="text-yellow-400" /> Per Kill - 10Tk</h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faHandPeace} className="text-yellow-400" />Total Prize Pool- 10Tk</h2>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setOpen(false)}
-                                                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-                                                    >
-                                                       <FontAwesomeIcon icon={faCircleXmark} className="text-2xl"/>
-                                                    </button>
-                                                   
-                                                </div>
-                                            </DialogPanel>
-                                        </div>
-                                    </div>
-                                </Dialog>
-                            </div>
-                        </div>
-                        <div className="absolute bottom-0 w-full left-0 text-white bg-green-500 p-2 rounded-b-lg">
-                            <p className="flex items-center justify-center"><FontAwesomeIcon className="mr-2 text-2xl" icon={faClock} />STARTS IN-</p>
-                        </div>
-                    </div>
-                </div>
-                {/* === Card Two === */}
-                <div className="w-[95%] mt-6">
-                    <div className="relative bg-cardbg rounded-lg p-2">
-                        <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                        <NavLink to='/matchdetails' className="match-box flex items-center gap-2">
-                            <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
-                            <div className="match-details flex flex-col gap-1.5">
-                                <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
-                                <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
-                            </div>
-                        </NavLink>
-                        {/* pricing mini card */}
-                        <div className='grid grid-cols-3 gap-3 items-center justify-center mt-4'>
-                            <div className=''>
-                                <div className='bg-green-500 text-white text-center rounded-t-md'>
-                                    <h2>+ WIN PRIZE</h2>
-                                </div>
-                                <div className='bg-white  text-center rounded-b-md'>
-                                    <h2>800</h2>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='bg-blue-500 text-white text-center rounded-t-md'>
-                                    <h2>+ PER KILL</h2>
-                                </div>
-                                <div className='bg-white text-center rounded-b-md'>
-                                    <h2>10</h2>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='bg-red-500 text-white text-center rounded-t-md'>
-                                    <h2>+ ENTRY FEE</h2>
-                                </div>
-                                <div className='bg-white text-center rounded-b-md'>
-                                    <h2>20</h2>
-                                </div>
-                            </div>
-                        </div>
-                        {/* match details */}
-                        <div className='grid grid-cols-3 mt-5 '>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>ENTRY TYPE</h2>
-                                <h2 className='text-white font-semibold'>100</h2>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>MAP</h2>
-                                <h2 className='text-white font-semibold'>Bermuda</h2>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>VERSION</h2>
-                                <h2 className='text-white font-semibold'>Mobile</h2>
-                            </div>
-                        </div>
-                        {/* === Progres Bar and Joining === */}
-                        <div className="flex items-center justify-between gap-4 mt-2">
-                            {/* === Bar === */}
-                            <div className="mt-5 w-3/4">
-                                <div className="w-full h-5 rounded-full bg-hoverbg">
-                                    <div className="bg-green-500 h-5 w-10 rounded-full"></div>
-                                </div>
-                                <div className="flex items-center justify-between text-white text-sm mt-1 pr-12">
-                                    <p>Only 42 spots are left</p>
-                                    <p>10/38</p>
-                                </div>
-                            </div>
-                            {/* === Joining === */}
-                            <div className="w-1/4">
-                                <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">Join</h2>
-                            </div>
-                        </div>
-                        <div className="flex justify-center gap-2 mt-4 mb-12">
-                            <div className="w-[50%] flex items-center justify-center border border-hoverbg text-white text-md rounded-md text-md p-2">
-                                <p><FontAwesomeIcon className="text-md mr-1" icon={faKey} /> Room Details</p>
-                            </div>
-                            {/* prize details modal */}
-                            <div>
-                                <button
-                                    onClick={() => setOpen(true)}
-                                    className=" w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
-                                >
-                                    <FontAwesomeIcon icon={faTrophy}/>
-
-                                   Prize Details
-                                </button>
-                                <Dialog open={open} onClose={setOpen} className="relative z-10">
-                                    <DialogBackdrop
-                                        transition
-                                        className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-                                    />
-
-                                    <div className="fixed top-4 z-10 w-sm overflow-y-auto">
-                                        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                                            <DialogPanel
-                                                transition
-                                                className="relative transform overflow-hidden rounded-lg bg-mainbg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-in-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-                                            >
-                                                <div className="bg-mainbg px-4 pt-2 pb-4 ">
-                                                    <div className="">
-                                                        <div className=" flex flex-col bg-cardbg items-center text-white rounded-md font-Jakarta py-2">
-                                                            <h2 className="font-semibold">TOTAL PRIZE</h2>
-                                                            <p className="text-sm ">Duo | Mobile | Regular</p>
-                                                        </div>
-                                                        <div className="mt-3 w-full text-center text-lg bg-cardbg text-white font-Jakarta flex flex-col gap-2 rounded-md px-3 py-3">
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faCrown} className="text-yellow-400" /> <span>Winner - 100Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faTrophy} className="text-yellow-400" /> <span>2nd Position - 80Tk</span></h2>
-                                                            <h2 className="flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>3rd Position - 50Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>4th Position - 40Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> 5th Position - 30Tk</h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faFire} className="text-yellow-400" /> Per Kill - 10Tk</h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faHandPeace} className="text-yellow-400" />Total Prize Pool- 10Tk</h2>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setOpen(false)}
-                                                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-                                                    >
-                                                       <FontAwesomeIcon icon={faCircleXmark} className="text-2xl"/>
-                                                    </button>
-                                                   
-                                                </div>
-                                            </DialogPanel>
-                                        </div>
-                                    </div>
-                                </Dialog>
-                            </div>
-                        </div>
-                        <div className="absolute bottom-0 w-full left-0 text-white bg-green-500 p-2 rounded-b-lg">
-                            <p className="flex items-center justify-center"><FontAwesomeIcon className="mr-2 text-2xl" icon={faClock} />STARTS IN-</p>
-                        </div>
-                    </div>
-                </div>
-                {/* === Card Three === */}
-                <div className="w-[95%] mt-6">
-                    <div className="relative bg-cardbg rounded-lg p-2">
-                        <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                        <NavLink to='/matchdetails' className="match-box flex items-center gap-2">
-                            <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
-                            <div className="match-details flex flex-col gap-1.5">
-                                <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
-                                <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
-                            </div>
-                        </NavLink>
-                        {/* pricing mini card */}
-                        <div className='grid grid-cols-3 gap-3 items-center justify-center mt-4'>
-                            <div className=''>
-                                <div className='bg-green-500 text-white text-center rounded-t-md'>
-                                    <h2>+ WIN PRIZE</h2>
-                                </div>
-                                <div className='bg-white  text-center rounded-b-md'>
-                                    <h2>800</h2>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='bg-blue-500 text-white text-center rounded-t-md'>
-                                    <h2>+ PER KILL</h2>
-                                </div>
-                                <div className='bg-white text-center rounded-b-md'>
-                                    <h2>10</h2>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='bg-red-500 text-white text-center rounded-t-md'>
-                                    <h2>+ ENTRY FEE</h2>
-                                </div>
-                                <div className='bg-white text-center rounded-b-md'>
-                                    <h2>20</h2>
-                                </div>
-                            </div>
-                        </div>
-                        {/* match details */}
-                        <div className='grid grid-cols-3 mt-5 '>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>ENTRY TYPE</h2>
-                                <h2 className='text-white font-semibold'>100</h2>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>MAP</h2>
-                                <h2 className='text-white font-semibold'>Bermuda</h2>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>VERSION</h2>
-                                <h2 className='text-white font-semibold'>Mobile</h2>
-                            </div>
-                        </div>
-                        {/* === Progres Bar and Joining === */}
-                        <div className="flex items-center justify-between gap-4 mt-2">
-                            {/* === Bar === */}
-                            <div className="mt-5 w-3/4">
-                                <div className="w-full h-5 rounded-full bg-hoverbg">
-                                    <div className="bg-green-500 h-5 w-10 rounded-full"></div>
-                                </div>
-                                <div className="flex items-center justify-between text-white text-sm mt-1 pr-12">
-                                    <p>Only 42 spots are left</p>
-                                    <p>10/38</p>
-                                </div>
-                            </div>
-                            {/* === Joining === */}
-                            <div className="w-1/4">
-                                <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">Join</h2>
-                            </div>
-                        </div>
-                        <div className="flex justify-center gap-2 mt-4 mb-12">
-                            <div className="w-[50%] flex items-center justify-center border border-hoverbg text-white text-md rounded-md text-md p-2">
-                                <p><FontAwesomeIcon className="text-md mr-1" icon={faKey} /> Room Details</p>
-                            </div>
-                            {/* prize details modal */}
-                            <div>
-                                <button
-                                    onClick={() => setOpen(true)}
-                                    className=" w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
-                                >
-                                    <FontAwesomeIcon icon={faTrophy}/>
-
-                                   Prize Details
-                                </button>
-                                <Dialog open={open} onClose={setOpen} className="relative z-10">
-                                    <DialogBackdrop
-                                        transition
-                                        className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-                                    />
-
-                                    <div className="fixed top-4 z-10 w-sm overflow-y-auto">
-                                        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                                            <DialogPanel
-                                                transition
-                                                className="relative transform overflow-hidden rounded-lg bg-mainbg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-in-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-                                            >
-                                                <div className="bg-mainbg px-4 pt-2 pb-4 ">
-                                                    <div className="">
-                                                        <div className=" flex flex-col bg-cardbg items-center text-white rounded-md font-Jakarta py-2">
-                                                            <h2 className="font-semibold">TOTAL PRIZE</h2>
-                                                            <p className="text-sm ">Duo | Mobile | Regular</p>
-                                                        </div>
-                                                        <div className="mt-3 w-full text-center text-lg bg-cardbg text-white font-Jakarta flex flex-col gap-2 rounded-md px-3 py-3">
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faCrown} className="text-yellow-400" /> <span>Winner - 100Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faTrophy} className="text-yellow-400" /> <span>2nd Position - 80Tk</span></h2>
-                                                            <h2 className="flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>3rd Position - 50Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>4th Position - 40Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> 5th Position - 30Tk</h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faFire} className="text-yellow-400" /> Per Kill - 10Tk</h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faHandPeace} className="text-yellow-400" />Total Prize Pool- 10Tk</h2>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setOpen(false)}
-                                                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-                                                    >
-                                                       <FontAwesomeIcon icon={faCircleXmark} className="text-2xl"/>
-                                                    </button>
-                                                   
-                                                </div>
-                                            </DialogPanel>
-                                        </div>
-                                    </div>
-                                </Dialog>
-                            </div>
-                        </div>
-                        <div className="absolute bottom-0 w-full left-0 text-white bg-green-500 p-2 rounded-b-lg">
-                            <p className="flex items-center justify-center"><FontAwesomeIcon className="mr-2 text-2xl" icon={faClock} />STARTS IN-</p>
-                        </div>
-                    </div>
-                </div>
-                {/* === Card Four === */}
-                <div className="w-[95%] mt-6">
-                    <div className="relative bg-cardbg rounded-lg p-2">
-                        <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                        <NavLink to='/matchdetails' className="match-box flex items-center gap-2">
-                            <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
-                            <div className="match-details flex flex-col gap-1.5">
-                                <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
-                                <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
-                            </div>
-                        </NavLink>
-                        {/* pricing mini card */}
-                        <div className='grid grid-cols-3 gap-3 items-center justify-center mt-4'>
-                            <div className=''>
-                                <div className='bg-green-500 text-white text-center rounded-t-md'>
-                                    <h2>+ WIN PRIZE</h2>
-                                </div>
-                                <div className='bg-white  text-center rounded-b-md'>
-                                    <h2>800</h2>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='bg-blue-500 text-white text-center rounded-t-md'>
-                                    <h2>+ PER KILL</h2>
-                                </div>
-                                <div className='bg-white text-center rounded-b-md'>
-                                    <h2>10</h2>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='bg-red-500 text-white text-center rounded-t-md'>
-                                    <h2>+ ENTRY FEE</h2>
-                                </div>
-                                <div className='bg-white text-center rounded-b-md'>
-                                    <h2>20</h2>
-                                </div>
-                            </div>
-                        </div>
-                        {/* match details */}
-                        <div className='grid grid-cols-3 mt-5 '>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>ENTRY TYPE</h2>
-                                <h2 className='text-white font-semibold'>100</h2>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>MAP</h2>
-                                <h2 className='text-white font-semibold'>Bermuda</h2>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>VERSION</h2>
-                                <h2 className='text-white font-semibold'>Mobile</h2>
-                            </div>
-                        </div>
-                        {/* === Progres Bar and Joining === */}
-                        <div className="flex items-center justify-between gap-4 mt-2">
-                            {/* === Bar === */}
-                            <div className="mt-5 w-3/4">
-                                <div className="w-full h-5 rounded-full bg-hoverbg">
-                                    <div className="bg-green-500 h-5 w-10 rounded-full"></div>
-                                </div>
-                                <div className="flex items-center justify-between text-white text-sm mt-1 pr-12">
-                                    <p>Only 42 spots are left</p>
-                                    <p>10/38</p>
-                                </div>
-                            </div>
-                            {/* === Joining === */}
-                            <div className="w-1/4">
-                                <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">Join</h2>
-                            </div>
-                        </div>
-                        <div className="flex justify-center gap-2 mt-4 mb-12">
-                            <div className="w-[50%] flex items-center justify-center border border-hoverbg text-white text-md rounded-md text-md p-2">
-                                <p><FontAwesomeIcon className="text-md mr-1" icon={faKey} /> Room Details</p>
-                            </div>
-                            {/* prize details modal */}
-                            <div>
-                                <button
-                                    onClick={() => setOpen(true)}
-                                    className=" w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
-                                >
-                                    <FontAwesomeIcon icon={faTrophy}/>
-
-                                   Prize Details
-                                </button>
-                                <Dialog open={open} onClose={setOpen} className="relative z-10">
-                                    <DialogBackdrop
-                                        transition
-                                        className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-                                    />
-
-                                    <div className="fixed top-4 z-10 w-sm overflow-y-auto">
-                                        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                                            <DialogPanel
-                                                transition
-                                                className="relative transform overflow-hidden rounded-lg bg-mainbg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-in-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-                                            >
-                                                <div className="bg-mainbg px-4 pt-2 pb-4 ">
-                                                    <div className="">
-                                                        <div className=" flex flex-col bg-cardbg items-center text-white rounded-md font-Jakarta py-2">
-                                                            <h2 className="font-semibold">TOTAL PRIZE</h2>
-                                                            <p className="text-sm ">Duo | Mobile | Regular</p>
-                                                        </div>
-                                                        <div className="mt-3 w-full text-center text-lg bg-cardbg text-white font-Jakarta flex flex-col gap-2 rounded-md px-3 py-3">
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faCrown} className="text-yellow-400" /> <span>Winner - 100Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faTrophy} className="text-yellow-400" /> <span>2nd Position - 80Tk</span></h2>
-                                                            <h2 className="flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>3rd Position - 50Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>4th Position - 40Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> 5th Position - 30Tk</h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faFire} className="text-yellow-400" /> Per Kill - 10Tk</h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faHandPeace} className="text-yellow-400" />Total Prize Pool- 10Tk</h2>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setOpen(false)}
-                                                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-                                                    >
-                                                       <FontAwesomeIcon icon={faCircleXmark} className="text-2xl"/>
-                                                    </button>
-                                                   
-                                                </div>
-                                            </DialogPanel>
-                                        </div>
-                                    </div>
-                                </Dialog>
-                            </div>
-                        </div>
-                        <div className="absolute bottom-0 w-full left-0 text-white bg-green-500 p-2 rounded-b-lg">
-                            <p className="flex items-center justify-center"><FontAwesomeIcon className="mr-2 text-2xl" icon={faClock} />STARTS IN-</p>
-                        </div>
-                    </div>
-                </div>
-                {/* === Card Five === */}
-                <div className="w-[95%] mt-6">
-                    <div className="relative bg-cardbg rounded-lg p-2">
-                        <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">#777</div>
-                        <NavLink to='/matchdetails' className="match-box flex items-center gap-2">
-                            <img className="w-16 h-16 rounded-full" src="./image/br-profile.jpg" alt="" />
-                            <div className="match-details flex flex-col gap-1.5">
-                                <h1 className="text-white font-semibold">Duo Time | Mobile | Regular</h1>
-                                <p className="text-sm text-yellow-500">2025-07-17 at 11:00 pm</p>
-                            </div>
-                        </NavLink>
-                        {/* pricing mini card */}
-                        <div className='grid grid-cols-3 gap-3 items-center justify-center mt-4'>
-                            <div className=''>
-                                <div className='bg-green-500 text-white text-center rounded-t-md'>
-                                    <h2>+ WIN PRIZE</h2>
-                                </div>
-                                <div className='bg-white  text-center rounded-b-md'>
-                                    <h2>800</h2>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='bg-blue-500 text-white text-center rounded-t-md'>
-                                    <h2>+ PER KILL</h2>
-                                </div>
-                                <div className='bg-white text-center rounded-b-md'>
-                                    <h2>10</h2>
-                                </div>
-                            </div>
-                            <div>
-                                <div className='bg-red-500 text-white text-center rounded-t-md'>
-                                    <h2>+ ENTRY FEE</h2>
-                                </div>
-                                <div className='bg-white text-center rounded-b-md'>
-                                    <h2>20</h2>
-                                </div>
-                            </div>
-                        </div>
-                        {/* match details */}
-                        <div className='grid grid-cols-3 mt-5 '>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>ENTRY TYPE</h2>
-                                <h2 className='text-white font-semibold'>100</h2>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>MAP</h2>
-                                <h2 className='text-white font-semibold'>Bermuda</h2>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <h2 className='text-hoverbg font-medium'>VERSION</h2>
-                                <h2 className='text-white font-semibold'>Mobile</h2>
-                            </div>
-                        </div>
-                        {/* === Progres Bar and Joining === */}
-                        <div className="flex items-center justify-between gap-4 mt-2">
-                            {/* === Bar === */}
-                            <div className="mt-5 w-3/4">
-                                <div className="w-full h-5 rounded-full bg-hoverbg">
-                                    <div className="bg-green-500 h-5 w-10 rounded-full"></div>
-                                </div>
-                                <div className="flex items-center justify-between text-white text-sm mt-1 pr-12">
-                                    <p>Only 42 spots are left</p>
-                                    <p>10/38</p>
-                                </div>
-                            </div>
-                            {/* === Joining === */}
-                            <div className="w-1/4">
-                                <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">Join</h2>
-                            </div>
-                        </div>
-                        <div className="flex justify-center gap-2 mt-4 mb-12">
-                            <div className="w-[50%] flex items-center justify-center border border-hoverbg text-white text-md rounded-md text-md p-2">
-                                <p><FontAwesomeIcon className="text-md mr-1" icon={faKey} /> Room Details</p>
-                            </div>
-                            {/* prize details modal */}
-                            <div>
-                                <button
-                                    onClick={() => setOpen(true)}
-                                    className=" w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
-                                >
-                                    <FontAwesomeIcon icon={faTrophy}/>
-
-                                   Prize Details
-                                </button>
-                                <Dialog open={open} onClose={setOpen} className="relative z-10">
-                                    <DialogBackdrop
-                                        transition
-                                        className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-                                    />
-
-                                    <div className="fixed top-4 z-10 w-sm overflow-y-auto">
-                                        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                                            <DialogPanel
-                                                transition
-                                                className="relative transform overflow-hidden rounded-lg bg-mainbg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-in-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-                                            >
-                                                <div className="bg-mainbg px-4 pt-2 pb-4 ">
-                                                    <div className="">
-                                                        <div className=" flex flex-col bg-cardbg items-center text-white rounded-md font-Jakarta py-2">
-                                                            <h2 className="font-semibold">TOTAL PRIZE</h2>
-                                                            <p className="text-sm ">Duo | Mobile | Regular</p>
-                                                        </div>
-                                                        <div className="mt-3 w-full text-center text-lg bg-cardbg text-white font-Jakarta flex flex-col gap-2 rounded-md px-3 py-3">
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faCrown} className="text-yellow-400" /> <span>Winner - 100Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faTrophy} className="text-yellow-400" /> <span>2nd Position - 80Tk</span></h2>
-                                                            <h2 className="flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>3rd Position - 50Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> <span>4th Position - 40Tk</span></h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faAward} className="text-yellow-400" /> 5th Position - 30Tk</h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faFire} className="text-yellow-400" /> Per Kill - 10Tk</h2>
-                                                            <h2 className=" flex items-center gap-3"><FontAwesomeIcon icon={faHandPeace} className="text-yellow-400" />Total Prize Pool- 10Tk</h2>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => setOpen(false)}
-                                                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-                                                    >
-                                                       <FontAwesomeIcon icon={faCircleXmark} className="text-2xl"/>
-                                                    </button>
-                                                   
-                                                </div>
-                                            </DialogPanel>
-                                        </div>
-                                    </div>
-                                </Dialog>
-                            </div>
-                        </div>
-                        <div className="absolute bottom-0 w-full left-0 text-white bg-green-500 p-2 rounded-b-lg">
-                            <p className="flex items-center justify-center"><FontAwesomeIcon className="mr-2 text-2xl" icon={faClock} />STARTS IN-</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-           
+  return (
+    <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
+      <div className=" bg-mainbg relative flex items-start justify-center">
+        {/* Top white curved section */}
+        <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
+          <NavLink
+            to="/"
+            className="bg-cardbg text-white px-6 py-2 rounded-xl text-lg font-medium shadow flex items-center gap-3 "
+          >
+            <span>
+              <FontAwesomeIcon className=" text-xl" icon={faChevronLeft} />
+            </span>
+            BR Matches
+          </NavLink>
         </div>
-    );
+      </div>
+      {/* === BR Matches Card Section === */}
+      <section className="w-full mt-24 justify-items-center">
+        {/* === Cards === */}
+        {match.map((match) => (
+          <div className="w-[95%] mt-5" key={match.id}>
+            <div className="relative bg-cardbg rounded-lg p-2">
+              <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">
+                #{match.match_id}
+              </div>
+              <NavLink
+                to="/matchdetails"
+                className="match-box flex items-center gap-2"
+              >
+                <img
+                  className="w-16 h-16 rounded-full"
+                  src={`${IMAGE_URL}/${match.category?.image || "default.jpg"}`}
+                  alt=""
+                />
+                <div className="match-details flex flex-col gap-1.5">
+                  <h1 className="text-white font-semibold">
+                    {match.match_name} | {match.version} | {match.game_mood}
+                  </h1>
+                  <p className="text-sm text-yellow-500">
+                    {match.date} at {match.time}
+                  </p>
+                </div>
+              </NavLink>
+
+              {/* Pricing Mini Card */}
+              <div className="grid grid-cols-3 gap-3 items-center justify-center mt-4">
+                <div>
+                  <div className="bg-green-500 text-white text-center rounded-t-md">
+                    <h2>+ WIN PRIZE</h2>
+                  </div>
+                  <div className="bg-white text-center rounded-b-md">
+                    <h2>{match.win_price}</h2>
+                  </div>
+                </div>
+                <div>
+                  <div className="bg-blue-500 text-white text-center rounded-t-md">
+                    <h2>+ PER KILL</h2>
+                  </div>
+                  <div className="bg-white text-center rounded-b-md">
+                    <h2>{match.kill_price}</h2>
+                  </div>
+                </div>
+                <div>
+                  <div className="bg-red-500 text-white text-center rounded-t-md">
+                    <h2>+ ENTRY FEE</h2>
+                  </div>
+                  <div className="bg-white text-center rounded-b-md">
+                    <h2>{match.entry_fee}</h2>
+                  </div>
+                </div>
+              </div>
+
+              {/* Match Details */}
+              <div className="grid grid-cols-3 mt-5">
+                <div className="flex flex-col items-center">
+                  <h2 className="text-hoverbg font-medium">ENTRY TYPE</h2>
+                  <h2 className="text-white font-semibold">
+                    {match.max_player}
+                  </h2>
+                </div>
+                <div className="flex flex-col items-center">
+                  <h2 className="text-hoverbg font-medium">MAP</h2>
+                  <h2 className="text-white font-semibold">{match.map_name}</h2>
+                </div>
+                <div className="flex flex-col items-center">
+                  <h2 className="text-hoverbg font-medium">VERSION</h2>
+                  <h2 className="text-white font-semibold">{match.version}</h2>
+                </div>
+              </div>
+
+              {/* Join Section */}
+              <div className="flex items-center justify-between gap-4 mt-2">
+                <div className="mt-5 w-3/4">
+                  <div className="w-full h-5 rounded-full bg-hoverbg">
+                    <div className="bg-green-500 h-5 w-10 rounded-full"></div>
+                  </div>
+                  <div className="flex items-center justify-between text-white text-sm mt-1 pr-12">
+                    <p>Only 42 spots are left</p>
+                    <p>10/{match.max_player}</p>
+                  </div>
+                </div>
+                <NavLink to="/br-match-join" className="w-1/4">
+                  <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">
+                    Join
+                  </h2>
+                </NavLink>
+              </div>
+
+              {/* Buttons: Room Details & Prize Details */}
+              <div className="flex justify-center gap-2 mt-4 mb-12">
+                {/* Room Details */}
+                <div>
+                  <button
+                    onClick={() => setOpen(true)}
+                    className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
+                  >
+                    <FontAwesomeIcon icon={faKey} />
+                    Room Details
+                  </button>
+                </div>
+
+                {/* Prize Details */}
+                <div>
+                  <button
+                    onClick={() => setOpen(true)}
+                    className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
+                  >
+                    <FontAwesomeIcon icon={faTrophy} />
+                    Prize Details
+                  </button>
+                </div>
+              </div>
+
+              <div className="absolute bottom-0 w-full left-0 text-white bg-green-500 p-2 rounded-b-lg">
+                <p className="flex items-center justify-center">
+                  <FontAwesomeIcon className="mr-2 text-2xl" icon={faClock} />
+                  STARTS IN-
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {/* Modal Shown Here */}
+        <div className="flex justify-center gap-2 mt-4 mb-12">
+          {/* prize details modal */}
+          <div>
+            <Dialog open={open} onClose={setOpen} className="relative z-10">
+              <DialogBackdrop
+                transition
+                className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+              />
+
+              <div className="fixed top-4 z-10 w-sm overflow-y-auto">
+                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                  <DialogPanel
+                    transition
+                    className="relative transform overflow-hidden rounded-lg bg-mainbg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-in-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+                  >
+                    <div className="bg-mainbg px-4 pt-2 pb-4 ">
+                      <div className="">
+                        <div className=" flex flex-col bg-cardbg items-center text-white rounded-md font-Jakarta py-2">
+                          <h2 className="font-semibold">TOTAL PRIZE</h2>
+                          <p className="text-sm ">Squad | Mobile | Regular</p>
+                        </div>
+                        <div className="mt-3 w-full text-center text-lg bg-cardbg text-white font-Jakarta flex flex-col gap-2 rounded-md px-3 py-3">
+                          <h2 className=" flex items-center gap-3">
+                            <FontAwesomeIcon
+                              icon={faCrown}
+                              className="text-yellow-400"
+                            />{" "}
+                            <span>Winner - 100Tk</span>
+                          </h2>
+                          <h2 className=" flex items-center gap-3">
+                            <FontAwesomeIcon
+                              icon={faTrophy}
+                              className="text-yellow-400"
+                            />{" "}
+                            <span>2nd Position - 80Tk</span>
+                          </h2>
+                          <h2 className="flex items-center gap-3">
+                            <FontAwesomeIcon
+                              icon={faAward}
+                              className="text-yellow-400"
+                            />{" "}
+                            <span>3rd Position - 50Tk</span>
+                          </h2>
+                          <h2 className=" flex items-center gap-3">
+                            <FontAwesomeIcon
+                              icon={faAward}
+                              className="text-yellow-400"
+                            />{" "}
+                            <span>4th Position - 40Tk</span>
+                          </h2>
+                          <h2 className=" flex items-center gap-3">
+                            <FontAwesomeIcon
+                              icon={faAward}
+                              className="text-yellow-400"
+                            />{" "}
+                            5th Position - 30Tk
+                          </h2>
+                          <h2 className=" flex items-center gap-3">
+                            <FontAwesomeIcon
+                              icon={faFire}
+                              className="text-yellow-400"
+                            />{" "}
+                            Per Kill - 10Tk
+                          </h2>
+                          <h2 className=" flex items-center gap-3">
+                            <FontAwesomeIcon
+                              icon={faHandPeace}
+                              className="text-yellow-400"
+                            />
+                            Total Prize Pool- 10Tk
+                          </h2>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                      <button
+                        type="button"
+                        onClick={() => setOpen(false)}
+                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+                      >
+                        <FontAwesomeIcon
+                          icon={faCircleXmark}
+                          className="text-2xl"
+                        />
+                      </button>
+                    </div>
+                  </DialogPanel>
+                </div>
+              </div>
+            </Dialog>
+          </div>
+        </div>
+        {/* Modal End Here */}
+      </section>
+    </div>
+  );
 };
 
 export default BrMatches;

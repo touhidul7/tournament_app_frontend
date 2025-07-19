@@ -59,7 +59,7 @@ const MainRoutes = createBrowserRouter([{
          element: <Login />
       },
       {
-         path: "/brmatches",
+         path: "/brmatches/:id",
          element: <BrMatches />
       },
       {
