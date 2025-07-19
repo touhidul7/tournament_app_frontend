@@ -137,7 +137,7 @@ const MainRoutes = createBrowserRouter([{
          element: <BrSquadDetails/>
       },
       {
-         path: "/br-match-join/:id",
+         path: "/br-match-join",
          element: <BrMatchJoin/>
       },
       {
