@@ -33,9 +33,6 @@ const BrMatchJoin = () => {
                     </div>
                         <div className="solo mx-2 mt-6">
                             <input className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out" type="text" placeholder="Player 1 Name" />
-                        </div>
-                        <div className="Duo flex flex-col gap-4 mx-2 mt-6">
-                            <input className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out" type="text" placeholder="Player 1 Name" />
                             <input className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out" type="text" placeholder="Player 2 Name" />
                         </div>
                 </div>
