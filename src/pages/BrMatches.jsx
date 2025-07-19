@@ -20,8 +20,10 @@ import { } from "../css/BrMatch.css";
 const BrMatches = () => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const IMAGE_URL = import.meta.env.VITE_API_IMAGE_URL;
+  const[matchData, setMatchData] = useState([]);
   const [open, setOpen] = useState(false);
   const [match, setMatch] = useState([]);
+  const [isStarted, setIsStarted] = useState(false);
   // get id data
   const { id } = useParams();
   //load data
@@ -67,7 +69,7 @@ const BrMatches = () => {
     const now = new Date();
     const diff = matchDateTime - now;
 
-    if (diff <= 0) return "Match started";
+    if (diff <= 0) {setIsStarted(true); return "Match started";}
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -87,68 +89,56 @@ const BrMatches = () => {
   }
 
 
-  const LiveCountdown = ({ date, time }) => {
-    const [remaining, setRemaining] = useState(calculateRemainingTime(date, time));
+  const MatchTimer = ({ date, time }) => {
+    const [remaining, setRemaining] = useState("Loading...");
 
     useEffect(() => {
-      // Update every second for live countdown
-      const interval = setInterval(() => {
-        setRemaining(calculateRemainingTime(date, time));
-      }, 1000);
+      const updateTimer = () => {
+        if (!date || !time) {
+          setRemaining("Time not set");
+          return;
+        }
+
+        const matchTime = new Date(`${date} ${time}`);
+        const now = new Date();
+        const diff = matchTime - now;
+
+        if (diff <= 0) {
+          setRemaining("Match started");
+          setIsStarted(true);
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const pad = (num) => num.toString().padStart(2, "0");
+
+        if (days > 0) {
+          setRemaining(`${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`);
+        } else if (hours > 0) {
+          setRemaining(`${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`);
+        } else {
+          setRemaining(`${pad(minutes)}m ${pad(seconds)}s`);
+        }
+      };
+
+      // Update immediately
+      updateTimer();
+
+      // Update every second
+      const interval = setInterval(updateTimer, 1000);
 
       return () => clearInterval(interval);
     }, [date, time]);
 
-    return <span>{remaining}</span>;
-  }
+    return <span> {!isStarted&&"MATCH STARTING IN"}{remaining}</span>;
+  };
 
-  const MatchTimer = ({ date, time }) => {
-  const [remaining, setRemaining] = useState("Loading...");
-
-  useEffect(() => {
-    const updateTimer = () => {
-      if (!date || !time) {
-        setRemaining("Time not set");
-        return;
-      }
-
-      const matchTime = new Date(`${date} ${time}`);
-      const now = new Date();
-      const diff = matchTime - now;
-
-      if (diff <= 0) {
-        setRemaining("Match started");
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-      const pad = (num) => num.toString().padStart(2, "0");
-
-      if (days > 0) {
-        setRemaining(`${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`);
-      } else if (hours > 0) {
-        setRemaining(`${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`);
-      } else {
-        setRemaining(`${pad(minutes)}m ${pad(seconds)}s`);
-      }
-    };
-
-    // Update immediately
-    updateTimer();
-
-    // Update every second
-    const interval = setInterval(updateTimer, 1000);
-
-    return () => clearInterval(interval);
-  }, [date, time]);
-
-  return <span>{remaining}</span>;
-};
-
+  console.log(matchData);
+  
 
   return (
     <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
@@ -251,11 +241,18 @@ const BrMatches = () => {
                     <p>10/{match.max_player}</p>
                   </div>
                 </div>
-                <NavLink to={`/br-match-join/${match.id}`} className="w-1/4">
-                  <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">
+                {!isStarted ? (
+                  <NavLink to={`/br-match-join/${match.id}`} className="w-1/4">
+                    <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">
+                      Join
+                    </h2>
+                  </NavLink>
+                ) : (<NavLink className="w-1/4">
+                  <h2 className="bg-green-400 font-semibold text-white text-center p-2 rounded-md">
                     Join
                   </h2>
-                </NavLink>
+                </NavLink>)}
+
               </div>
 
               {/* Buttons: Room Details & Prize Details */}
@@ -263,7 +260,7 @@ const BrMatches = () => {
                 {/* Room Details */}
                 <div>
                   <button
-                    onClick={() => setOpen(true)}
+                    onClick={() =>console.log("Room Details Clicked")}
                     className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
                   >
                     <FontAwesomeIcon icon={faKey} />
@@ -274,7 +271,7 @@ const BrMatches = () => {
                 {/* Prize Details */}
                 <div>
                   <button
-                    onClick={() => setOpen(true)}
+                    onClick={() => {setOpen(true);setMatchData(match);}}
                     className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
                   >
                     <FontAwesomeIcon icon={faTrophy} />
@@ -286,8 +283,8 @@ const BrMatches = () => {
               <div className="absolute bottom-0 w-full left-0 text-white bg-green-500 p-2 rounded-b-lg">
                 <p className="flex items-center justify-center">
                   <FontAwesomeIcon className="mr-2 text-2xl" icon={faClock} />
-                  STARTS IN- {/* use this props and make a timer {match.date} and {match.time} */}
-                  {/* <LiveCountdown date={match.date} time={match.time} /> */}<MatchTimer date={match.date} time={match.time} />
+                  {/* use this props and make a timer {match.date} and {match.time} */}
+                  <MatchTimer date={match.date} time={match.time} />
                 </p>
               </div>
             </div>
@@ -314,7 +311,7 @@ const BrMatches = () => {
                       <div className="">
                         <div className=" flex flex-col bg-cardbg items-center text-white rounded-md font-Jakarta py-2">
                           <h2 className="font-semibold">TOTAL PRIZE</h2>
-                          <p className="text-sm ">Squad | Mobile | Regular</p>
+                          <p className="text-sm ">{matchData?.match_name}</p>
                         </div>
                         <div className="mt-3 w-full text-center text-lg bg-cardbg text-white font-Jakarta flex flex-col gap-2 rounded-md px-3 py-3">
                           <h2 className=" flex items-center gap-3">
@@ -322,49 +319,49 @@ const BrMatches = () => {
                               icon={faCrown}
                               className="text-yellow-400"
                             />{" "}
-                            <span>Winner - 100Tk</span>
+                            <span>Winner - {matchData?.win_price}Tk</span>
                           </h2>
                           <h2 className=" flex items-center gap-3">
                             <FontAwesomeIcon
                               icon={faTrophy}
                               className="text-yellow-400"
                             />{" "}
-                            <span>2nd Position - 80Tk</span>
+                            <span>2nd Position - {matchData?.second_prize}Tk</span>
                           </h2>
                           <h2 className="flex items-center gap-3">
                             <FontAwesomeIcon
                               icon={faAward}
                               className="text-yellow-400"
                             />{" "}
-                            <span>3rd Position - 50Tk</span>
+                            <span>3rd Position - {matchData?.third_prize}Tk</span>
                           </h2>
                           <h2 className=" flex items-center gap-3">
                             <FontAwesomeIcon
                               icon={faAward}
                               className="text-yellow-400"
                             />{" "}
-                            <span>4th Position - 40Tk</span>
+                            <span>4th Position - {matchData?.fourth_prize}Tk</span>
                           </h2>
                           <h2 className=" flex items-center gap-3">
                             <FontAwesomeIcon
                               icon={faAward}
                               className="text-yellow-400"
                             />{" "}
-                            5th Position - 30Tk
+                            5th Position - {matchData?.fifth_prize}Tk
                           </h2>
                           <h2 className=" flex items-center gap-3">
                             <FontAwesomeIcon
                               icon={faFire}
                               className="text-yellow-400"
                             />{" "}
-                            Per Kill - 10Tk
+                            Per Kill - {matchData?.kill_price}Tk
                           </h2>
                           <h2 className=" flex items-center gap-3">
                             <FontAwesomeIcon
                               icon={faHandPeace}
                               className="text-yellow-400"
                             />
-                            Total Prize Pool- 10Tk
+                            Total Prize Pool- {matchData?.total_prize}Tk
                           </h2>
                         </div>
                       </div>
