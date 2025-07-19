@@ -22,7 +22,15 @@ const SignUp = () => {
 
         const email = e.target[0].value;
         const password = e.target[1].value;
-      
+        const cPassword = e.target[2].value;
+
+        console.log(cPassword);
+        if( password != cPassword) {
+            toast.error("Passwords do not match!");
+            return;
+        }
+
+
 
         if (!isSignedIn) {
             setIsSignedIn(true);

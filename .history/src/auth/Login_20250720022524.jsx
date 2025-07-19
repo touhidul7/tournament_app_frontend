@@ -32,7 +32,7 @@ const Login = () => {
             navigate("/");
         } catch (error) {
             console.error("Login error:", error.message);
-            toast.error("Login failed! " + 'Invalid-Credential');
+            toast.error("Login failed! " + error.message);
             setIsSignedIn(false); // Reset state on failure
         }
     };
@@ -45,12 +45,13 @@ const Login = () => {
             </div>
             <section className="w-full bg-mainbg justify-items-center pt-12 pb-24 rounded-t-[20px]">
                 <div className="w-[80%]">
-                    <div className="flex flex-col items-center justify-center text-center">
-                        <h2 className="text-3xl ">Login</h2>
-                    </div>
+                    {/* <div className="flex items-center justify-center gap-4 mt-6 p-2 bg-white rounded-md cursor-pointer text-mainbg">
+                    <FontAwesomeIcon icon={faGoogle} className="text-3xl" />
+                    <p className="text-lg">Log in with Google</p>
+                </div> */}
                     <div>
                         <div>
-                            <form className="flex flex-col gap-4 mt-4" onSubmit={handleSubmit}>
+                            <form className="flex flex-col gap-4 mt-4"  onSubmit={handleSubmit}>
                                 <div className="flex items-center gap-2 bg-dark-card p-2 rounded-xl bg-white text-mainbg shadow-lg shadow-gray-800">
                                     <FontAwesomeIcon icon={faAt} />
                                     <input
@@ -83,13 +84,13 @@ const Login = () => {
                                     >
                                         Log In
                                     </button>
+                                    <br />
+                                    <NavLink to='/signup' className="underline">
+                                        Don't have an account? Sign up
+                                    </NavLink>
                                 </div>
                             </form>
-                            <div className="mt-5">
-                                <NavLink to='/signup' className="underline mt-5">
-                                    Don't have an account? Sign up
-                                </NavLink>
-                            </div>
+
 
                         </div>
                     </div>

@@ -26,7 +26,7 @@ import BrSquad from "../pages/BrSquad";
 import BrSquadDetails from "../pages/BrSquadDetails";
 import BrMatchJoin from "../pages/BrMatchJoin";
 import ThankYou from "../pages/ThankYou";
-import PrivateRoute from "./PrivateRoutes";
+import PrivateRoute from "../PrivateRoute";
 
 
 const MainRoutes = createBrowserRouter([

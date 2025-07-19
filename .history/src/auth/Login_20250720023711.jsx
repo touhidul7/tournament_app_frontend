@@ -46,7 +46,7 @@ const Login = () => {
             <section className="w-full bg-mainbg justify-items-center pt-12 pb-24 rounded-t-[20px]">
                 <div className="w-[80%]">
                     <div className="flex flex-col items-center justify-center text-center">
-                        <h2 className="text-3xl ">Login</h2>
+                        <h2 className="text-3xl ">Login</h2> <hr /><hr />
                     </div>
                     <div>
                         <div>

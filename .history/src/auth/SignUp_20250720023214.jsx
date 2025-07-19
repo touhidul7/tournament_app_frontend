@@ -22,7 +22,13 @@ const SignUp = () => {
 
         const email = e.target[0].value;
         const password = e.target[1].value;
-      
+        const cPassword = e.target[2].value;
+        if( password != cPassword) {
+            toast.error("Passwords do not match!");
+            return;
+        }
+
+console.log(cPassword);
 
         if (!isSignedIn) {
             setIsSignedIn(true);
@@ -100,7 +106,7 @@ const SignUp = () => {
                                     </div>
 
 
-                                    {/* <div className="flex items-center gap-2 bg-white text-mainbg p-1 rounded shadow-lg shadow-gray-800">
+                                    <div className="flex items-center gap-2 bg-white text-mainbg p-1 rounded shadow-lg shadow-gray-800">
                                         <FontAwesomeIcon icon={faKey} className="text-mainbg pl-1" />
                                         <input
                                             type={showConfirmPassword ? "text" : "password"}
@@ -115,7 +121,7 @@ const SignUp = () => {
                                         >
                                             <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
                                         </button>
-                                    </div> */}
+                                    </div>
                                     <button
                                         type="submit"
                                         className="w-40 items-center justify-items-center bg-white border text-mainbg px-8 py-2 rounded-md text-xl font-semibold shadow-lg shadow-gray-800"
