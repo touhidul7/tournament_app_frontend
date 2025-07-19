@@ -94,7 +94,7 @@ const BrMatches = () => {
                 />
                 <div className="match-details flex flex-col gap-1.5">
                   <h1 className="text-white font-semibold">
-                    {match.match_name} | {match.version} | {match.game_mood}
+                    {match.match_name}
                   </h1>
                   <p className="text-sm text-yellow-500">
                     {match.date} at {match.time}
@@ -135,7 +135,7 @@ const BrMatches = () => {
                 <div className="flex flex-col items-center">
                   <h2 className="text-hoverbg font-medium">ENTRY TYPE</h2>
                   <h2 className="text-white font-semibold">
-                    {match.max_player}
+                    {match.game_type}
                   </h2>
                 </div>
                 <div className="flex flex-col items-center">
