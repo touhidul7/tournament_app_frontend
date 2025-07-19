@@ -25,6 +25,7 @@ import LoneWolfRules from "../pages/LoneWolfRules";
 import BrSquad from "../pages/BrSquad";
 import BrSquadDetails from "../pages/BrSquadDetails";
 import BrMatchJoin from "../pages/BrMatchJoin";
+import ThankYou from "../pages/ThankYou";
 
 
 const MainRoutes = createBrowserRouter([{
@@ -138,6 +139,10 @@ const MainRoutes = createBrowserRouter([{
       {
          path: "/br-match-join",
          element: <BrMatchJoin/>
+      },
+      {
+         path: "/thankyou",
+         element: <ThankYou/>
       }
 
 

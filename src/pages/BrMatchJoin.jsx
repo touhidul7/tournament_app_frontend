@@ -29,13 +29,23 @@ const BrMatchJoin = () => {
                     <div className="flex items-center justify-center gap-5 mt-4">
                         <button className="text-lg font-medium bg-mainbg w-32 py-2 rounded-md inset-shadow-sm inset-shadow-gray-100/70 hover:bg-cardbg hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out" type="submit">Solo</button>
                         <button className="text-lg font-medium bg-mainbg w-32 py-2 rounded-md inset-shadow-sm inset-shadow-gray-100/70 hover:bg-cardbg hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out" type="submit">Duo</button>
-                        {/* === DropDown Input Text === */}
                     </div>
-                        <div className="solo mx-2 mt-6">
+                        {/* === DropDown Input Text === */}
+                        <div className="flex flex-col mx-2 mt-6 gap-4">
                             <input className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out" type="text" placeholder="Player 1 Name" />
                             <input className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out" type="text" placeholder="Player 2 Name" />
                         </div>
+                        <hr className="my-3 text-hoverbg" />
+                        {/* === Cofirmation === */}
+                        <div className="flex items-center justify-center gap-5 mt-4  px-2">
+                            <button className="text-lg font-medium bg-mainbg w-1/2 py-2 rounded-md inset-shadow-sm inset-shadow-gray-100/70 hover:bg-cardbg hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out" type="submit">Edit Players</button>
+                            <NavLink to='/thankyou' className="text-center text-lg font-medium bg-mainbg w-1/2 py-2 rounded-md inset-shadow-sm inset-shadow-gray-100/70 hover:bg-cardbg hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out" type="submit">Confirm and Pay</NavLink>
+                        </div>
                 </div>
+            </div>
+            {/* === Join Now btn === */}
+            <div className="w-full bottom-0 sticky flex items-center justify-center mt-4">
+                <button className="w-[95%] p-3 bg-green-500 mb-20 rounded text-lg text-white font-semibold">Join Now</button>
             </div>
         </div>
     );
