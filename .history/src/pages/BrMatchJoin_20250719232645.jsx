@@ -24,7 +24,7 @@ const BrMatchJoin = () => {
             <div className=" bg-black relative flex items-start justify-center">
                 {/* Top white curved section */}
                 <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
-                    <NavLink to={`/brmatches/${matchDetails.category_id}`} className="bg-cardbg text-white px-6 py-2 rounded-xl text-lg font-medium shadow flex items-center gap-3 ">
+                    <NavLink to='/' className="bg-cardbg text-white px-6 py-2 rounded-xl text-lg font-medium shadow flex items-center gap-3 ">
                         <span><FontAwesomeIcon className=" text-xl" icon={faChevronLeft} /></span>
                         Back
                     </NavLink>
@@ -33,12 +33,12 @@ const BrMatchJoin = () => {
             {/* === Join Details === */}
             <div className="w-full mt-24 justify-items-center font-Jakarta pt-5">
                 <div className="w-[95%] bg-cardbg rounded-md text-white p-3">
-                    <h1 className="text-md font-semibold ml-2">{matchDetails.match_name}</h1>
-                    <p className="text-md text-hoverbg ml-2 mt-3">Date: {matchDetails.date} | Time: {matchDetails.time}</p>
+                    <h1 className="text-md font-semibold ml-2">Solo Time | Mobile | Regular</h1>
+                    <p className="text-md text-hoverbg ml-2 mt-3">19/07/2025, 02:00 PM</p>
 
-                    <div className="flex text-md font-medium ml-2 mt-3 gap-7 justify-between">
-                        <p>Win Prize: <FontAwesomeIcon className="mx-1" icon={faBangladeshiTakaSign} />{matchDetails.win_price}</p>
-                        <p>Entry Fee: <FontAwesomeIcon icon={faBangladeshiTakaSign} />{matchDetails.entry_fee}</p>
+                    <div className="flex text-md font-medium ml-2 mt-3 gap-7">
+                        <p>Win Prize: <FontAwesomeIcon className="mx-1" icon={faBangladeshiTakaSign} /> 800 Tk</p>
+                        <p>Entry Fee: <FontAwesomeIcon icon={faBangladeshiTakaSign} /> 10 TK</p>
                     </div>
 
                     <hr className="text-hoverbg my-3" />
