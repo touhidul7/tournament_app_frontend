@@ -286,7 +286,7 @@ const BrMatches = () => {
               <div className="absolute bottom-0 w-full left-0 text-white bg-green-500 p-2 rounded-b-lg">
                 <p className="flex items-center justify-center">
                   <FontAwesomeIcon className="mr-2 text-2xl" icon={faClock} />
-                  STARTS IN- {/* use this props and make a timer {match.date} and {match.time} */}
+                  {/* use this props and make a timer {match.date} and {match.time} */}
                   {/* <LiveCountdown date={match.date} time={match.time} /> */}<MatchTimer date={match.date} time={match.time} />
                 </p>
               </div>
