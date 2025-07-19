@@ -60,8 +60,95 @@ const BrMatches = () => {
 
   console.log(match);
 
-  //time filter
-  
+  const calculateRemainingTime = (dateString, timeString) => {
+    if (!dateString || !timeString) return "Time not set";
+
+    const matchDateTime = new Date(`${dateString} ${timeString}`);
+    const now = new Date();
+    const diff = matchDateTime - now;
+
+    if (diff <= 0) return "Match started";
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    // Format with leading zeros for consistent display
+    const pad = (num) => num.toString().padStart(2, '0');
+
+    if (days > 0) {
+      return `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
+    } else if (hours > 0) {
+      return `${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
+    } else {
+      return `${pad(minutes)}m ${pad(seconds)}s`;
+    }
+  }
+
+
+  const LiveCountdown = ({ date, time }) => {
+    const [remaining, setRemaining] = useState(calculateRemainingTime(date, time));
+
+    useEffect(() => {
+      // Update every second for live countdown
+      const interval = setInterval(() => {
+        setRemaining(calculateRemainingTime(date, time));
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }, [date, time]);
+
+    return <span>{remaining}</span>;
+  }
+
+  const MatchTimer = ({ date, time }) => {
+  const [remaining, setRemaining] = useState("Loading...");
+
+  useEffect(() => {
+    const updateTimer = () => {
+      if (!date || !time) {
+        setRemaining("Time not set");
+        return;
+      }
+
+      const matchTime = new Date(`${date} ${time}`);
+      const now = new Date();
+      const diff = matchTime - now;
+
+      if (diff <= 0) {
+        setRemaining("Match started");
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      const pad = (num) => num.toString().padStart(2, "0");
+
+      if (days > 0) {
+        setRemaining(`${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`);
+      } else if (hours > 0) {
+        setRemaining(`${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`);
+      } else {
+        setRemaining(`${pad(minutes)}m ${pad(seconds)}s`);
+      }
+    };
+
+    // Update immediately
+    updateTimer();
+
+    // Update every second
+    const interval = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(interval);
+  }, [date, time]);
+
+  return <span>{remaining}</span>;
+};
+
 
   return (
     <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
@@ -164,7 +251,7 @@ const BrMatches = () => {
                     <p>10/{match.max_player}</p>
                   </div>
                 </div>
-                <NavLink to="/br-match-join" className="w-1/4">
+                <NavLink to={`/br-match-join/${match.id}`} className="w-1/4">
                   <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">
                     Join
                   </h2>
@@ -199,7 +286,8 @@ const BrMatches = () => {
               <div className="absolute bottom-0 w-full left-0 text-white bg-green-500 p-2 rounded-b-lg">
                 <p className="flex items-center justify-center">
                   <FontAwesomeIcon className="mr-2 text-2xl" icon={faClock} />
-                  STARTS IN-
+                  STARTS IN- {/* use this props and make a timer {match.date} and {match.time} */}
+                  {/* <LiveCountdown date={match.date} time={match.time} /> */}<MatchTimer date={match.date} time={match.time} />
                 </p>
               </div>
             </div>
