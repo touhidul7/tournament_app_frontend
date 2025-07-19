@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import {
   faAward,
   faChevronLeft,
@@ -13,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
-import {} from "../css/BrMatch.css";
+import { } from "../css/BrMatch.css";
 
 const BrMatches = () => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -58,6 +60,9 @@ const BrMatches = () => {
 
   console.log(match);
 
+  //time filter
+  
+
   return (
     <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
       <div className=" bg-mainbg relative flex items-start justify-center">
@@ -84,7 +89,7 @@ const BrMatches = () => {
                 #{match.match_id}
               </div>
               <NavLink
-                to="/matchdetails"
+                to={`/matchdetails/${match.id}`}
                 className="match-box flex items-center gap-2"
               >
                 <img

@@ -64,7 +64,7 @@ const MainRoutes = createBrowserRouter([{
          element: <BrMatches />
       },
       {
-         path: "/matchdetails",
+         path: "/matchdetails/:id",
          element: <MatcheDetails />
       },
 
