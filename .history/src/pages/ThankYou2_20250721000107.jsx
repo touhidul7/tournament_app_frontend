@@ -10,7 +10,7 @@ const ThankYou2 = () => {
                 <h1 className='text-2xl text-gray-900 font-bold'>Thank You for Deposite</h1>
                 <p className='text-md font-md text-gray-900'>Your Payment id pending</p>
                 <p className='text-sm text-gray-900'>Status will update in 20 - 40 minutes</p>
-                <NavLink to={`/profile`} className="bg-cardbg text-white px-6 py-2 rounded-xl text-lg font-medium shadow flex items-center gap-3 mt-5">
+                <NavLink to={`/`} className="bg-cardbg text-white px-6 py-2 rounded-xl text-lg font-medium shadow flex items-center gap-3 ">
                     <span><FontAwesomeIcon className=" text-xl" icon={faChevronLeft} /></span>
                     Back to Home
                 </NavLink>

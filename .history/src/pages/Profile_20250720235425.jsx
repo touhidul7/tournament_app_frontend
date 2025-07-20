@@ -1,12 +1,14 @@
-import { faArrowRightFromBracket , faChartSimple, faScaleBalanced, faShareAlt, faUserCircle, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faBangladeshiTakaSign, faChartSimple, faScaleBalanced, faShareAlt, faUserCircle, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons/faHandHoldingDollar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import { doSignOut } from '../firebase/auth';
+import { useEffect, useState } from 'react';
 const Profile = () => {
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const navigate = useNavigate();
+    const [deposite, setDeposite] = useState(0);
     // load localStorage user data
     const user = JSON.parse(localStorage.getItem("user")) || {};
     const logout = async () => {
@@ -20,10 +22,43 @@ const Profile = () => {
             console.error("Logout error:", error.message);
         }
     };
-  
+    // load deposite data from api
+    const loadDeposite = () => {
+        fetch(`${BASE_URL}/${user.user.uid}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    setDeposite(data.deposite);
+                } else {
+                    toast.error("Failed to load deposite data");
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching deposite data:", error);
+                toast.error("Error fetching deposite data");
+            });
+    }
+    // Call loadDeposite when the component mounts
+    useEffect(()=>{
+        loadDeposite();
+    })
+
 
     return (
-        <div className='max-w-md mx-auto bg-mainbg  font-Jakarta pb-20 pt-2'>
+        <div className='max-w-md mx-auto bg-mainbg  font-Jakarta pb-20'>
+            {/* app name icon and wallet section */}
+            <div className='py-2 flex items-center justify-between border-b border-cardbg'>
+                <div className='flex items-center gap-2'>
+                    <img className='w-[50px] h-[50px] rounded-full' src="./image/profile-image.jpg" alt="Profilepic" />
+                    <h2 className='text-white font-medium text-lg'>App Name</h2>
+                </div>
+                <div className='flex items-center gap-2 text-white bg-cardbg px-4 py-2 rounded-full mr-2'> <FontAwesomeIcon className='text-2xl' icon={faWallet} /> <p><FontAwesomeIcon icon={faBangladeshiTakaSign} /> 0.0TK</p></div>
+            </div>
             {/* profile picure */}
             <div className='flex justify-center flex-col items-center mt-3'>
                 <img src="./image/profile.png" alt="" className='h-16 w-16 border-3 border-white rounded-full' />

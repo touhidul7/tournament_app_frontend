@@ -32,7 +32,7 @@ const Wallet = () => {
                     <div className='flex gap-2 items-center'>
                         <FontAwesomeIcon icon={faTrophy} className='text-amber-400'/> <p className='text-[15px]'>WINNING CASH BALANCE</p>
                     </div>
-                    {/* <h2 className='text-lg'>BDT 0</h2> */}
+                    <h2 className='text-lg'>BDT 0</h2>
                   </div>
                   <NavLink to='/withdraw' className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
                     <FontAwesomeIcon icon={faHandHoldingDollar} className='text-xl'/> <p>Withdraw</p>
@@ -44,7 +44,7 @@ const Wallet = () => {
                     <div className='flex gap-2'>
                         <FontAwesomeIcon icon={faPiggyBank} className='text-amber-400'/> <p className='text-[15px]'>DIPOSIT CASH BALANCE</p>
                     </div>
-                    {/* <h2 className='text-lg'>BDT 0</h2> */}
+                    <h2 className='text-lg'>BDT 0</h2>
                   </div>
                   <NavLink to='/addmoney' className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
                     <FontAwesomeIcon icon={faPlusCircle} className='text-xl'/> <p>Add Money</p>
