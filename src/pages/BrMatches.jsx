@@ -24,6 +24,29 @@ const BrMatches = () => {
   const [open, setOpen] = useState(false);
   const [match, setMatch] = useState([]);
   const [isStarted, setIsStarted] = useState(null);
+  // Helper function for Join button
+  const renderJoinButton = (date, time, matchId) => {
+    const matchDateTime = new Date(`${date} ${time}`);
+    const now = new Date();
+    const started = matchDateTime - now <= 0;
+    if (started) {
+      return (
+        <NavLink className="w-1/4">
+          <h2 className="bg-green-400 font-semibold text-white text-center p-2 rounded-md opacity-50 cursor-not-allowed">
+            Join
+          </h2>
+        </NavLink>
+      );
+    } else {
+      return (
+        <NavLink to={`/br-match-join/${matchId}`} className="w-1/4">
+          <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">
+            Join
+          </h2>
+        </NavLink>
+      );
+    }
+  };
   // get id data
   const { id } = useParams();
   //load data
@@ -241,17 +264,7 @@ const BrMatches = () => {
                     <p>10/{match.max_player}</p>
                   </div>
                 </div>
-                {isStarted !== match.id ? (
-                  <NavLink to={`/br-match-join/${match.id}`} className="w-1/4">
-                    <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">
-                      Join
-                    </h2>
-                  </NavLink>
-                ) : (<NavLink className="w-1/4">
-                  <h2 className="bg-green-400 font-semibold text-white text-center p-2 rounded-md">
-                    Join
-                  </h2>
-                </NavLink>)}
+                {renderJoinButton(match.date, match.time, match.id)}
 
               </div>
 
