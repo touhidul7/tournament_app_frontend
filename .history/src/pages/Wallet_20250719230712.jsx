@@ -6,7 +6,7 @@ import { NavLink } from 'react-router';
 
 const Wallet = () => {
     return (
-        <div className='max-w-md mx-auto font-Jakarta bg-mainbg space-y-3 pb-30 pt-5'>
+        <div className='max-w-md mx-auto font-Jakarta bg-mainbg space-y-3 pb-30'>
             {/* wallet header */}
             <div className='w-[96%] mx-auto flex justify-between items-center py-3 px-4 font-medium text-white bg-cardbg rounded-lg'>
                 <NavLink to='/profile'><FontAwesomeIcon icon={faChevronLeft} className='text-xl'/></NavLink>
@@ -32,7 +32,7 @@ const Wallet = () => {
                     <div className='flex gap-2 items-center'>
                         <FontAwesomeIcon icon={faTrophy} className='text-amber-400'/> <p className='text-[15px]'>WINNING CASH BALANCE</p>
                     </div>
-                    {/* <h2 className='text-lg'>BDT 0</h2> */}
+                    <h2 className='text-lg'>BDT 0</h2>
                   </div>
                   <NavLink to='/withdraw' className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
                     <FontAwesomeIcon icon={faHandHoldingDollar} className='text-xl'/> <p>Withdraw</p>
@@ -44,7 +44,7 @@ const Wallet = () => {
                     <div className='flex gap-2'>
                         <FontAwesomeIcon icon={faPiggyBank} className='text-amber-400'/> <p className='text-[15px]'>DIPOSIT CASH BALANCE</p>
                     </div>
-                    {/* <h2 className='text-lg'>BDT 0</h2> */}
+                    <h2 className='text-lg'>BDT 0</h2>
                   </div>
                   <NavLink to='/addmoney' className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
                     <FontAwesomeIcon icon={faPlusCircle} className='text-xl'/> <p>Add Money</p>

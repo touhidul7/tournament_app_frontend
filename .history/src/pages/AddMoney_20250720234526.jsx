@@ -84,7 +84,7 @@ const AddMoney = () => {
         <div className="mb-4">
           <label htmlFor="payment_phone_number" className={`block font-bold mb-1 ${activeTab == "bKash" ? "text-pink-700" : activeTab == "Nagad" ? "text-[#EF8F1C]" : "text-[#7D2A8B]"} `}>ফোন নাম্বার দিন</label>
           <input
-            type="number"
+            type="text"
             id="payment_phone_number"
             name="payment_phone_number"
             {...register("payment_phone_number", { required: true })}
@@ -95,7 +95,7 @@ const AddMoney = () => {
         <div className="mb-4">
           <label htmlFor="amount" className={`block font-bold mb-1 ${activeTab == "bKash" ? "text-pink-700" : activeTab == "Nagad" ? "text-[#EF8F1C]" : "text-[#7D2A8B]"} `}>পরিমাণ</label>
           <input
-            type="number"
+            type="text"
             id="amount"
             name="amount"
             {...register("amount", { required: true })}
@@ -113,7 +113,6 @@ const AddMoney = () => {
           <div className="flex items-center gap-2">
             <span className="font-bold text-yellow-700">{receiverNumber}</span>
             <button
-              type="button"
               onClick={handleCopy}
               className="px-2 py-1 text-sm bg-gray-200 rounded hover:bg-gray-300"
             >

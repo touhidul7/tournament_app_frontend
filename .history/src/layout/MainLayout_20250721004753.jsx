@@ -7,10 +7,10 @@ import MainHeader from '../components/MainHeader';
 const MainLayout = () => {
     return (
         <div className='max-w-md mx-auto'>
-            <MainHeader />
-            <Outlet />
+            <MainHeader/>
+            <Outlet/>
             <BottomNav />
-            <Toaster />
+             <Toaster />
         </div>
     );
 };

@@ -84,7 +84,7 @@ const AddMoney = () => {
         <div className="mb-4">
           <label htmlFor="payment_phone_number" className={`block font-bold mb-1 ${activeTab == "bKash" ? "text-pink-700" : activeTab == "Nagad" ? "text-[#EF8F1C]" : "text-[#7D2A8B]"} `}>ফোন নাম্বার দিন</label>
           <input
-            type="number"
+            type="text"
             id="payment_phone_number"
             name="payment_phone_number"
             {...register("payment_phone_number", { required: true })}

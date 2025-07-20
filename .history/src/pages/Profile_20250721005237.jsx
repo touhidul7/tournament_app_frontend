@@ -23,7 +23,7 @@ const Profile = () => {
   
 
     return (
-        <div className='max-w-md mx-auto bg-mainbg  font-Jakarta pb-20 pt-2'>
+        <div className='max-w-md mx-auto bg-mainbg  font-Jakarta pb-20'>
             {/* profile picure */}
             <div className='flex justify-center flex-col items-center mt-3'>
                 <img src="./image/profile.png" alt="" className='h-16 w-16 border-3 border-white rounded-full' />

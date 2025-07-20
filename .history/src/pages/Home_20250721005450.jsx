@@ -31,7 +31,7 @@ const Home = () => {
   console.log(categories);
 
   return (
-    <div className="max-w-md mx-auto bg-mainbg font-Jakarta items-center justify-center justify-items-center py-2 pb-24">
+    <div className="max-w-md mx-auto bg-mainbg font-Jakarta items-center justify-center justify-items-center py-2 pb-10">
       <section className="w-[95%]">
         {/* === notice board ==== */}
         <div className="bg-cardbg p-2 rounded-md text-white font-medium text-center mt-4 mb-4">

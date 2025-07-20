@@ -31,8 +31,25 @@ const Home = () => {
   console.log(categories);
 
   return (
-    <div className="max-w-md mx-auto bg-mainbg font-Jakarta items-center justify-center justify-items-center py-2 pb-24">
+    <div className="max-w-md mx-auto bg-mainbg font-Jakarta items-center justify-center justify-items-center pb-24">
       <section className="w-[95%]">
+        <div className="py-2 flex items-center justify-between border-b border-cardbg">
+          <div className="flex items-center gap-2">
+            <img
+              className="w-[50px] h-[50px] rounded-full"
+              src="./image/profile-image.jpg"
+              alt="Profilepic"
+            />
+            <h2 className="text-white font-medium text-lg">App Name</h2>
+          </div>
+          <div className="flex items-center gap-2 text-white bg-cardbg px-4 py-2 rounded-full">
+            {" "}
+            <FontAwesomeIcon className="text-2xl" icon={faWallet} />{" "}
+            <p>
+              <FontAwesomeIcon icon={faBangladeshiTakaSign} /> 0.0TK
+            </p>
+          </div>
+        </div>
         {/* === notice board ==== */}
         <div className="bg-cardbg p-2 rounded-md text-white font-medium text-center mt-4 mb-4">
           <p>
