@@ -1,39 +1,91 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBangladeshiTakaSign, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { NavLink, useParams } from "react-router";
+import { NavLink, useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 
 const BrMatchJoin = () => {
-    const { id } = useParams(); 
 
-    const [joinType, setJoinType] = useState(null); 
+    const { id } = useParams();
+    const navigate = useNavigate();
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const user = JSON.parse(localStorage.getItem("user")) || {};
+
+    const [joinType, setJoinType] = useState(null);
+    const [matchDetails, setMatchDetails] = useState([]);
+    const [userData, setUserData] = useState([]);
+    const { register, handleSubmit, reset } = useForm();
+
+    // load deposite data from api
+    const loadDeposite = () => {
+        fetch(`${BASE_URL}/deposites/user/${user.user.uid}`, {
+            method: "GET",
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setUserData(data);
+            })
+            .catch((error) => {
+                console.error("Error fetching deposite data:", error);
+                toast.error("Error fetching deposite data");
+            });
+    }
 
     /* get matches */
-    const [matchDetails, setMatchDetails] = useState([]);
     useEffect(() => {
         fetch(`${BASE_URL}/get/matches/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setMatchDetails(data);
             });
+        /* Deposit Data */
+        loadDeposite();
     }, [BASE_URL, id]);
-    console.log(matchDetails);
 
+    /* Match join function */
+    const onSubmit = (data) => {
 
-    /* join function */
-    
+        const fee = (joinType == "solo" ? Number(matchDetails.entry_fee) : (Number(matchDetails.entry_fee) * 2));
 
+        if (fee > userData.total_deposit) {
+            toast.error("Insufficient balance to join this match.");
+            return;
+        }
+        const depositPayload = {
+            user_id: user.user.uid,
+            match_id: matchDetails.id,
+            game_type: joinType,
+            entry_fee: matchDetails.entry_fee,
+            game_date: matchDetails.date,
+            game_time: matchDetails.time,
+            status: matchDetails.status,
+            pname1: data.player1,
+            pname2: data.player2 || "",
+            game_name: matchDetails.match_name,
+            pay: fee,
+        };
 
+        const request = axios.post(`${BASE_URL}/game-entry`, depositPayload);
 
-
-
-
-
-
+        toast.promise(request, {
+            loading: 'Joining...',
+            success: 'Joined successfully!',
+            error: 'Something went wrong!',
+        });
+        request
+            .then((response) => {
+                if (response.status === 201) {
+                    reset();
+                    navigate("/thankyou");
+                }
+            })
+    };
 
     return (
-        <div className='max-w-md mx-auto h-screen font-Jakarta bg-mainbg'>
+        <form onSubmit={handleSubmit(onSubmit)} className='max-w-md mx-auto h-screen font-Jakarta bg-mainbg'>
             <div className=" bg-black relative flex items-start justify-center">
                 {/* Top white curved section */}
                 <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
@@ -83,12 +135,14 @@ const BrMatchJoin = () => {
                             <input
                                 className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out"
                                 type="text"
+                                {...register("player1", { required: true })}
                                 placeholder="Player 1 Name"
                             />
                             {joinType === 'duo' && (
                                 <input
                                     className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out"
                                     type="text"
+                                    {...register("player2", { required: true })}
                                     placeholder="Player 2 Name"
                                 />
                             )}
@@ -98,9 +152,9 @@ const BrMatchJoin = () => {
             </div>
             {/* === Join Now btn === */}
             <div className="w-full  flex items-center justify-center mt-4">
-                <button className="w-[95%] p-3 bg-green-500 mb-20 rounded text-lg text-white font-semibold">Pay & Join Now</button>
+                <button type="submit" className="w-[95%] p-3 bg-green-500 mb-20 rounded text-lg text-white font-semibold">Pay & Join Now</button>
             </div>
-        </div>
+        </form>
     );
 };
 
