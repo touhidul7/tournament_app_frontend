@@ -8,17 +8,30 @@ const BrMatchJoin = () => {
 
     const [joinType, setJoinType] = useState(null); 
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-    const [matchDetails, setMatchDetails] = useState([]);
 
+    /* get matches */
+    const [matchDetails, setMatchDetails] = useState([]);
     useEffect(() => {
         fetch(`${BASE_URL}/get/matches/${id}`)
             .then((res) => res.json())
             .then((data) => {
-                // const found = data.filter((item) => item.category_id == id);
                 setMatchDetails(data);
             });
     }, [BASE_URL, id]);
     console.log(matchDetails);
+
+
+    /* join function */
+    
+
+
+
+
+
+
+
+
+
     return (
         <div className='max-w-md mx-auto h-screen font-Jakarta bg-mainbg'>
             <div className=" bg-black relative flex items-start justify-center">
