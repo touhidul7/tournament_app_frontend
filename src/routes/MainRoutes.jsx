@@ -27,6 +27,7 @@ import BrSquadDetails from "../pages/BrSquadDetails";
 import BrMatchJoin from "../pages/BrMatchJoin";
 import ThankYou from "../pages/ThankYou";
 import PrivateRoute from "./PrivateRoutes";
+import ThankYou2 from "../pages/ThankYou2";
 
 
 const MainRoutes = createBrowserRouter([
@@ -219,10 +220,18 @@ const MainRoutes = createBrowserRouter([
             )
          },
          {
-            path: '/thankyou',
+            path: '/thankyou-old',
             element: (
                <PrivateRoute>
                   <ThankYou />
+               </PrivateRoute>
+            )
+         },
+         {
+            path: '/thankyou',
+            element: (
+               <PrivateRoute>
+                  <ThankYou2 />
                </PrivateRoute>
             )
          },

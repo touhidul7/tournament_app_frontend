@@ -13,6 +13,7 @@ export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [userLoggedIn, setUserLoggedIn] = useState(false);
+    const user = JSON.parse(localStorage.getItem("user")) || {};
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, inializerUser);
