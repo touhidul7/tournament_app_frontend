@@ -57,7 +57,7 @@ const MyMatches = () => {
                                 {/* <h2>#777</h2> */}
                             </div>
                         </div>
-                    ))) : (<>No Match Founded</>)}
+                    ))) : (<div className="text-center font-bold text-white pt-4">No Match Founded</div>)}
             </section>
         </div>
     );

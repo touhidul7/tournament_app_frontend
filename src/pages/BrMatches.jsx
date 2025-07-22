@@ -15,12 +15,15 @@ import { NavLink, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { } from "../css/BrMatch.css";
+import toast from "react-hot-toast";
 
 const BrMatches = () => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const IMAGE_URL = import.meta.env.VITE_API_IMAGE_URL;
   const [matchData, setMatchData] = useState([]);
   const [open, setOpen] = useState(false);
+  const [roomOpen, setRoomOpen] = useState(false);
+  const [roomDetails, setRoomDetails] = useState({});
   const [match, setMatch] = useState([]);
   const [isStarted, setIsStarted] = useState(null);
   const user = JSON.parse(localStorage.getItem("user")) || {};
@@ -67,12 +70,21 @@ const BrMatches = () => {
   }, [id, user.user.uid]);
 
 
-
-
-
-
   const [joinedMatch, setJoinedMatch] = useState([]);
   // Helper function for Join button
+
+  const roomDetailsVerify = (date, time, id) => {
+    const matchDateTime = new Date(`${date} ${time}`);
+    const now = new Date();
+    const started = matchDateTime - now <= 0;
+    const alreadyJoined = Array.isArray(joinedMatch?.data) && joinedMatch.data.some((entry) => String(entry.match_id) === String(id));
+
+    if (alreadyJoined && started) {
+      return (true);
+    } else if (alreadyJoined && !started) { return ("notstarted") } else {
+      return (false);
+    }
+  };
   const renderJoinButton = (date, time, id) => {
     const matchDateTime = new Date(`${date} ${time}`);
     const now = new Date();
@@ -94,7 +106,7 @@ const BrMatches = () => {
       return (
         <NavLink className="w-1/4">
           <h2 className="bg-green-400 font-semibold text-white text-center p-2 rounded-md opacity-50 cursor-not-allowed">
-            Join
+            Started
           </h2>
         </NavLink>
       );
@@ -115,53 +127,6 @@ const BrMatches = () => {
 
 
   if (!match) return <p className="text-white">Loading match...</p>;
-
-  /*  const {
-     match_id,
-     match_name,
-     map_name,
-     version,
-     game_type,
-     game_mood,
-     time,
-     date,
-     win_price,
-     kill_price,
-     entry_fee,
-     total_prize,
-     second_prize,
-     third_prize,
-     fourth_prize,
-     fifth_prize,
-     max_player,
-   } = match; */
-
-
-  /*   const calculateRemainingTime = (dateString, timeString) => {
-      if (!dateString || !timeString) return "Time not set";
-  
-      const matchDateTime = new Date(`${dateString} ${timeString}`);
-      const now = new Date();
-      const diff = matchDateTime - now;
-  
-      if (diff <= 0) { setIsStarted(true); return "Match started"; }
-  
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-  
-      // Format with leading zeros for consistent display
-      const pad = (num) => num.toString().padStart(2, '0');
-  
-      if (days > 0) {
-        return `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
-      } else if (hours > 0) {
-        return `${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
-      } else {
-        return `${pad(minutes)}m ${pad(seconds)}s`;
-      }
-    } */
 
 
   const MatchTimer = ({ date, time, matchId }) => {
@@ -329,13 +294,23 @@ const BrMatches = () => {
               <div className="flex justify-center gap-2 mt-4 mb-12">
                 {/* Room Details */}
                 <div>
+
                   <button
-                    onClick={() => console.log("Room Details Clicked")}
+                    onClick={() => {
+                      const result = roomDetailsVerify(match.date, match.time, match.id);
+                      result === true ? (setRoomDetails(match), setRoomOpen(true))
+                        : result === 'notstarted' ? toast.error("Match not started yet")
+                          : result === 'notjoined' ? toast.error("Join to access Room")
+                            : toast.error("Match Ended");
+                    }}
                     className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
                   >
                     <FontAwesomeIcon icon={faKey} />
                     Room Details
                   </button>
+
+
+
                 </div>
 
                 {/* Prize Details */}
@@ -452,6 +427,51 @@ const BrMatches = () => {
                 </div>
               </div>
             </Dialog>
+          </div>
+          {/* Room Details Dialogue */}
+          <div>
+            {/* Room Details Modal */}
+            <Dialog open={roomOpen} onClose={setRoomOpen} className="relative z-10">
+              <DialogBackdrop
+                transition
+                className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+              />
+
+              <div className="fixed top-4 z-10 w-sm overflow-y-auto">
+                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                  <DialogPanel
+                    transition
+                    className="relative transform overflow-hidden rounded-lg bg-mainbg text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-in-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+                  >
+                    <div className="bg-mainbg px-4 pt-2 pb-4 ">
+                      <div className="flex flex-col bg-cardbg items-center text-white rounded-md font-Jakarta py-2">
+                        <h2 className="font-semibold">ROOM DETAILS</h2>
+                        <p className="text-sm">{roomDetails?.match_name}</p>
+                      </div>
+                      {roomDetails?.rooms && (
+                        <div className="mt-3 w-full text-left text-md bg-cardbg text-white font-Jakarta flex flex-col gap-3 rounded-md px-4 py-4">
+                          <p><strong>Room ID:</strong> {roomDetails?.rooms[0]?.room_id || 'Not Available'}</p>
+                          <p><strong>Password:</strong> {roomDetails?.rooms[0]?.room_password || 'Not Available'}</p>
+                          {/* <p><strong>Host Name:</strong> {roomDetails?.room_host || 'Not Available'}</p> */}
+                          {/* Add more room fields if needed */}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                      <button
+                        type="button"
+                        onClick={() => setRoomOpen(false)}
+                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+                      >
+                        <FontAwesomeIcon icon={faCircleXmark} className="text-2xl" />
+                      </button>
+                    </div>
+                  </DialogPanel>
+                </div>
+              </div>
+            </Dialog>
+
           </div>
         </div>
         {/* Modal End Here */}
