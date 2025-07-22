@@ -81,8 +81,8 @@ const BrMatches = () => {
 
     if (alreadyJoined && started) {
       return (true);
-    } else if (alreadyJoined && !started) { return ("notstarted") } else {
-      return (false);
+    } else if (alreadyJoined && !started) { return ("notstarted") } else if (!alreadyJoined && !started) {
+      return ("notjoined");
     }
   };
   const renderJoinButton = (date, time, id) => {
@@ -305,8 +305,7 @@ const BrMatches = () => {
                   ) : (
                     <button
                       onClick={() => {
-                        roomDetailsVerify(match.date, match.time, match.id) == 'notstarted' ? toast.error("Match not started yet") :
-                          roomDetailsVerify(match.date, match.time, match.id) == true ? toast.error("Join to access Room") : toast.error("Match Ended");
+                        roomDetailsVerify(match.date, match.time, match.id) == 'notstarted' ? toast.error("Match not started yet") : roomDetailsVerify(match.date, match.time, match.id) == "notjoined" ? toast.error("Join to access Room") : toast.error("Match Ended");
                       }}
                       className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
                     >
