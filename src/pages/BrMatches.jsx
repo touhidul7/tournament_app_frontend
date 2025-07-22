@@ -294,22 +294,27 @@ const BrMatches = () => {
               <div className="flex justify-center gap-2 mt-4 mb-12">
                 {/* Room Details */}
                 <div>
+                  {roomDetailsVerify(match.date, match.time, match.id) == true ? (
+                    <button
+                      onClick={() => { setRoomDetails(match); setRoomOpen(true); }}
+                      className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
+                    >
+                      <FontAwesomeIcon icon={faKey} />
+                      Room Details
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        roomDetailsVerify(match.date, match.time, match.id) == 'notstarted' ? toast.error("Match not started yet") :
+                          roomDetailsVerify(match.date, match.time, match.id) == true ? toast.error("Join to access Room") : toast.error("Match Ended");
+                      }}
+                      className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
+                    >
+                      <FontAwesomeIcon icon={faKey} />
+                      Room Details
+                    </button>
 
-                  <button
-                    onClick={() => {
-                      const result = roomDetailsVerify(match.date, match.time, match.id);
-                      result === true ? (setRoomDetails(match), setRoomOpen(true))
-                        : result === 'notstarted' ? toast.error("Match not started yet")
-                          : result === 'notjoined' ? toast.error("Join to access Room")
-                            : toast.error("Match Ended");
-                    }}
-                    className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
-                  >
-                    <FontAwesomeIcon icon={faKey} />
-                    Room Details
-                  </button>
-
-
+                  )}
 
                 </div>
 
