@@ -237,7 +237,10 @@ const MainRoutes = createBrowserRouter([
          },
 
          // ❌ Leave login/signup as public
-         {
+         
+      ]
+   },
+   {
             path: '/signup',
             element: <SignUp />
          },
@@ -245,7 +248,5 @@ const MainRoutes = createBrowserRouter([
             path: '/login',
             element: <Login />
          }
-      ]
-   }
 ]);
 export default MainRoutes;

@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useNavigate, useOutletContext } from "react-router";
 
 const AddMoney = () => {
   const [activeTab, setActiveTab] = useState("bKash");
@@ -18,6 +18,8 @@ const AddMoney = () => {
     alert("Number copied!");
   };
   const navigate = useNavigate();
+
+  const{updateData}= useOutletContext();
 
   /* Data Post System Here */
 
@@ -44,6 +46,7 @@ const AddMoney = () => {
       .then((response) => {
         console.log("Response:", response);
         if (response.status === 201) {
+          updateData();
           reset();
           navigate("/thankyou");
         }

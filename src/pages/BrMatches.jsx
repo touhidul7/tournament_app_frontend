@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import {
   faAward,
   faChevronLeft,
@@ -20,15 +19,77 @@ import { } from "../css/BrMatch.css";
 const BrMatches = () => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const IMAGE_URL = import.meta.env.VITE_API_IMAGE_URL;
-  const[matchData, setMatchData] = useState([]);
+  const [matchData, setMatchData] = useState([]);
   const [open, setOpen] = useState(false);
   const [match, setMatch] = useState([]);
   const [isStarted, setIsStarted] = useState(null);
+  const user = JSON.parse(localStorage.getItem("user")) || {};
+  const { id } = useParams();
+  const [joinCounts, setJoinCounts] = useState({});
+  const [loadingJoinCounts, setLoadingJoinCounts] = useState(true);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/matches`)
+      .then((res) => res.json())
+      .then((data) => {
+        const found = data.filter((item) => item.category_id == id);
+        setMatch(found);
+        // Fetch join counts for all matches in this category
+        if (found.length > 0) {
+          setLoadingJoinCounts(true);
+          Promise.all(
+            found.map((m) =>
+              fetch(`${BASE_URL}/game-entry/count/${m.id}`)
+                .then((res) => res.json())
+                .then((data) => ({ id: m.id, count: data.game_count }))
+                .catch(() => ({ id: m.id, count: 0 }))
+            )
+          ).then((results) => {
+            const countsObj = {};
+            results.forEach(({ id, count }) => {
+              countsObj[id] = count;
+            });
+            setJoinCounts(countsObj);
+            setLoadingJoinCounts(false);
+          });
+        } else {
+          setJoinCounts({});
+          setLoadingJoinCounts(false);
+        }
+      });
+
+    fetch(`${BASE_URL}/game-entry/check/${user.user.uid}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setJoinedMatch(data);
+      });
+
+  }, [id, user.user.uid]);
+
+
+
+
+
+
+  const [joinedMatch, setJoinedMatch] = useState([]);
   // Helper function for Join button
-  const renderJoinButton = (date, time, matchId) => {
+  const renderJoinButton = (date, time, id) => {
     const matchDateTime = new Date(`${date} ${time}`);
     const now = new Date();
     const started = matchDateTime - now <= 0;
+
+    // joinedMatch is an object with a data array
+    const alreadyJoined = Array.isArray(joinedMatch?.data) && joinedMatch.data.some((entry) => String(entry.match_id) === String(id));
+    if (alreadyJoined) {
+      return (
+        <NavLink className="w-1/4">
+          <h2 className="bg-gray-400 font-semibold text-white text-center p-2 rounded-md opacity-50 cursor-not-allowed">
+            Joined
+          </h2>
+        </NavLink>
+      );
+    }
+
     if (started) {
       return (
         <NavLink className="w-1/4">
@@ -39,7 +100,7 @@ const BrMatches = () => {
       );
     } else {
       return (
-        <NavLink to={`/br-match-join/${matchId}`} className="w-1/4">
+        <NavLink to={`/br-match-join/${id}`} className="w-1/4">
           <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">
             Join
           </h2>
@@ -48,68 +109,59 @@ const BrMatches = () => {
     }
   };
   // get id data
-  const { id } = useParams();
-  //load data
-  useEffect(() => {
-    fetch(`${BASE_URL}/matches`)
-      .then((res) => res.json())
-      .then((data) => {
-        const found = data.filter((item) => item.category_id == id);
-        setMatch(found);
-      });
-  }, [id]);
 
-  console.log(match);
+  //load data
+
+
 
   if (!match) return <p className="text-white">Loading match...</p>;
 
-  const {
-    match_id,
-    match_name,
-    map_name,
-    version,
-    game_type,
-    game_mood,
-    time,
-    date,
-    win_price,
-    kill_price,
-    entry_fee,
-    total_prize,
-    second_prize,
-    third_prize,
-    fourth_prize,
-    fifth_prize,
-    max_player,
-  } = match;
+  /*  const {
+     match_id,
+     match_name,
+     map_name,
+     version,
+     game_type,
+     game_mood,
+     time,
+     date,
+     win_price,
+     kill_price,
+     entry_fee,
+     total_prize,
+     second_prize,
+     third_prize,
+     fourth_prize,
+     fifth_prize,
+     max_player,
+   } = match; */
 
-  console.log(match);
 
-  const calculateRemainingTime = (dateString, timeString) => {
-    if (!dateString || !timeString) return "Time not set";
-
-    const matchDateTime = new Date(`${dateString} ${timeString}`);
-    const now = new Date();
-    const diff = matchDateTime - now;
-
-    if (diff <= 0) {setIsStarted(true); return "Match started";}
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    // Format with leading zeros for consistent display
-    const pad = (num) => num.toString().padStart(2, '0');
-
-    if (days > 0) {
-      return `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
-    } else if (hours > 0) {
-      return `${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
-    } else {
-      return `${pad(minutes)}m ${pad(seconds)}s`;
-    }
-  }
+  /*   const calculateRemainingTime = (dateString, timeString) => {
+      if (!dateString || !timeString) return "Time not set";
+  
+      const matchDateTime = new Date(`${dateString} ${timeString}`);
+      const now = new Date();
+      const diff = matchDateTime - now;
+  
+      if (diff <= 0) { setIsStarted(true); return "Match started"; }
+  
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  
+      // Format with leading zeros for consistent display
+      const pad = (num) => num.toString().padStart(2, '0');
+  
+      if (days > 0) {
+        return `${days}d ${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
+      } else if (hours > 0) {
+        return `${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
+      } else {
+        return `${pad(minutes)}m ${pad(seconds)}s`;
+      }
+    } */
 
 
   const MatchTimer = ({ date, time, matchId }) => {
@@ -157,11 +209,10 @@ const BrMatches = () => {
       return () => clearInterval(interval);
     }, [date, time]);
 
-    return <span> {!isStarted&&"MATCH STARTING IN"}{remaining}</span>;
+    return <span> {!isStarted && "MATCH STARTING IN"} {remaining}</span>;
   };
 
-  console.log(matchData);
-  
+
 
   return (
     <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
@@ -260,8 +311,14 @@ const BrMatches = () => {
                     <div className="bg-green-500 h-5 w-10 rounded-full"></div>
                   </div>
                   <div className="flex items-center justify-between text-white text-sm mt-1 pr-12">
-                    <p>Only 42 spots are left</p>
-                    <p>10/{match.max_player}</p>
+                    <p>
+                      {loadingJoinCounts
+                        ? "Loading spots..."
+                        : `Only ${match.max_player - (joinCounts[match.id] || 0)} spots are left`}
+                    </p>
+                    <p>
+                      {loadingJoinCounts ? "-/-" : `${joinCounts[match.id] || 0}/${match.max_player}`}
+                    </p>
                   </div>
                 </div>
                 {renderJoinButton(match.date, match.time, match.id)}
@@ -273,7 +330,7 @@ const BrMatches = () => {
                 {/* Room Details */}
                 <div>
                   <button
-                    onClick={() =>console.log("Room Details Clicked")}
+                    onClick={() => console.log("Room Details Clicked")}
                     className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
                   >
                     <FontAwesomeIcon icon={faKey} />
@@ -284,7 +341,7 @@ const BrMatches = () => {
                 {/* Prize Details */}
                 <div>
                   <button
-                    onClick={() => {setOpen(true);setMatchData(match);}}
+                    onClick={() => { setOpen(true); setMatchData(match); }}
                     className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
                   >
                     <FontAwesomeIcon icon={faTrophy} />

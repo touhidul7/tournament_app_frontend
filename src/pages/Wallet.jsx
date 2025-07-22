@@ -2,9 +2,10 @@ import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
 import { faChevronLeft, faChevronRight, faHandHoldingDollar, faPiggyBank, faPlusCircle, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useOutletContext } from 'react-router';
 
 const Wallet = () => {
+   const {totalPay, deposite} = useOutletContext();
     return (
         <div className='max-w-md mx-auto font-Jakarta bg-mainbg space-y-3 pb-30 pt-5'>
             {/* wallet header */}
@@ -12,11 +13,18 @@ const Wallet = () => {
                 <NavLink to='/profile'><FontAwesomeIcon icon={faChevronLeft} className='text-xl'/></NavLink>
                 <h2 className='text-lg'>Your Wallet</h2>
             </div>
-            {/* balace section */}
+            {/* Deposite section */}
             <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center'>
-                <h2>TOTAL CASH BALLACE</h2>
+                <h2>TOTAL DEPOSIT</h2>
                     <h2 className='text-lg font-semibold'>
-                        BDT 0.0
+                        BDT {deposite ? deposite : 0}
+                    </h2>
+            </div>
+            {/* Payed section */}
+            <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center'>
+                <h2>TOTAL PAYED</h2>
+                    <h2 className='text-lg font-semibold'>
+                        BDT {totalPay ? totalPay : 0}
                     </h2>
             </div>
             {/* transaction section */}
