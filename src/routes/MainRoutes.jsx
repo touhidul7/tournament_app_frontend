@@ -28,6 +28,7 @@ import BrMatchJoin from "../pages/BrMatchJoin";
 import ThankYou from "../pages/ThankYou";
 import PrivateRoute from "./PrivateRoutes";
 import ThankYou2 from "../pages/ThankYou2";
+import JoinThanks from "../pages/JoinThanks";
 
 
 const MainRoutes = createBrowserRouter([
@@ -227,26 +228,31 @@ const MainRoutes = createBrowserRouter([
                </PrivateRoute>
             )
          },
-         {
-            path: '/thankyou',
-            element: (
-               <PrivateRoute>
-                  <ThankYou2 />
-               </PrivateRoute>
-            )
-         },
+
 
          // ❌ Leave login/signup as public
-         
+
       ]
    },
    {
-            path: '/signup',
-            element: <SignUp />
-         },
-         {
-            path: '/login',
-            element: <Login />
-         }
+      path: '/thankyou',
+      element: (
+         <PrivateRoute>
+            <ThankYou2 />
+         </PrivateRoute>
+      )
+   },
+   {
+      path: '/joine-thanks/:id',
+      element: <JoinThanks />
+   },
+   {
+      path: '/signup',
+      element: <SignUp />
+   },
+   {
+      path: '/login',
+      element: <Login />
+   }
 ]);
 export default MainRoutes;

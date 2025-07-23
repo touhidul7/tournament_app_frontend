@@ -180,7 +180,7 @@ const BrMatches = () => {
 
 
   return (
-    <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
+    <div className="max-w-md mx-auto min-h-screen font-Jakarta bg-mainbg pb-24">
       <div className=" bg-mainbg relative flex items-start justify-center">
         {/* Top white curved section */}
         <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">

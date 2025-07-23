@@ -66,7 +66,7 @@ const BrMatchJoin = () => {
                 if (response.status === 201) {
                     updateData();
                     reset();
-                    navigate("/thankyou");
+                    navigate(`/joine-thanks/${matchDetails.category_id}`);
                 }
             })
     };

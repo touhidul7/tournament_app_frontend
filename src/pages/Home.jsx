@@ -31,7 +31,7 @@ const Home = () => {
   console.log(categories);
 
   return (
-    <div className="max-w-md mx-auto bg-mainbg font-Jakarta items-center justify-center justify-items-center py-2 pb-24">
+    <div className="max-w-md mx-auto min-h-screen bg-mainbg font-Jakarta items-center justify-center justify-items-center py-2 pb-24">
       <section className="w-[95%]">
         {/* === notice board ==== */}
         <div className="bg-cardbg p-2 rounded-md text-white font-medium text-center mt-4 mb-4">
@@ -122,28 +122,6 @@ const Home = () => {
               </NavLink>
             ))}
           </div>
-
-         {/*  <div className="bg-cardbg text-white text-lg font-medium text-center py-1 rounded-md mt-6">
-            <p>BR AND LONEWOLF MATCH</p>
-          </div>
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <NavLink
-              to="/free-match"
-              className="bg-cardbg  p-2  rounded-xl text-white"
-            >
-              <img className="rounded-md" src="./image/free-match.jpg" alt="" />
-              <p className="font-semibold text-md mt-2">FREE MATCH</p>
-              <p className="text-sm font-light">25 Match Found</p>
-            </NavLink>
-            <NavLink
-              to="/br-squad-match"
-              className="bg-cardbg  p-2  rounded-xl text-white"
-            >
-              <img className="rounded-md" src="./image/free-match.jpg" alt="" />
-              <p className="font-semibold text-md mt-2">BR MATCH</p>
-              <p className="text-sm font-light">25 Match Found</p>
-            </NavLink>
-          </div> */}
         </div>
       </section>
     </div>
