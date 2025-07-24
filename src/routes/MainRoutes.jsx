@@ -29,6 +29,7 @@ import ThankYou from "../pages/ThankYou";
 import PrivateRoute from "./PrivateRoutes";
 import ThankYou2 from "../pages/ThankYou2";
 import JoinThanks from "../pages/JoinThanks";
+import Notifications from "../pages/Notifications";
 
 
 const MainRoutes = createBrowserRouter([
@@ -137,6 +138,14 @@ const MainRoutes = createBrowserRouter([
             element: (
                <PrivateRoute>
                   <AddMoney />
+               </PrivateRoute>
+            )
+         },
+         {
+            path: '/notifications',
+            element: (
+               <PrivateRoute>
+                  <Notifications />
                </PrivateRoute>
             )
          },

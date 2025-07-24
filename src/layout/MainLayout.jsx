@@ -6,6 +6,8 @@ import { Toaster } from 'react-hot-toast';
 import MainHeader from '../components/MainHeader';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import PushNotification from '../components/PushNotification';
+import { ToastContainer } from 'react-toastify';
 const MainLayout = () => {
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [deposite, setDeposite] = useState(0);
@@ -50,9 +52,12 @@ const MainLayout = () => {
     return (
         <div className='max-w-md mx-auto'>
             <MainHeader balance={deposite - totalPay} />
+            {/* <UserPanel/> */}
+            <PushNotification/>
             <Outlet context={{ updateData, deposite, totalPay, balance: (deposite - totalPay) }} />
             <BottomNav />
             <Toaster />
+             <ToastContainer />
         </div>
     );
 };

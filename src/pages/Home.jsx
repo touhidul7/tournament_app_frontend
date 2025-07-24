@@ -28,7 +28,7 @@ const Home = () => {
       .catch((err) => console.error("Failed to fetch categories:", err));
   }, []);
 
-  console.log(categories);
+  // console.log(categories);
 
   return (
     <div className="max-w-md mx-auto min-h-screen bg-mainbg font-Jakarta items-center justify-center justify-items-center py-2 pb-24">

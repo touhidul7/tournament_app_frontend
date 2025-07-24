@@ -5,8 +5,6 @@ import { NavLink, useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import { doSignOut } from '../firebase/auth';
 const Profile = () => {
-   
-    
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const navigate = useNavigate();
     // load localStorage user data
