@@ -125,7 +125,7 @@ const MainRoutes = createBrowserRouter([
             )
          },
          {
-            path: '/resultdetails',
+            path: '/resultdetails/:matchId',
             element: (
                <PrivateRoute>
                   <ResultDetails />

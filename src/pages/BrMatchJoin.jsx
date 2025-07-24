@@ -41,6 +41,7 @@ const BrMatchJoin = () => {
         }
         const joinmatch = {
             user_id: user.user.uid,
+            ex1: user.user.displayName,
             match_id: matchDetails.id,
             game_type: joinType,
             entry_fee: matchDetails.entry_fee,

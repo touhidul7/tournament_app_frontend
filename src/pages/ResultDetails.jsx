@@ -1,9 +1,11 @@
 import { faBangladeshiTakaSign, faChevronLeft, faClipboardCheck, faTrophy, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router";
+import { NavLink, useParams } from "react-router";
 const ResultDetails = () => {
+    const {matchId} = useParams();
     return (
         <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
+            {matchId}
             <div className=" bg-mainbg relative flex items-start justify-center">
                 {/* Top white curved section */}
                 <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
