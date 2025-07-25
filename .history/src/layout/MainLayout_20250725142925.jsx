@@ -64,15 +64,13 @@ const MainLayout = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                setTopPlayer(data.top_players);
+                setTopPlayer(data);
             })
             .catch((error) => {
                 console.error("Error fetching:", error);
                 toast.error("Error fetching");
             });
     }
-    // total income
-    const totalIncome = (result?.total_prize + result?.total_win_price) - result?.total_income_deposit;
 
 
     const updateData = () => {
@@ -88,10 +86,10 @@ const MainLayout = () => {
 
     return (
         <div className='max-w-md mx-auto'>
-            <MainHeader balance={(result.total_income_deposit + deposite) - totalPay} />
+            <MainHeader balance={deposite - totalPay} />
             {/* <UserPanel/> */}
-            <PushNotification updateData={updateData}/>
-            <Outlet context={{ updateData, deposite, totalPay, balance: (deposite - totalPay), result, topPlayer ,totalIncome}} />
+            <PushNotification />
+            <Outlet context={{ updateData, deposite, totalPay, balance: (deposite - totalPay), result, topPlayer }} />
             <BottomNav />
             <Toaster />
             <ToastContainer />

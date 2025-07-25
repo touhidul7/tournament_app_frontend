@@ -71,8 +71,6 @@ const MainLayout = () => {
                 toast.error("Error fetching");
             });
     }
-    // total income
-    const totalIncome = (result?.total_prize + result?.total_win_price) - result?.total_income_deposit;
 
 
     const updateData = () => {
@@ -91,7 +89,7 @@ const MainLayout = () => {
             <MainHeader balance={(result.total_income_deposit + deposite) - totalPay} />
             {/* <UserPanel/> */}
             <PushNotification updateData={updateData}/>
-            <Outlet context={{ updateData, deposite, totalPay, balance: (deposite - totalPay), result, topPlayer ,totalIncome}} />
+            <Outlet context={{ updateData, deposite, totalPay, balance: (deposite - totalPay), result, topPlayer }} />
             <BottomNav />
             <Toaster />
             <ToastContainer />

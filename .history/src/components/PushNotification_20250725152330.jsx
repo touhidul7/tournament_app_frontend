@@ -26,11 +26,10 @@ const PushNotification = ({updateData}) => {
 
             if (lastNotificationId.current !== latestDoc.id) {
               lastNotificationId.current = latestDoc.id;
-               updateData()
 
               toast.info(`🔔 ${latest.message}`, {
                 position: 'top-right',
-                autoClose: 500,
+                autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

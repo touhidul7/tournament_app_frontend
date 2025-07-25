@@ -12,8 +12,6 @@ const MainLayout = () => {
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [deposite, setDeposite] = useState(0);
     const [totalPay, setTotalPay] = useState(0);
-    const [result, setResult] = useState([]);
-    const [topPlayer, setTopPlayer] = useState([]);
     const user = JSON.parse(localStorage.getItem("user")) || {};
     const loadDeposite = () => {
         fetch(`${BASE_URL}/deposites/user/${user?.user?.uid}`, {
@@ -49,37 +47,21 @@ const MainLayout = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                setResult(data);
+                setTotalPay(data.total_pay);
             })
             .catch((error) => {
-                console.error("Error fetching:", error);
-                toast.error("Error fetching");
+                console.error("Error fetching total pay data:", error);
+                toast.error("Error fetching total pay data");
             });
     }
 
-    // load top player results
-    const loadTopPlayerData = () => {
-        fetch(`${BASE_URL}/top-players`, {
-            method: "GET",
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setTopPlayer(data.top_players);
-            })
-            .catch((error) => {
-                console.error("Error fetching:", error);
-                toast.error("Error fetching");
-            });
-    }
-    // total income
-    const totalIncome = (result?.total_prize + result?.total_win_price) - result?.total_income_deposit;
+
+
 
 
     const updateData = () => {
         loadDeposite();
         loadTotalPay();
-        loadResultData()
-        loadTopPlayerData()
     }
 
     useEffect(() => {
@@ -88,10 +70,10 @@ const MainLayout = () => {
 
     return (
         <div className='max-w-md mx-auto'>
-            <MainHeader balance={(result.total_income_deposit + deposite) - totalPay} />
+            <MainHeader balance={deposite - totalPay} />
             {/* <UserPanel/> */}
-            <PushNotification updateData={updateData}/>
-            <Outlet context={{ updateData, deposite, totalPay, balance: (deposite - totalPay), result, topPlayer ,totalIncome}} />
+            <PushNotification />
+            <Outlet context={{ updateData, deposite, totalPay, balance: (deposite - totalPay) }} />
             <BottomNav />
             <Toaster />
             <ToastContainer />

@@ -91,7 +91,7 @@ const MainLayout = () => {
             <MainHeader balance={(result.total_income_deposit + deposite) - totalPay} />
             {/* <UserPanel/> */}
             <PushNotification updateData={updateData}/>
-            <Outlet context={{ updateData, deposite, totalPay, balance: (deposite - totalPay), result, topPlayer ,totalIncome}} />
+            <Outlet context={{ updateData, deposite, totalPay, balance: (deposite - totalPay), result, topPlayer }} />
             <BottomNav />
             <Toaster />
             <ToastContainer />

@@ -28,24 +28,31 @@ const TopPlayers = () => {
                         </th>
                     </thead>
                     <tfoot className="bg-white">
-                        {
-                            topPlayer && topPlayer.map((player, index) => (
-                                <tr key={index} className="border-b text-start text-sm">
-                                    <td className="text-center py-1 bg-hoverbg text-orange-400">{index + 1} <FontAwesomeIcon icon={faCrown}/></td>
-                                    <td className="pl-2 py-1 bg-hoverbg text-md font-semibold text-cardbg">{player.ex_1}</td>
-                                    <td className="pr-2 py-1 text-end bg-hoverbg text-md font-semibold text-cardbg">
-                                        <FontAwesomeIcon icon={faBangladeshiTakaSign}/> {player.total_prize} TK
-                                    </td>
-                                </tr>
-                            ))
-                        }
-
-                        {/* <tr className="border-b text-start text-sm">
+                        <tr className="border-b text-start text-sm">
                             <td className="text-center py-1 bg-hoverbg text-orange-400"><FontAwesomeIcon icon={faCrown}/></td>
                             <td className="pl-2 py-1 bg-hoverbg text-md font-semibold text-cardbg">Subas Hembrom</td>
                             <td className="pr-2 py-1 text-end bg-hoverbg text-md font-semibold text-cardbg"> <FontAwesomeIcon icon={faBangladeshiTakaSign}/> 1,00,000 TK</td>
-                        </tr> */}
-                        
+                        </tr>
+                        <tr className="border-b text-start text-sm">
+                            <td className="text-center py-1 bg-hoverbg text-orange-400"><FontAwesomeIcon icon={faTrophy}/></td>
+                            <td className="pl-2 py-1 bg-hoverbg text-md font-semibold text-cardbg">Juwel Hossain</td>
+                            <td className="pr-2 py-1 text-end bg-hoverbg text-md font-semibold text-cardbg"> <FontAwesomeIcon icon={faBangladeshiTakaSign}/> 99,000 TK</td>
+                        </tr>
+                        <tr className="border-b text-start text-sm">
+                            <td className="text-center py-1 bg-hoverbg text-orange-400"><FontAwesomeIcon icon={faAward}/></td>
+                            <td className="pl-2 py-1 bg-hoverbg text-md font-semibold text-cardbg">Md Babu</td>
+                            <td className="pr-2 py-1 text-end bg-hoverbg text-md font-semibold text-cardbg"> <FontAwesomeIcon icon={faBangladeshiTakaSign}/> 80,000 TK</td>
+                        </tr>
+                        <tr className="border-b text-start text-sm">
+                            <td className="text-center py-1 bg-hoverbg">4</td>
+                            <td className="pl-2 py-1 bg-hoverbg text-md font-semibold text-cardbg">Roton</td>
+                            <td className="pr-2 py-1 text-end bg-hoverbg text-md font-semibold text-cardbg"> <FontAwesomeIcon icon={faBangladeshiTakaSign}/> 60,000 TK</td>
+                        </tr>
+                        <tr className="border-b text-start text-sm">
+                            <td className="text-center py-1 bg-hoverbg rounded-bl-md">5</td>
+                            <td className="pl-2 py-1 bg-hoverbg text-md font-semibold text-cardbg">Bikrom</td>
+                            <td className="pr-2 py-1 text-end rounded-br-md bg-hoverbg text-md font-semibold text-cardbg"> <FontAwesomeIcon icon={faBangladeshiTakaSign}/> 50,000 TK</td>
+                        </tr>
                     </tfoot>
                     <tbody className="bg-cardbg text-start">
                         <td className="text-center text-white py-1">No</td>

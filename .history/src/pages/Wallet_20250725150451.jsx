@@ -12,26 +12,18 @@ const Wallet = () => {
   const [showModal, setShowModal] = useState(false);
   const user = JSON.parse(localStorage.getItem("user")) || {};
   const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
 
 
 
   const onSubmit = (data) => {
     // console.log("Form Data:", data );
-    let getIncomeData = document.getElementById("incomeData").innerText;
-
-    if (data?.amount > getIncomeData) {
-      toast.error("Insufficient balance to deposit.");
-      // navigate("/addmoney");
-      return;
-    }
 
     const depositPayload = {
       user_id: user.user.uid,
-      // transaction_id: 'dfgfg',
-      // payment_phone_number:'3424',
-      status: 1,
+      transaction_id: '',
+      payment_phone_number:'',
       amount: data?.amount,
       payment_method: "income",
     };
@@ -40,8 +32,8 @@ const Wallet = () => {
     const request = axios.post(`${VITE_API_BASE_URL}/add/deposite`, depositPayload);
 
     toast.promise(request, {
-      loading: 'Sending...',
-      success: 'Success !',
+      loading: 'Saving project...',
+      success: 'Project saved!',
       error: 'Something went wrong!',
     });
     request
@@ -85,7 +77,7 @@ const Wallet = () => {
       <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center'>
         <h2>TOTAL INCOME</h2>
         <h2 className='text-lg font-semibold'>
-          BDT <span id='incomeData' className='text-green-600'>{result ? (result.total_prize + result.total_win_price) - result.total_income_deposit : 0}</span>
+          BDT <span className='text-green-600'>{result ? result.total_prize + result.total_win_price : 0}</span>
         </h2>
       </div>
       {/* transaction section */}
@@ -185,7 +177,7 @@ const Wallet = () => {
                 placeholder="Enter amount (BDT)"
                 className="border border-gray-300 p-2 rounded"
               />
-              <button type='submit' className="bg-cardbg text-white py-2 rounded hover:bg-opacity-80">
+              <button className="bg-cardbg text-white py-2 rounded hover:bg-opacity-80">
                 Submit Deposit
               </button>
             </form>

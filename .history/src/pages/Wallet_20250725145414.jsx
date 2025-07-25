@@ -1,65 +1,11 @@
 import { faPlayCircle } from '@fortawesome/free-regular-svg-icons';
-import { faChevronLeft, faChevronRight, faHandHoldingDollar, faPiggyBank, faPlusCircle, faTimes, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faHandHoldingDollar, faPiggyBank, faPlusCircle, faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import React from 'react';
 import { NavLink, useOutletContext } from 'react-router';
 
 const Wallet = () => {
-  const { totalPay, deposite, result, updateData } = useOutletContext();
-  const [showModal, setShowModal] = useState(false);
-  const user = JSON.parse(localStorage.getItem("user")) || {};
-  const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  const { register, handleSubmit, reset } = useForm();
-
-
-
-
-  const onSubmit = (data) => {
-    // console.log("Form Data:", data );
-    let getIncomeData = document.getElementById("incomeData").innerText;
-
-    if (data?.amount > getIncomeData) {
-      toast.error("Insufficient balance to deposit.");
-      // navigate("/addmoney");
-      return;
-    }
-
-    const depositPayload = {
-      user_id: user.user.uid,
-      // transaction_id: 'dfgfg',
-      // payment_phone_number:'3424',
-      status: 1,
-      amount: data?.amount,
-      payment_method: "income",
-    };
-    console.log("Deposit Payload:", depositPayload);
-
-    const request = axios.post(`${VITE_API_BASE_URL}/add/deposite`, depositPayload);
-
-    toast.promise(request, {
-      loading: 'Sending...',
-      success: 'Success !',
-      error: 'Something went wrong!',
-    });
-    request
-      .then((response) => {
-        console.log("Response:", response);
-        if (response.status === 201) {
-          updateData();
-          reset();
-          setShowModal(false);
-        }
-      })
-
-  };
-
-
-
-
-
+  const { totalPay, deposite,result } = useOutletContext();
   return (
     <div className='max-w-md mx-auto font-Jakarta bg-mainbg space-y-3 pb-30 pt-5'>
       {/* wallet header */}
@@ -85,7 +31,7 @@ const Wallet = () => {
       <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center'>
         <h2>TOTAL INCOME</h2>
         <h2 className='text-lg font-semibold'>
-          BDT <span id='incomeData' className='text-green-600'>{result ? (result.total_prize + result.total_win_price) - result.total_income_deposit : 0}</span>
+          BDT <span className='text-green-600'>{result ? result.total_prize + result.total_win_price : 0}</span>
         </h2>
       </div>
       {/* transaction section */}
@@ -119,7 +65,7 @@ const Wallet = () => {
           <FontAwesomeIcon icon={faPlusCircle} className='text-xl' /> <p>Add Money</p>
         </NavLink>
       </div>
-      {/* Deposit Income section */}
+      {/* Deposit cash section */}
       <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-3 rounded-lg justify-between items-center font-light'>
         <div className='flex flex-col gap-1'>
           <div className='flex gap-2'>
@@ -127,9 +73,9 @@ const Wallet = () => {
           </div>
           {/* <h2 className='text-lg'>BDT 0</h2> */}
         </div>
-        <button onClick={() => setShowModal(true)} className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
+        <NavLink to='/addmoney' className='flex items-center gap-1 bg-white rounded-sm text-cardbg px-1 py-1'>
           <FontAwesomeIcon icon={faPlusCircle} className='text-xl' /> <p>Deposite Money</p>
-        </button>
+        </NavLink>
       </div>
       {/* HOW TO ADD MONEY? */}
       <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-3 rounded-lg justify-between items-center font-light'>
@@ -167,31 +113,6 @@ const Wallet = () => {
           <FontAwesomeIcon icon={faPlayCircle} className='text-xl text-red-800' /> <p>ভিডিওটি দেখুন</p>
         </div>
       </div>
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white text-black p-5 rounded-lg w-[90%] max-w-md relative">
-            <button
-              onClick={() => setShowModal(false)}
-              className="absolute top-2 right-2 text-black"
-            >
-              <FontAwesomeIcon icon={faTimes} className="text-xl" />
-            </button>
-            <h2 className="text-lg font-semibold mb-3">Deposit Money</h2>
-            {/* Modal content here */}
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-              <input
-                type="number"
-                {...register("amount", { required: true })}
-                placeholder="Enter amount (BDT)"
-                className="border border-gray-300 p-2 rounded"
-              />
-              <button type='submit' className="bg-cardbg text-white py-2 rounded hover:bg-opacity-80">
-                Submit Deposit
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

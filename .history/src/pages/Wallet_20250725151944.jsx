@@ -19,19 +19,11 @@ const Wallet = () => {
 
   const onSubmit = (data) => {
     // console.log("Form Data:", data );
-    let getIncomeData = document.getElementById("incomeData").innerText;
-
-    if (data?.amount > getIncomeData) {
-      toast.error("Insufficient balance to deposit.");
-      // navigate("/addmoney");
-      return;
-    }
 
     const depositPayload = {
       user_id: user.user.uid,
       // transaction_id: 'dfgfg',
       // payment_phone_number:'3424',
-      status: 1,
       amount: data?.amount,
       payment_method: "income",
     };
@@ -85,7 +77,7 @@ const Wallet = () => {
       <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center'>
         <h2>TOTAL INCOME</h2>
         <h2 className='text-lg font-semibold'>
-          BDT <span id='incomeData' className='text-green-600'>{result ? (result.total_prize + result.total_win_price) - result.total_income_deposit : 0}</span>
+          BDT <span className='text-green-600'>{result ? (result.total_prize + result.total_win_price) - result.total_income_deposit : 0}</span>
         </h2>
       </div>
       {/* transaction section */}

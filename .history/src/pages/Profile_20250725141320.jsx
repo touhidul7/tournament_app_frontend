@@ -36,15 +36,15 @@ const Profile = () => {
             <div className='bg-slate-100 rounded-lg w-[95%] mx-auto mt-4 mb-5'>
                 <div className='grid grid-cols-3 text-cardbg font-semibold px-2 py-1'>
                     <div className='flex flex-col items-center'>
-                        <h2>{result ? result.total_games : 0}</h2>
+                        <h2>{result?.total_games}</h2>
                         <h2>Played</h2>
                     </div>
                     <div className='flex flex-col items-center'>
-                        <h2 className=''>{result ? result.total_kill: 0}</h2>
+                        <h2 className=''>{result?.total_kill}</h2>
                         <h2 className=''>Total Kill</h2>
                     </div>
                     <div className='flex flex-col items-center'>
-                        <h2>{result ? result.total_winner : 0}</h2>
+                        <h2>{result?.total_winner}</h2>
                         <h2>Won</h2>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { faArrowRightFromBracket, faChartSimple, faScaleBalanced, faShareAlt, faUserCircle, faWallet } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket , faChartSimple, faScaleBalanced, faShareAlt, faUserCircle, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons/faHandHoldingDollar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink, useNavigate, useOutletContext } from 'react-router';
@@ -23,7 +23,8 @@ const Profile = () => {
     };
 
     // get outlet context
-    const { result } = useOutletContext();
+     const { result } = useOutletContext();
+  
 
     return (
         <div className='max-w-md mx-auto bg-mainbg  font-Jakarta pb-20 pt-2'>
@@ -36,15 +37,15 @@ const Profile = () => {
             <div className='bg-slate-100 rounded-lg w-[95%] mx-auto mt-4 mb-5'>
                 <div className='grid grid-cols-3 text-cardbg font-semibold px-2 py-1'>
                     <div className='flex flex-col items-center'>
-                        <h2>{result ? result.total_games : 0}</h2>
+                        <h2>0</h2>
                         <h2>Played</h2>
                     </div>
                     <div className='flex flex-col items-center'>
-                        <h2 className=''>{result ? result.total_kill: 0}</h2>
+                        <h2 className=''>0</h2>
                         <h2 className=''>Total Kill</h2>
                     </div>
                     <div className='flex flex-col items-center'>
-                        <h2>{result ? result.total_winner : 0}</h2>
+                        <h2>0</h2>
                         <h2>Won</h2>
                     </div>
                 </div>

@@ -31,7 +31,7 @@ const Wallet = () => {
       user_id: user.user.uid,
       // transaction_id: 'dfgfg',
       // payment_phone_number:'3424',
-      status: 1,
+      status: '1',
       amount: data?.amount,
       payment_method: "income",
     };

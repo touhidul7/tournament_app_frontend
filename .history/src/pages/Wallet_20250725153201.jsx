@@ -19,19 +19,18 @@ const Wallet = () => {
 
   const onSubmit = (data) => {
     // console.log("Form Data:", data );
-    let getIncomeData = document.getElementById("incomeData").innerText;
+    let getIncomeData = document.getElementById("incomeData").innerText ;
 
     if (data?.amount > getIncomeData) {
-      toast.error("Insufficient balance to deposit.");
-      // navigate("/addmoney");
-      return;
-    }
+            toast.error("Insufficient balance to deposit.");
+            // navigate("/addmoney");
+            return;
+        }
 
     const depositPayload = {
       user_id: user.user.uid,
       // transaction_id: 'dfgfg',
       // payment_phone_number:'3424',
-      status: 1,
       amount: data?.amount,
       payment_method: "income",
     };

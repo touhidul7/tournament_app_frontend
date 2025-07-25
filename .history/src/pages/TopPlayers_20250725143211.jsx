@@ -31,7 +31,7 @@ const TopPlayers = () => {
                         {
                             topPlayer && topPlayer.map((player, index) => (
                                 <tr key={index} className="border-b text-start text-sm">
-                                    <td className="text-center py-1 bg-hoverbg text-orange-400">{index + 1} <FontAwesomeIcon icon={faCrown}/></td>
+                                    <td className="text-center py-1 bg-hoverbg text-orange-400">{index + 1}</td>
                                     <td className="pl-2 py-1 bg-hoverbg text-md font-semibold text-cardbg">{player.ex_1}</td>
                                     <td className="pr-2 py-1 text-end bg-hoverbg text-md font-semibold text-cardbg">
                                         <FontAwesomeIcon icon={faBangladeshiTakaSign}/> {player.total_prize} TK
