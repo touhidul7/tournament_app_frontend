@@ -1,10 +1,63 @@
 import { faBangladeshiTakaSign, faChevronLeft, faMobileScreenButton, } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { use } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { NavLink, useOutletContext } from 'react-router';
 
 const Withdraw = () => {
     const { totalIncome } = useOutletContext();
+
+
+    const { updateData } = useOutletContext();
+    const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const user = JSON.parse(localStorage.getItem("user")) || {};
+    const [activeTab, setActiveTab] = useState("bKash");
+    const { register, handleSubmit, reset } = useForm();
+
+    const onSubmit = (data) => {
+
+        const withdrawPayload = {
+            user_id: user.user.uid,
+            transaction_id: data.transaction_id,
+            payment_phone_number: data?.payment_phone_number,
+            amount: data?.amount,
+            status: 0,
+            payment_method: activeTab,
+        };
+        console.log("Deposit Payload:", withdrawPayload);
+
+        const request = axios.post(`${VITE_API_BASE_URL}/add/deposite`, withdrawPayload);
+
+        toast.promise(request, {
+            loading: 'Sending...',
+            success: 'Sent !',
+            error: 'Something went wrong!',
+        });
+        request
+            .then((response) => {
+                console.log("Response:", response);
+                if (response.status === 201) {
+                    updateData();
+                    reset();
+                    // navigate("/thankyou");
+                }
+            })
+
+    };
+
+
+
+
+
+
+
+
+
+
+
+
     return (
         <div className='max-w-md mx-auto font-Jakarta bg-mainbg space-y-3  pb-60 py-5'>
             {/* wallet header */}
@@ -29,14 +82,14 @@ const Withdraw = () => {
             </div>
             {/* withdraw form */}
             <div className='bg-cardbg w-[96%] mx-auto px-5 py-5 rounded-lg text-white'>
-                <form action="" className='space-y-3 flex flex-col '>
+                <form onSubmit={handleSubmit(onSubmit)} className='space-y-3 flex flex-col '>
                     <div className='flex items-center gap-2 bg-white text-cardbg px-2 py-2 rounded-lg'>
                         <FontAwesomeIcon icon={faMobileScreenButton} className='text-xl' />
-                        <input type="text" placeholder='Mobile Number' className='placeholder:text-black focus:outline-none w-full' />
+                        <input {...register("withdraw_phone_number", { required: true })} type="text" placeholder='Mobile Number' className='placeholder:text-black focus:outline-none w-full' />
                     </div>
                     <div className='flex items-center gap-2 bg-white text-cardbg px-2 py-2 rounded-lg'>
                         <FontAwesomeIcon icon={faBangladeshiTakaSign} className='text-xl' />
-                        <input type="text" placeholder='Amount to Withdraw' className='placeholder:text-black focus:outline-none w-full' />
+                        <input {...register("amount", { required: true })} type="number" placeholder='Amount to Withdraw' className='placeholder:text-black focus:outline-none w-full' />
                     </div>
                     <h2 className='text-center text-red-500'>* Minimum withdraw amount 100 taka *</h2>
                     <button type='submit' className='bg-amber-400 py-2 px-4 rounded-2xl'>
