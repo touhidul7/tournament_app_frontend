@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { faBangladeshiTakaSign, faChevronLeft, faClipboardCheck, faTrophy, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +10,7 @@ const ResultDetails = () => {
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [loader, setLoader] = useState(true);
     const [results, setResults] = useState([]);
-
+    const [matchDetails, setMatchDetails] = useState([])
 
 
     useEffect(() => {
@@ -30,9 +31,22 @@ const ResultDetails = () => {
         };
 
         fetchData();
-    }, []);
 
+        fetch(`${BASE_URL}/get/matches/${matchId}`)
+            .then((res) => res.json())
+            .then((data) => {
+                // const found = data.filter((item) => item.category_id == id);
+                setMatchDetails(data);
+            });
+
+
+    }, []);
     console.log(results)
+
+    const getPlayerNameById = (userId) => {
+        const player = results.player_results?.find(p => p.user_id === userId);
+        return player ? player : "Unknown";
+    };
 
 
     return (
@@ -53,8 +67,8 @@ const ResultDetails = () => {
                     <div className="w-full justify-items-center">
                         <div className="w-[95%] bg-cardbg rounded-md text-center mt-24 py-2 shadow-sm shadow-gray-600">
                             <div>
-                                <h3 className="text-white text-md font-medium">Duo Time | Mobile | Regular</h3>
-                                <p className="text-hoverbg text-sm mt-2">Organised on 2025-07-17 at 12:00 pm</p>
+                                <h3 className="text-white text-md">{matchDetails.match_name}</h3>
+                                <p className="text-hoverbg text-sm mt-2">Organised on {matchDetails.date} at {matchDetails.time}</p>
                             </div>
                             <div className="border border-hoverbg my-3"></div>
                             <div className="justify-items-center">
@@ -68,9 +82,9 @@ const ResultDetails = () => {
                                     </thead>
                                     <tbody className="w-[95%]">
                                         <tr className="mt-4">
-                                            <th className="text-md text-white pt-2"> <FontAwesomeIcon className="mr-1" icon={faBangladeshiTakaSign} /> 800 TK</th>
-                                            <th className="text-md text-white pt-2"> <FontAwesomeIcon className="mr-1" icon={faBangladeshiTakaSign} /> 10 TK</th>
-                                            <th className="text-md text-white pt-2"> <FontAwesomeIcon className="mr-1" icon={faBangladeshiTakaSign} /> 20 TK</th>
+                                            <th className="text-md text-white pt-2"> <FontAwesomeIcon className="mr-1" icon={faBangladeshiTakaSign} /> {matchDetails.win_price} TK</th>
+                                            <th className="text-md text-white pt-2"> <FontAwesomeIcon className="mr-1" icon={faBangladeshiTakaSign} /> {matchDetails.kill_price}  TK</th>
+                                            <th className="text-md text-white pt-2"> <FontAwesomeIcon className="mr-1" icon={faBangladeshiTakaSign} />{matchDetails.entry_fee} TK</th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -87,19 +101,46 @@ const ResultDetails = () => {
                                     <FontAwesomeIcon className="text-md ml-2" icon={faTrophy} />
                                 </th>
                             </thead>
-                            <tfoot className="bg-white">
+                            <tfoot className="bg-white rounded-b-md">
                                 <tr className="border-b text-start text-sm">
                                     <td className="text-center py-1">1</td>
-                                    <td className="pl-2 py-1">Subas Hembrom</td>
-                                    <td className="text-center py-1">30</td>
-                                    <td className="pl-2 py-1">100</td>
+                                    <td className="pl-2 py-1">{getPlayerNameById(results.winner).ex_1}</td>
+                                    <td className="text-center py-1">
+                                        {getPlayerNameById(results.winner).pname1_kill + getPlayerNameById(results.winner).pname2_kill}</td>
+                                    <td className="pl-2 py-1">{getPlayerNameById(results.winner).total_prize}</td>
                                 </tr>
-                                <tr className="border-b text-start text-sm">
-                                    <td className="rounded-bl-md text-center py-1">2</td>
-                                    <td className="pl-2 py-1">Juwel Hossain</td>
-                                    <td className="text-center py-1">30</td>
-                                    <td className="pl-2 rounded-br-md py-1">100</td>
-                                </tr>
+                                {results.second && (
+                                    <tr className="border-b text-start text-sm">
+                                        <td className="rounded-bl-md text-center py-1">2</td>
+                                        <td className="pl-2 py-1">{getPlayerNameById(results.second).ex_1}</td>
+                                        <td className="text-center py-1">30</td>
+                                        <td className="pl-2 rounded-br-md py-1">100</td>
+                                    </tr>
+                                )}
+                                {results.third && (
+                                    <tr className="border-b text-start text-sm">
+                                        <td className="rounded-bl-md text-center py-1">3</td>
+                                        <td className="pl-2 py-1">{getPlayerNameById(results.third).ex_1}</td>
+                                        <td className="text-center py-1">30</td>
+                                        <td className="pl-2 rounded-br-md py-1">100</td>
+                                    </tr>
+                                )}
+                                {results.fourth && (
+                                    <tr className="border-b text-start text-sm">
+                                        <td className="rounded-bl-md text-center py-1">4</td>
+                                        <td className="pl-2 py-1">{getPlayerNameById(results.fourth).ex_1}</td>
+                                        <td className="text-center py-1">30</td>
+                                        <td className="pl-2 rounded-br-md py-1">100</td>
+                                    </tr>
+                                )}
+                                {results.fifth && (
+                                    <tr className="border-b text-start text-sm">
+                                        <td className="rounded-bl-md text-center py-1">5</td>
+                                        <td className="pl-2 py-1">{getPlayerNameById(results.fifth).ex_1}</td>
+                                        <td className="text-center py-1">30</td>
+                                        <td className="pl-2 rounded-br-md py-1">100</td>
+                                    </tr>
+                                )}
                             </tfoot>
                             <tbody className="bg-blue-500 text-start">
                                 <td className="text-center text-white py-1">No</td>
