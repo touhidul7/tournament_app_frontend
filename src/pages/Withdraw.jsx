@@ -90,6 +90,7 @@ const Withdraw = () => {
                     <div className='flex items-center gap-2 bg-white text-cardbg px-2 py-2 rounded-lg'>
                         <FontAwesomeIcon icon={faBangladeshiTakaSign} className='text-xl' />
                         <input {...register("amount", { required: true })} type="number" placeholder='Amount to Withdraw' className='placeholder:text-black focus:outline-none w-full' />
+                        
                     </div>
                     <h2 className='text-center text-red-500'>* Minimum withdraw amount 100 taka *</h2>
                     <button type='submit' className='bg-amber-400 py-2 px-4 rounded-2xl'>
