@@ -27,7 +27,7 @@ const Profile = () => {
             {/* profile picure */}
             <div className='flex justify-center flex-col items-center mt-3'>
                 <img src="./image/profile.png" alt="" className='h-16 w-16 border-3 border-white rounded-full' />
-                <h2 className='text-white text-lg font-medium mt-1'>{user.user?.email}</h2>
+                <h2 className='text-white text-lg font-medium mt-1'>{user.user?.displayName}</h2>
             </div>
             {/* user analitics */}
             <div className='bg-slate-100 rounded-lg w-[95%] mx-auto mt-4 mb-5'>

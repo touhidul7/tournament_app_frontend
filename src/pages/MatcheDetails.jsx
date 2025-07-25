@@ -5,20 +5,20 @@ import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router";
 
 const MatcheDetails = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [matchDetails, setMatchDetails] = useState([]);
     console.log(`Match ID: ${id}`); // For debugging purposes, you can remove this later
     useEffect(() => {
         fetch(`${BASE_URL}/get/matches/${id}`)
-          .then((res) => res.json())
-          .then((data) => {
-            // const found = data.filter((item) => item.category_id == id);
-            setMatchDetails(data);
-          });
-      }, [BASE_URL, id]);
-    
-      console.log(matchDetails);
+            .then((res) => res.json())
+            .then((data) => {
+                // const found = data.filter((item) => item.category_id == id);
+                setMatchDetails(data);
+            });
+    }, [BASE_URL, id]);
+
+    console.log(matchDetails);
     return (
         <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
             <div className="pb-24">
@@ -61,31 +61,34 @@ const MatcheDetails = () => {
                 </div>
                 <div className="w-[95%] mt-4 bg-cardbg text-white text-md font-semibold text-center rounded-md p-2">
                     <h1 className="flex items-center justify-center gap-3">
-                        <FontAwesomeIcon icon={faClipboardCheck}/>
+                        <FontAwesomeIcon icon={faClipboardCheck} />
                         Match Instructions and Rules
-                        <FontAwesomeIcon icon={faClipboardCheck}/>
+                        <FontAwesomeIcon icon={faClipboardCheck} />
                     </h1>
                 </div>
                 <div className="mt-4">
                     <h1 className="bg-red-500 p-2 rounded-md text-white text-md font-medium">Full Map Rules:</h1>
                 </div>
                 {/* === Rules === */}
-                <div  className="w-[95%] mt-2 text-white font-Siliguri font-medium">
-                   <div
+                <div className="w-[95%] mt-2 text-white font-Siliguri font-medium">
+                    <div
                         dangerouslySetInnerHTML={{ __html: matchDetails.category?.rules }}
                     />
                 </div>
-        
+
                 <div className="w-[95%] mt-4 bg-cardbg text-white text-md font-semibold text-center rounded-md p-2">
                     <h1 className="flex items-center justify-center gap-3">
-                        <FontAwesomeIcon icon={faClipboardCheck}/>
+                        <FontAwesomeIcon icon={faClipboardCheck} />
                         Registered Participants
-                        <FontAwesomeIcon icon={faClipboardCheck}/>
+                        <FontAwesomeIcon icon={faClipboardCheck} />
                     </h1>
                 </div>
                 <div className="w-[95%] mt-4 font-semibold text-white">
-                    <h2 className="border-b border-b-hoverbg pb-2">1. Subas Hembrom</h2>
-                    <h2 className="border-b border-b-hoverbg py-2">2. Juwel Hossain</h2>
+                    {matchDetails.joins && matchDetails.joins.length > 0 ? (
+                        matchDetails.joins.map((join, index) => (
+                            <h2 key={index} className="border-b border-b-hoverbg py-2">{index + 1}. {join?.pname1}</h2>
+                        ))
+                    ) : (<div>Hello World</div>)}
                 </div>
             </div>
         </div>

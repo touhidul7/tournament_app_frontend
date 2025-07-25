@@ -7,10 +7,11 @@ const Carousel = () => {
     dots: false,
     infinite: true,
     speed: 500,
+    arrows: false,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true, // Enable auto-play
-    autoplaySpeed: 3000, // Set auto-play speed to 3 seconds
+    autoplay: true, 
+    autoplaySpeed: 3000, 
   };
 
   return (

@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   faBangladeshiTakaSign,
   faFire,
-  faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
@@ -28,10 +28,10 @@ const Home = () => {
       .catch((err) => console.error("Failed to fetch categories:", err));
   }, []);
 
-  console.log(categories);
+  // console.log(categories);
 
   return (
-    <div className="max-w-md mx-auto bg-mainbg font-Jakarta items-center justify-center justify-items-center py-2 pb-24">
+    <div className="max-w-md mx-auto min-h-screen bg-mainbg font-Jakarta items-center justify-center justify-items-center py-2 pb-24">
       <section className="w-[95%]">
         {/* === notice board ==== */}
         <div className="bg-cardbg p-2 rounded-md text-white font-medium text-center mt-4 mb-4">
@@ -52,7 +52,7 @@ const Home = () => {
             className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
           />
 
-          <div className="fixed top-4 z-10 w-sm overflow-y-auto">
+          <div className="fixed top-4 right-0 left-0 m-auto z-10 w-sm overflow-y-auto">
             <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
               <DialogPanel
                 transition
@@ -122,28 +122,6 @@ const Home = () => {
               </NavLink>
             ))}
           </div>
-
-         {/*  <div className="bg-cardbg text-white text-lg font-medium text-center py-1 rounded-md mt-6">
-            <p>BR AND LONEWOLF MATCH</p>
-          </div>
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <NavLink
-              to="/free-match"
-              className="bg-cardbg  p-2  rounded-xl text-white"
-            >
-              <img className="rounded-md" src="./image/free-match.jpg" alt="" />
-              <p className="font-semibold text-md mt-2">FREE MATCH</p>
-              <p className="text-sm font-light">25 Match Found</p>
-            </NavLink>
-            <NavLink
-              to="/br-squad-match"
-              className="bg-cardbg  p-2  rounded-xl text-white"
-            >
-              <img className="rounded-md" src="./image/free-match.jpg" alt="" />
-              <p className="font-semibold text-md mt-2">BR MATCH</p>
-              <p className="text-sm font-light">25 Match Found</p>
-            </NavLink>
-          </div> */}
         </div>
       </section>
     </div>

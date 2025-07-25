@@ -1,14 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBangladeshiTakaSign, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { NavLink, useNavigate, useParams } from "react-router";
+import { NavLink, useNavigate, useOutletContext, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
 const BrMatchJoin = () => {
-
+    const {balance} = useOutletContext();
     const { id } = useParams();
     const navigate = useNavigate();
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -16,23 +15,9 @@ const BrMatchJoin = () => {
 
     const [joinType, setJoinType] = useState(null);
     const [matchDetails, setMatchDetails] = useState([]);
-    const [userData, setUserData] = useState([]);
     const { register, handleSubmit, reset } = useForm();
+    const { updateData } = useOutletContext();
 
-    // load deposite data from api
-    const loadDeposite = () => {
-        fetch(`${BASE_URL}/deposites/user/${user.user.uid}`, {
-            method: "GET",
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setUserData(data);
-            })
-            .catch((error) => {
-                console.error("Error fetching deposite data:", error);
-                toast.error("Error fetching deposite data");
-            });
-    }
 
     /* get matches */
     useEffect(() => {
@@ -42,7 +27,6 @@ const BrMatchJoin = () => {
                 setMatchDetails(data);
             });
         /* Deposit Data */
-        loadDeposite();
     }, [BASE_URL, id]);
 
     /* Match join function */
@@ -50,12 +34,14 @@ const BrMatchJoin = () => {
 
         const fee = (joinType == "solo" ? Number(matchDetails.entry_fee) : (Number(matchDetails.entry_fee) * 2));
 
-        if (fee > userData.total_deposit) {
+        if (fee > balance) {
             toast.error("Insufficient balance to join this match.");
+            navigate("/addmoney");
             return;
         }
-        const depositPayload = {
+        const joinmatch = {
             user_id: user.user.uid,
+            ex1: user.user.displayName,
             match_id: matchDetails.id,
             game_type: joinType,
             entry_fee: matchDetails.entry_fee,
@@ -65,10 +51,11 @@ const BrMatchJoin = () => {
             pname1: data.player1,
             pname2: data.player2 || "",
             game_name: matchDetails.match_name,
+            win_prize: matchDetails.win_price,
             pay: fee,
         };
 
-        const request = axios.post(`${BASE_URL}/game-entry`, depositPayload);
+        const request = axios.post(`${BASE_URL}/game-entry`, joinmatch);
 
         toast.promise(request, {
             loading: 'Joining...',
@@ -78,8 +65,9 @@ const BrMatchJoin = () => {
         request
             .then((response) => {
                 if (response.status === 201) {
+                    updateData();
                     reset();
-                    navigate("/thankyou");
+                    navigate(`/joine-thanks/${matchDetails.category_id}`);
                 }
             })
     };

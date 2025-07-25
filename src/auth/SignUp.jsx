@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { doCreateUserWithEmailAndPassword } from '../firebase/auth';
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "../context/authContext";
 
 const SignUp = () => {
@@ -12,7 +12,7 @@ const SignUp = () => {
     const { userLoggedIn } = authContext || {}; // Prevent destructuring error
 
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isSignedIn, setIsSignedIn] = useState(false);
     const navigate = useNavigate();
 
@@ -20,15 +20,15 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const email = e.target[0].value;
-        const password = e.target[1].value;
-      
+        const name = e.target[0].value;
+        const email = e.target[1].value;
+        const password = e.target[2].value;
 
         if (!isSignedIn) {
             setIsSignedIn(true);
             try {
-                await doCreateUserWithEmailAndPassword(email, password);
-                toast.success("User created successfully!");
+                await doCreateUserWithEmailAndPassword(email, password, name);
+                toast.success("Account Created successfully!");
                 navigate('/login');
             } catch (error) {
                 toast.error(error.message || "Error signing up");
@@ -52,26 +52,15 @@ const SignUp = () => {
                     <div>
                         <div>
                             <form className="flex flex-col gap-4 mt-4" onSubmit={handleSubmit}>
-                                {/* <div className="">
-                                    <div className="flex items-center mt-3 gap-3 bg-white p-1 rounded text-white shadow-lg shadow-gray-800">
-                                        <FontAwesomeIcon icon={faUser} className="text-mainbg pl-1" />
-                                        <input type="text"
-                                            placeholder="Enter Your First Name"
-                                            className="focus:outline-none bg-white text-mainbg w-full p-2 rounded"
-                                            required
-                                        />
-                                    </div>
-                                </div> */}
-                                {/* <div className="">
-                                    <div className="flex items-center mt-3 gap-3 bg-white p-1 rounded text-white shadow-lg shadow-gray-800">
-                                        <FontAwesomeIcon icon={faUser} className="text-mainbg pl-1" />
-                                        <input type="text"
-                                            placeholder="Enter Your Last Name"
-                                            className="focus:outline-none bg-white text-mainbg w-full p-2 rounded"
-                                            required
-                                        />
-                                    </div>
-                                </div> */}
+                                <div className="flex items-center gap-2 bg-white p-1 rounded shadow-lg shadow-gray-800">
+                                    <FontAwesomeIcon icon={faUser} className="text-mainbg pl-1" />
+                                    <input
+                                        type="text"
+                                        placeholder="Enter Your Name"
+                                        className="w-full bg-white focus:outline-none text-mainbg p-2"
+                                        required
+                                    />
+                                </div>
                                 <div className="flex items-center gap-2 bg-white p-1 rounded shadow-lg shadow-gray-800">
                                     <FontAwesomeIcon icon={faAt} className="text-mainbg pl-1" />
                                     <input
@@ -134,6 +123,7 @@ const SignUp = () => {
                     </div>
                 </div>
             </section>
+            <Toaster position="top-center"  />
         </div>
     );
 };

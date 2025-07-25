@@ -1,9 +1,13 @@
 import { auth } from "./firebase";
-import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, updatePassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, updatePassword, updateProfile } from "firebase/auth";
 
-// create user with email and password
-export const doCreateUserWithEmailAndPassword = async (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+// create user with email, password, and name (displayName)
+export const doCreateUserWithEmailAndPassword = async (email, password, name) => {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    if (name) {
+        await updateProfile(userCredential.user, { displayName: name });
+    }
+    return userCredential;
 };
 
 // sign in with email and password
@@ -12,7 +16,7 @@ export const doSignInWithEmailAndPassword = async (email, password) => {
 
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log("Login successful:", userCredential);
+        // console.log("Login successful:", userCredential);
         return userCredential;
     } catch (error) {
         console.error("Firebase Login Error:", error.code, error.message);
