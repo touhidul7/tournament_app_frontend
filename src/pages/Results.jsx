@@ -3,12 +3,13 @@ import { faUser, } from '@fortawesome/free-regular-svg-icons';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 
 const Results = () => {
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [categories, setCategories] = useState([]);
     // const [open, setOpen] = useState(0);
+    const navigate =useNavigate();
 
     const [matchDetails, setMatchDetails] = useState([]);
 
@@ -54,13 +55,13 @@ const Results = () => {
             </div>
             {/* match details card 1 here */}
             {matchDetails && matchDetails.map((match, index) => (
-                <div key={index} className="mt-5 w-[98%] mx-auto bg-cardbg rounded-lg pb-3 mb-5">
+                <div onClick={()=>navigate(`/resultdetails/${match?.id}`)} key={index} className="mt-5 w-[98%] mx-auto bg-cardbg rounded-lg pb-3 mb-5">
                     <div className='flex justify-between items-center mb5'>
                         <div>
 
                         </div>
                         <div>
-                            <h2 className='text-cardbg bg-white h-5 w-12 rounded-tr-md '>
+                            <h2 className='text-cardbg bg-white p-2 rounded-tr-md '>
                                 {match?.match_id}
                             </h2>
                         </div>
@@ -71,8 +72,8 @@ const Results = () => {
                             <FontAwesomeIcon icon={faUser} />
                         </div>
                         <div>
-                            <h2 className='text-white font-medium'>Solo Mobile survival - only headshot</h2>
-                            <p className='text-yellow-500 text-sm'>2025-07-15 at 06:00pm</p>
+                            <h2 className='text-white font-medium'>{match?.match_name}</h2>
+                            <p className='text-yellow-500 text-sm'>{match.date} at {match.time}</p>
                         </div>
                     </Link>
                     {/* pricing mini card */}
@@ -82,7 +83,7 @@ const Results = () => {
                                 <h2>+ WIN PRIZE</h2>
                             </div>
                             <div className='bg-white  text-center rounded-b-md'>
-                                <h2>800</h2>
+                                <h2>{match?.win_price}</h2>
                             </div>
                         </div>
                         <div>
@@ -90,7 +91,7 @@ const Results = () => {
                                 <h2>+ PER KILL</h2>
                             </div>
                             <div className='bg-white text-center rounded-b-md'>
-                                <h2>10</h2>
+                                <h2>{match?.kill_price}</h2>
                             </div>
                         </div>
                         <div>
@@ -98,23 +99,23 @@ const Results = () => {
                                 <h2>+ ENTRY FEE</h2>
                             </div>
                             <div className='bg-white text-center rounded-b-md'>
-                                <h2>20</h2>
+                                <h2>{match.entry_fee}</h2>
                             </div>
                         </div>
                     </div>
                     {/* match details */}
                     <div className='grid grid-cols-3 mt-5 mb-5 '>
                         <div className='flex flex-col items-center'>
-                            <h2 className='text-hoverbg'>ENTRY TYPE</h2>
-                            <h2 className='text-white'>100</h2>
+                            <h2 className='text-hoverbg'>MAX ENTRY</h2>
+                            <h2 className='text-white'>{match.max_player}</h2>
                         </div>
                         <div className='flex flex-col items-center'>
                             <h2 className='text-hoverbg'>MAP</h2>
-                            <h2 className='text-white'>Bermuda</h2>
+                            <h2 className='text-white'>{match.map_name}</h2>
                         </div>
                         <div className='flex flex-col items-center'>
                             <h2 className='text-hoverbg'>VERSION</h2>
-                            <h2 className='text-white'>Mobile</h2>
+                            <h2 className='text-white'>{match.version}</h2>
                         </div>
                     </div>
                 </div>))}
