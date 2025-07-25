@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import { faBangladeshiTakaSign, faChevronLeft, faClipboardCheck, faTrophy, } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
@@ -106,7 +105,7 @@ const ResultDetails = () => {
                                     <td className="text-center py-1">1</td>
                                     <td className="pl-2 py-1">{getPlayerNameById(results.winner).ex_1}</td>
                                     <td className="text-center py-1">
-                                        {getPlayerNameById(results.winner).pname1_kill + getPlayerNameById(results.winner).pname2_kill}</td>
+                                        {parseInt(getPlayerNameById(results.winner).pname1_kill) + parseInt(getPlayerNameById(results.winner).pname2_kill)}</td>
                                     <td className="pl-2 py-1">{getPlayerNameById(results.winner).total_prize}</td>
                                 </tr>
                                 {results.second && (
@@ -167,7 +166,7 @@ const ResultDetails = () => {
                                         <tr key={index} className="border-b text-start text-sm">
                                             <td className="text-center py-1">{index + 1}</td>
                                             <td className="pl-2 py-1">{result.ex_1}</td>
-                                            <td className="text-center py-1">{result.pname1_kill + result.pname2_kill}</td>
+                                            <td className="text-center py-1">{parseInt(result.pname1_kill) + parseInt(result.pname2_kill)}</td>
                                             <td className="pl-2 py-1">{result.total_prize}</td>
                                         </tr>
                                     ))

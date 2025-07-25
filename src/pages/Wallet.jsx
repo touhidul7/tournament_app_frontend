@@ -19,9 +19,9 @@ const Wallet = () => {
 
   const onSubmit = (data) => {
     // console.log("Form Data:", data );
-    let getIncomeData = document.getElementById("incomeData").innerText;
+    let getIncomeData = result.message != "No player results found for this user" ? ((result.total_prize + result.total_win_price) - result.total_income_deposit) : 0
 
-    if (data?.amount > getIncomeData || data?.amount <= 0) {
+    if (parseInt(data?.amount) > parseInt(getIncomeData) || parseInt(data?.amount) <= 0) {
       toast.error("Insufficient balance to deposit.");
       // navigate("/addmoney");
       return;
