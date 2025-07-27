@@ -36,6 +36,7 @@ const BrMatchJoin = () => {
     let multiplier = 1;
     const onSubmit = (data) => {
 
+
         if (joinType == "duo") multiplier = 2;
         else if (joinType == "squad") multiplier = 4;
 

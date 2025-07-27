@@ -33,13 +33,9 @@ const BrMatchJoin = () => {
 
 
     /* Match join function */
-    let multiplier = 1;
     const onSubmit = (data) => {
 
-        if (joinType == "duo") multiplier = 2;
-        else if (joinType == "squad") multiplier = 4;
-
-        const fee = Number(matchDetails.entry_fee) * multiplier;
+        const fee = (joinType == "solo" ? Number(matchDetails.entry_fee) : (Number(matchDetails.entry_fee) * 2));
 
         if (fee > balance) {
             toast.error("Insufficient balance to join this match.");

@@ -7,7 +7,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 
 const BrMatchJoin = () => {
-    const { balance } = useOutletContext();
+    const {balance} = useOutletContext();
     const { id } = useParams();
     const navigate = useNavigate();
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -30,16 +30,12 @@ const BrMatchJoin = () => {
     }, [BASE_URL, id]);
 
     console.log(matchDetails);
-
+    
 
     /* Match join function */
-    let multiplier = 1;
     const onSubmit = (data) => {
 
-        if (joinType == "duo") multiplier = 2;
-        else if (joinType == "squad") multiplier = 4;
-
-        const fee = Number(matchDetails.entry_fee) * multiplier;
+        const fee = (joinType == "solo" ? Number(matchDetails.entry_fee) : (Number(matchDetails.entry_fee) * 2));
 
         if (fee > balance) {
             toast.error("Insufficient balance to join this match.");
@@ -93,7 +89,7 @@ const BrMatchJoin = () => {
             {/* === Join Details === */}
             <div className="w-full mt-24 justify-items-center font-Jakarta pt-5">
                 <div className="w-[95%] bg-cardbg rounded-md text-white p-3">
-                    <h1 className="text-md font-semibold ml-2">{matchDetails.match_name} | {matchDetails.game_type}</h1>
+                    <h1 className="text-md font-semibold ml-2">{matchDetails.match_name}</h1>
                     <p className="text-md text-hoverbg ml-2 mt-3">Date: {matchDetails.date} | Time: {matchDetails.time}</p>
 
                     <div className="flex text-md font-medium ml-2 mt-3 gap-7 justify-between">
@@ -108,29 +104,20 @@ const BrMatchJoin = () => {
 
                     {/* === Join type buttons === */}
                     <div className="flex items-center justify-center gap-5 mt-4 p-3">
-                        {
-                            matchDetails.game_type == "Solo" ? <button
-                                className={`text-lg font-medium w-32 py-2 rounded-md inset-shadow-sm transition-all duration-300 ${joinType === 'solo' ? 'bg-green-600' : 'bg-black'
-                                    } hover:bg-green-600`}
-                                onClick={() => setJoinType('solo')}
-                            >
-                                Solo
-                            </button> : matchDetails.game_type == "Duo" ? <button
-                                className={`text-lg font-medium w-32 py-2 rounded-md inset-shadow-sm transition-all duration-300 ${joinType === 'duo' ? 'bg-green-600' : 'bg-black'
-                                    } hover:bg-green-600`}
-                                onClick={() => setJoinType('duo')}
-                            >
-                                Duo
-                            </button> : matchDetails.game_type == "Squad" ? <button
-                                className={`text-lg font-medium w-32 py-2 rounded-md inset-shadow-sm transition-all duration-300 ${joinType === 'duo' ? 'bg-green-600' : 'bg-black'
-                                    } hover:bg-green-600`}
-                                onClick={() => setJoinType('squad')}
-                            >
-                                Squad
-                            </button> : null
-                        }
-
-
+                        <button
+                            className={`text-lg font-medium w-32 py-2 rounded-md inset-shadow-sm transition-all duration-300 ${joinType === 'solo' ? 'bg-green-600' : 'bg-black'
+                                } hover:bg-green-600`}
+                            onClick={() => setJoinType('solo')}
+                        >
+                            Solo
+                        </button>
+                        <button
+                            className={`text-lg font-medium w-32 py-2 rounded-md inset-shadow-sm transition-all duration-300 ${joinType === 'duo' ? 'bg-green-600' : 'bg-black'
+                                } hover:bg-green-600`}
+                            onClick={() => setJoinType('duo')}
+                        >
+                            Duo
+                        </button>
                     </div>
 
                     {/* === Conditional Input Fields === */}
@@ -142,33 +129,16 @@ const BrMatchJoin = () => {
                                 {...register("player1", { required: true })}
                                 placeholder="Player 1 Name"
                             />
-                            {joinType === 'duo' || joinType == 'squad' ? (
+                            {joinType === 'duo' && (
                                 <input
                                     className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out"
                                     type="text"
                                     {...register("player2", { required: true })}
                                     placeholder="Player 2 Name"
                                 />
-                            ) : null}
-                            {joinType == 'squad' && (
-                                <>
-                                    <input
-                                        className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out"
-                                        type="text"
-                                        {...register("player3", { required: true })}
-                                        placeholder="Player 3 Name"
-                                    />
-                                    <input
-                                        className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out"
-                                        type="text"
-                                        {...register("player4", { required: true })}
-                                        placeholder="Player 4 Name"
-                                    />
-                                </>
                             )}
                         </div>
                     )}
-
                 </div>
             </div>
             {/* === Join Now btn === */}
