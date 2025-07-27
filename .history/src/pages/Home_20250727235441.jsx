@@ -18,7 +18,7 @@ const Home = () => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const IMAGE_URL = import.meta.env.VITE_API_IMAGE_URL;
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -31,17 +31,6 @@ const Home = () => {
   // console.log(categories);
 
   // popUpHandler function to close the dialog
-
-  useEffect(() => {
-    const popup = localStorage.getItem("popup");
-    if (popup == "false") {
-      setOpen(false);
-    } else {
-      setOpen(true);
-    }
-  }, []);
-
-
   const popUpHandler = () => {
     setOpen(false);
     localStorage.setItem("popup", "false");
