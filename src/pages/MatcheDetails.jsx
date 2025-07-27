@@ -86,7 +86,12 @@ const MatcheDetails = () => {
                 <div className="w-[95%] mt-4 font-semibold text-white">
                     {matchDetails.joins && matchDetails.joins.length > 0 ? (
                         matchDetails.joins.map((join, index) => (
-                            <h2 key={index} className="border-b border-b-hoverbg py-2">{index + 1}. {join?.pname1}</h2>
+                            <>
+                                {join?.pname1 && <h2 key={index} className="border-b border-b-hoverbg py-2"> {join?.pname1}</h2>}
+                                {join?.pname2 && <h2 className="border-b border-b-hoverbg py-2"> {join?.pname2}</h2>}
+                                {join?.pname3 && <h2 className="border-b border-b-hoverbg py-2"> {join?.pname3}</h2>}
+                                {join?.pname4 && <h2 className="border-b border-b-hoverbg py-2"> {join?.pname4}</h2>}
+                            </>
                         ))
                     ) : (<div>Hello World</div>)}
                 </div>
