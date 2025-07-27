@@ -93,7 +93,7 @@ const AddMoney = () => {
             name="payment_phone_number"
             {...register("payment_phone_number", { required: true })}
             className="w-full p-2 border border-pink-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
-            placeholder="ট্রানজেকশন আইডি দিন"
+            placeholder="ফোন নম্বর দিন"
           />
         </div>
         <div className="mb-4">
@@ -104,7 +104,7 @@ const AddMoney = () => {
             name="amount"
             {...register("amount", { required: true })}
             className="w-full p-2 border border-pink-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
-            placeholder="ট্রানজেকশন আইডি দিন"
+            placeholder="পরিমাণ দিন"
           />
         </div>
 

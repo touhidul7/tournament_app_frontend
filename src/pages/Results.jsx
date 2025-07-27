@@ -31,7 +31,7 @@ const Results = () => {
 
         // fetchMatchDetails(categories[0].id);
     }, [BASE_URL]);
-    console.log("matchDetails", matchDetails);
+    // console.log("matchDetails", matchDetails);
     return (
         <div className='font-Jakarta bg-mainbg pb-30 min-h-screen'>
             <div className="bg-mainbg relative flex items-start justify-center">
@@ -55,16 +55,9 @@ const Results = () => {
             </div>
             {/* match details card 1 here */}
             {matchDetails && matchDetails.map((match, index) => (
-                <div onClick={() => navigate(`/resultdetails/${match?.id}`)} key={index} className="mt-5 w-[98%] mx-auto bg-cardbg rounded-lg pb-3 mb-5">
-                    <div className='flex justify-between items-center mb5'>
-                        <div>
-
-                        </div>
-                        <div>
-                            <h2 className='text-cardbg bg-white p-2 rounded-tr-md '>
-                                {match?.match_id}
-                            </h2>
-                        </div>
+                <div onClick={() => navigate(`/resultdetails/${match?.id}`)} key={index} className="relative mt-5 w-[98%] mx-auto bg-cardbg rounded-lg pb-3 mb-5">
+                    <div className='absolute top-0 right-0 bg-green-500 text-md font-semibold rounded-tr-md py-1 px-2 text-white' >
+                        # {match?.match_id}
                     </div>
                     <Link to={`/resultdetails/${match?.id}`} className='flex items-center gap-2 p-2'>
                         <div className='bg-white rounded-full h-10 w-10 flex items-center justify-center'>

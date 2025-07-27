@@ -73,7 +73,8 @@ const Withdraw = () => {
                 <NavLink to='/profile'><FontAwesomeIcon icon={faChevronLeft} className='text-xl' /></NavLink>
                 <div className='flex items-center justify-center gap-2'>
                     <h2 className='text-lg'>Abailable Balance </h2>
-                    <h2 className='text-xl'><FontAwesomeIcon icon={faBangladeshiTakaSign} /> {totalIncome ? totalIncome - withdrawRequest : 0} Tk</h2>
+                    <h2 className='text-xl'><FontAwesomeIcon icon={faBangladeshiTakaSign} />
+                     {totalIncome ? totalIncome - withdrawRequest : 0} Tk</h2>
                 </div>
             </div>
             {/* Mobile Banking list */}

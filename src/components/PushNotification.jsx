@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const PushNotification = ({ updateData }) => {
   const lastNotificationId = useRef(null);
-  // const { updateData } = useOutletContext();
 
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged((user) => {
@@ -17,7 +16,7 @@ const PushNotification = ({ updateData }) => {
         const q = query(
           collection(db, 'notifications'),
           where('userId', '==', user.uid),
-          orderBy('timestamp', 'desc')
+          orderBy('timestamp', 'desc'),
         );
 
         const unsubscribeSnapshot = onSnapshot(q, (snapshot) => {
@@ -32,11 +31,10 @@ const PushNotification = ({ updateData }) => {
             if (lastNotificationId.current !== latestDoc.id) {
               lastNotificationId.current = latestDoc.id;
 
-              updateData();
-
+              // Show toast
               toast.info(`🔔 ${latest.message}`, {
                 position: 'top-right',
-                autoClose: 500,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -44,6 +42,9 @@ const PushNotification = ({ updateData }) => {
                 progress: undefined,
                 theme: 'light'
               });
+
+              // 🔁 Update data only when a new notification is shown
+              updateData();
             }
           } else {
             console.log("ℹ️ No notifications found.");
@@ -57,10 +58,9 @@ const PushNotification = ({ updateData }) => {
     });
 
     return () => unsubscribeAuth();
-  }, []);
+  }, [updateData]); // Optional: add updateData if it's from props/context
 
-
-  return null; // no UI needed for toast
+  return null;
 };
 
 export default PushNotification;

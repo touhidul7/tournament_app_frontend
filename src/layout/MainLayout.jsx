@@ -1,121 +1,97 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import { Outlet } from 'react-router';
 import BottomNav from '../components/BottomNav';
 import { Toaster } from 'react-hot-toast';
 import MainHeader from '../components/MainHeader';
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import { useCallback, useEffect, useState } from 'react';
 import PushNotification from '../components/PushNotification';
 import { ToastContainer } from 'react-toastify';
 import ScrollToTop from '../components/ScrollToTop';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const MainLayout = () => {
-    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const [deposite, setDeposite] = useState(0);
     const [totalPay, setTotalPay] = useState(0);
     const [result, setResult] = useState([]);
     const [topPlayer, setTopPlayer] = useState([]);
     const [withdrawRequest, setWithdrawRequest] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // Loading state
 
     const user = JSON.parse(localStorage.getItem("user")) || {};
-    const loadDeposite = () => {
-        fetch(`${BASE_URL}/deposites/user/${user?.user?.uid}`, {
-            method: "GET",
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setDeposite(data.total_deposit);
-            })
-            .catch((error) => {
-                console.error("Error fetching deposite data:", error);
-                // toast.error("Error fetching deposite data");
-            });
-    }
-    const loadTotalPay = () => {
-        fetch(`${BASE_URL}/game-entry/sum-pay/${user?.user?.uid}`, {
-            method: "GET",
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setTotalPay(data.total_pay);
-            })
-            .catch((error) => {
-                console.error("Error fetching total pay data:", error);
-                // toast.error("Error fetching total pay data");
-            });
-    }
 
-    // load player results
-    const loadResultData = () => {
-        fetch(`${BASE_URL}/player-result/${user?.user?.uid}`, {
-            method: "GET",
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setResult(data);
-            })
-            .catch((error) => {
-                console.error("Error fetching:", error);
-                // toast.error("Error fetching");
-            });
-    }
+    const updateData = useCallback(async () => {
+        setIsLoading(true); // Start loading
+        try {
+            const [depositeRes, payRes, resultRes, topPlayerRes, withdrawRes] = await Promise.all([
+                fetch(`${BASE_URL}/deposites/user/${user?.user?.uid}`),
+                fetch(`${BASE_URL}/game-entry/sum-pay/${user?.user?.uid}`),
+                fetch(`${BASE_URL}/player-result/${user?.user?.uid}`),
+                fetch(`${BASE_URL}/top-players`),
+                fetch(`${BASE_URL}/withdraw-request/sum/${user?.user?.uid}`)
+            ]);
 
-    // load top player results
-    const loadTopPlayerData = () => {
-        fetch(`${BASE_URL}/top-players`, {
-            method: "GET",
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setTopPlayer(data.top_players);
-            })
-            .catch((error) => {
-                console.error("Error fetching:", error);
-                // toast.error("Error fetching");
-            });
-    }
+            const [depositeData, payData, resultData, topPlayerData, withdrawData] = await Promise.all([
+                depositeRes.json(),
+                payRes.json(),
+                resultRes.json(),
+                topPlayerRes.json(),
+                withdrawRes.json()
+            ]);
 
-
-    // load total withdraw
-    const loadTotalWithdrawRequest = () => {
-        fetch(`${BASE_URL}/withdraw-request/sum/${user?.user?.uid}`, {
-            method: "GET",
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setWithdrawRequest(data.total_withdraw);
-            })
-            .catch((error) => {
-                console.error("Error fetching:", error);
-                // toast.error("Error fetching");
-            });
-    }
-    // total income
-    const totalIncome = result.total_prize ? (result?.total_prize + result?.total_win_price) - result?.total_income_deposit : 0;
-
-
-    const updateData = () => {
-        loadDeposite();
-        loadTotalPay();
-        loadResultData();
-        loadTopPlayerData();
-        loadTotalWithdrawRequest();
-    }
+            setDeposite(depositeData.total_deposit);
+            setTotalPay(payData.total_pay);
+            setResult(resultData);
+            setTopPlayer(topPlayerData.top_players);
+            setWithdrawRequest(withdrawData.total_withdraw);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            setIsLoading(false); // Stop loading regardless of success/error
+        }
+    }, [user?.user?.uid]);
 
     useEffect(() => {
         updateData();
-    }, [])
+    }, [updateData]);
+
+    // total income
+    const totalIncome = result.total_prize ? (result?.total_prize + result?.total_win_price) - result?.total_income_deposit : 0;
+
+    // Custom Loader Component
+    const Loader = () => (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
+            <div className="flex flex-col items-center">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
+                <p className="text-white text-lg font-semibold">Loading your data...</p>
+                <p className="text-gray-300 text-sm">Please wait a moment</p>
+            </div>
+        </div>
+    );
 
     return (
-        <div className='max-w-md mx-auto'>
-            <MainHeader balance={(result.total_income_deposit + deposite) - totalPay} />
-            {/* <UserPanel/> */}
-            <PushNotification updateData={updateData} />
-            <ScrollToTop />
-            <Outlet context={{ updateData, deposite, totalPay, balance: (deposite - totalPay), result, topPlayer, totalIncome, withdrawRequest }} />
-            <BottomNav />
-            <Toaster />
-            <ToastContainer />
+        <div className='max-w-md mx-auto relative'>
+            {/* Show loader when data is loading */}
+            {isLoading && <Loader />}
+
+            {/* Main content with opacity control when loading */}
+            <div className={`transition-opacity duration-300 ${isLoading ? 'opacity-50' : 'opacity-100'}`}>
+                <MainHeader balance={(parseInt(deposite)) - parseInt(totalPay)} />
+                <PushNotification updateData={updateData} />
+                <ScrollToTop />
+                <Outlet context={{ 
+                    updateData, 
+                    deposite, 
+                    totalPay, 
+                    balance: (deposite - totalPay), 
+                    result, 
+                    topPlayer, 
+                    totalIncome, 
+                    withdrawRequest,
+                    isLoading // Pass loading state to child components if needed
+                }} />
+                <BottomNav />
+                <Toaster />
+                <ToastContainer className={'z-50'} />
+            </div>
         </div>
     );
 };
