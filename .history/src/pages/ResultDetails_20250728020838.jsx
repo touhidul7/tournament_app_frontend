@@ -113,7 +113,7 @@ const ResultDetails = () => {
                                         <td className="rounded-bl-md text-center py-1">2</td>
                                         <td className="pl-2 py-1">{getPlayerNameById(results.second).ex_1}</td>
                                         <td className="text-center py-1"> {parseInt(getPlayerNameById(results.second).pname1_kill) + parseInt(getPlayerNameById(results.second).pname2_kill)}</td>
-                                        <td className="pl-2 rounded-br-md py-1">{getPlayerNameById(results.second).total_prize}</td>
+                                        <td className="pl-2 rounded-br-md py-1">100</td>
                                     </tr>
                                 )}
                                 {results.third && (

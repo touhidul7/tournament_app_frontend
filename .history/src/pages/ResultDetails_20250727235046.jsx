@@ -50,7 +50,7 @@ const ResultDetails = () => {
 
     return (
         <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
-            {/* {matchId} */}
+            {matchId}
             <div className=" bg-mainbg relative flex items-start justify-center">
                 {/* Top white curved section */}
                 <div className="absolute top-0 left-0 w-full h-22 bg-white rounded-b-[100%] shadow-md  flex justify-center items-end pb-4">
@@ -112,8 +112,8 @@ const ResultDetails = () => {
                                     <tr className="border-b text-start text-sm">
                                         <td className="rounded-bl-md text-center py-1">2</td>
                                         <td className="pl-2 py-1">{getPlayerNameById(results.second).ex_1}</td>
-                                        <td className="text-center py-1"> {parseInt(getPlayerNameById(results.second).pname1_kill) + parseInt(getPlayerNameById(results.second).pname2_kill)}</td>
-                                        <td className="pl-2 rounded-br-md py-1">{getPlayerNameById(results.second).total_prize}</td>
+                                        <td className="text-center py-1">30</td>
+                                        <td className="pl-2 rounded-br-md py-1">100</td>
                                     </tr>
                                 )}
                                 {results.third && (
