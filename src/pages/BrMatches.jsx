@@ -85,13 +85,15 @@ const BrMatches = () => {
       return ("notjoined");
     }
   };
-  const renderJoinButton = (date, time, id) => {
+
+  const renderJoinButton = (date, time, id, maxPlayer) => {
     const matchDateTime = new Date(`${date} ${time}`);
     const now = new Date();
     const started = matchDateTime - now <= 0;
 
-    // joinedMatch is an object with a data array
     const alreadyJoined = Array.isArray(joinedMatch?.data) && joinedMatch.data.some((entry) => String(entry.match_id) === String(id));
+    const joinedCount = joinCounts[id] || 0;
+
     if (alreadyJoined) {
       return (
         <NavLink className="w-1/4">
@@ -110,16 +112,27 @@ const BrMatches = () => {
           </h2>
         </NavLink>
       );
-    } else {
+    }
+
+    if (joinedCount >= maxPlayer) {
       return (
-        <NavLink to={`/br-match-join/${id}`} className="w-1/4">
-          <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">
-            Join
+        <NavLink className="w-1/4">
+          <h2 className="bg-red-400 font-semibold text-white text-center p-2 rounded-md opacity-50 cursor-not-allowed">
+            Full
           </h2>
         </NavLink>
       );
     }
+
+    return (
+      <NavLink to={`/br-match-join/${id}`} className="w-1/4">
+        <h2 className="bg-green-500 font-semibold text-white text-center p-2 rounded-md">
+          Join
+        </h2>
+      </NavLink>
+    );
   };
+
   // get id data
 
   //load data
@@ -272,9 +285,16 @@ const BrMatches = () => {
               {/* Join Section */}
               <div className="flex items-center justify-between gap-4 mt-2">
                 <div className="mt-5 w-3/4">
-                  <div className="w-full h-5 rounded-full bg-hoverbg">
-                    <div className="bg-green-500 h-5 w-10 rounded-full"></div>
+                  <div className="w-full h-5 rounded-full bg-hoverbg overflow-hidden">
+                    <div
+                      className="bg-green-500 h-5 rounded-full transition-all duration-500 ease-in-out"
+                      style={{
+                        width: `${(joinCounts[match.id] / match.max_player) * 100 || 0
+                          }%`,
+                      }}
+                    ></div>
                   </div>
+
                   <div className="flex items-center justify-between text-white text-sm mt-1 pr-12">
                     <p>
                       {loadingJoinCounts
@@ -286,7 +306,8 @@ const BrMatches = () => {
                     </p>
                   </div>
                 </div>
-                {renderJoinButton(match.date, match.time, match.id)}
+                {renderJoinButton(match.date, match.time, match.id, match.max_player)}
+
 
               </div>
 
