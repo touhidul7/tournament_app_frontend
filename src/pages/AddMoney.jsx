@@ -28,6 +28,7 @@ const AddMoney = () => {
 
     const depositPayload = {
       user_id: user.user.uid,
+      ex1:user.user.displayName,
       transaction_id: data.transaction_id,
       payment_phone_number: data?.payment_phone_number,
       amount: data?.amount,
@@ -45,7 +46,7 @@ const AddMoney = () => {
     });
     request
       .then((response) => {
-        console.log("Response:", response);
+        // console.log("Response:", response);
         if (response.status === 201) {
           updateData();
           reset();
