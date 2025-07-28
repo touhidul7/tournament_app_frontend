@@ -76,15 +76,25 @@ const BrMatches = () => {
   const roomDetailsVerify = (date, time, id) => {
     const matchDateTime = new Date(`${date} ${time}`);
     const now = new Date();
-    const started = matchDateTime - now <= 0;
-    const alreadyJoined = Array.isArray(joinedMatch?.data) && joinedMatch.data.some((entry) => String(entry.match_id) === String(id));
+    const timeDiff = matchDateTime - now;
 
-    if (alreadyJoined && started) {
-      return (true);
-    } else if (alreadyJoined && !started) { return ("notstarted") } else if (!alreadyJoined && !started) {
-      return ("notjoined");
+    const alreadyJoined = Array.isArray(joinedMatch?.data) &&
+      joinedMatch.data.some((entry) => String(entry.match_id) === String(id));
+
+    // ✅ Show room details if match is within 5 minutes from now or already started
+    const fiveMinutesBeforeStart = timeDiff <= 5 * 60 * 1000; // 300000 ms = 5 minutes
+
+    if (alreadyJoined && fiveMinutesBeforeStart) {
+      return true;
+    } else if (alreadyJoined && !fiveMinutesBeforeStart) {
+      return "notstarted";
+    } else if (!alreadyJoined && !fiveMinutesBeforeStart) {
+      return "notjoined";
+    } else {
+      return "matchended";
     }
   };
+
 
   const renderJoinButton = (date, time, id, maxPlayer) => {
     const matchDateTime = new Date(`${date} ${time}`);
@@ -212,7 +222,7 @@ const BrMatches = () => {
       <section className="w-full mt-24 justify-items-center">
         {/* === Cards === */}
         {match.map((match) => (
-          <div className="w-[95%] mt-5" key={match.id}>
+          <div className={`w-[95%] mt-5 ${match.status == 0 ? "hidden" : "block"}`} key={match.id}>
             <div className="relative bg-cardbg rounded-lg p-2">
               <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">
                 #{match.match_id}
@@ -326,8 +336,16 @@ const BrMatches = () => {
                   ) : (
                     <button
                       onClick={() => {
-                        roomDetailsVerify(match.date, match.time, match.id) == 'notstarted' ? toast.error("Match not started yet") : roomDetailsVerify(match.date, match.time, match.id) == "notjoined" ? toast.error("Join to access Room") : toast.error("Match Ended");
+                        const result = roomDetailsVerify(match.date, match.time, match.id);
+                        if (result === 'notstarted') {
+                          toast.error("Room details will be available 5 minutes before match starts.");
+                        } else if (result === 'notjoined') {
+                          toast.error("Please join the match to view room details.");
+                        } else if (result === 'matchended') {
+                          toast.error("Match already ended.");
+                        }
                       }}
+
                       className="w-full rounded-md bg-cardbg  px-2.5 py-2 text-md text-white border border-hoverbg gap-2 flex items-center"
                     >
                       <FontAwesomeIcon icon={faKey} />
