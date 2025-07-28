@@ -47,6 +47,16 @@ const ResultDetails = () => {
         return player ? player : "Unknown";
     };
 
+    const calculateTotalKills = (player) => {
+        let total = 0;
+        if (player?.pname1_kill) total += parseInt(player.pname1_kill);
+        if (player?.pname2_kill) total += parseInt(player.pname2_kill);
+        if (player?.pname3_kill) total += parseInt(player.pname3_kill);
+        if (player?.pname4_kill) total += parseInt(player.pname4_kill);
+        return total;
+    };
+
+
 
     return (
         <div className="max-w-md mx-auto h-auto font-Jakarta bg-mainbg pb-24">
@@ -104,40 +114,39 @@ const ResultDetails = () => {
                                 <tr className="border-b text-start text-sm">
                                     <td className="text-center py-1">1</td>
                                     <td className="pl-2 py-1">{getPlayerNameById(results.winner).ex_1}</td>
-                                    <td className="text-center py-1">
-                                        {parseInt(getPlayerNameById(results.winner).pname1_kill) + parseInt(getPlayerNameById(results.winner).pname2_kill)}</td>
+                                    <td className="pl-2 py-1">{calculateTotalKills(getPlayerNameById(results.winner))}</td>
                                     <td className="pl-2 py-1">{getPlayerNameById(results.winner).total_prize}</td>
                                 </tr>
                                 {results.second && (
                                     <tr className="border-b text-start text-sm">
                                         <td className="rounded-bl-md text-center py-1">2</td>
                                         <td className="pl-2 py-1">{getPlayerNameById(results.second).ex_1}</td>
-                                        <td className="text-center py-1"> {parseInt(getPlayerNameById(results.second).pname1_kill) + parseInt(getPlayerNameById(results.second).pname2_kill)}</td>
-                                        <td className="pl-2 rounded-br-md py-1">{getPlayerNameById(results.second).total_prize}</td>
+                                        <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.second))}</td>
+                                        <td className="pl-2 py-1">{getPlayerNameById(results.second).total_prize}</td>
                                     </tr>
                                 )}
                                 {results.third && (
                                     <tr className="border-b text-start text-sm">
                                         <td className="rounded-bl-md text-center py-1">3</td>
                                         <td className="pl-2 py-1">{getPlayerNameById(results.third).ex_1}</td>
-                                        <td className="text-center py-1">{parseInt(getPlayerNameById(results.third).pname1_kill) + parseInt(getPlayerNameById(results.third).pname2_kill)}</td>
-                                        <td className="pl-2 rounded-br-md py-1">100</td>
+                                        <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.third))}</td>
+                                        <td className="pl-2 py-1">{getPlayerNameById(results.third).total_prize}</td>
                                     </tr>
                                 )}
                                 {results.fourth && (
                                     <tr className="border-b text-start text-sm">
                                         <td className="rounded-bl-md text-center py-1">4</td>
                                         <td className="pl-2 py-1">{getPlayerNameById(results.fourth).ex_1}</td>
-                                        <td className="text-center py-1">30</td>
-                                        <td className="pl-2 rounded-br-md py-1">100</td>
+                                        <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.fourth))}</td>
+                                        <td className="pl-2 py-1">{getPlayerNameById(results.fourth).total_prize}</td>
                                     </tr>
                                 )}
                                 {results.fifth && (
                                     <tr className="border-b text-start text-sm">
                                         <td className="rounded-bl-md text-center py-1">5</td>
                                         <td className="pl-2 py-1">{getPlayerNameById(results.fifth).ex_1}</td>
-                                        <td className="text-center py-1">30</td>
-                                        <td className="pl-2 rounded-br-md py-1">100</td>
+                                        <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.fifth))}</td>
+                                        <td className="pl-2 py-1">{getPlayerNameById(results.fifth).total_prize}</td>
                                     </tr>
                                 )}
                             </tfoot>
