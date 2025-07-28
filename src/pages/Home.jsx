@@ -18,8 +18,15 @@ const Home = () => {
   const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const IMAGE_URL = import.meta.env.VITE_API_IMAGE_URL;
 
+
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+
+
+
+
+  console.log();
+
 
   useEffect(() => {
     fetch(`${BASE_URL}/categories`)
@@ -134,10 +141,14 @@ const Home = () => {
                   alt={cat.name}
                 />
                 <p className="font-semibold text-md mt-2">{cat.name}</p>
-                <p className="text-sm font-light">Match Found</p>{" "}
+                <p className="text-sm font-light">
+                  {cat?.matches?.length || 0}  Match Found
+                </p>
+                {" "}
                 {/* Replace with actual count if available */}
               </NavLink>
             ))}
+
           </div>
         </div>
       </section>
