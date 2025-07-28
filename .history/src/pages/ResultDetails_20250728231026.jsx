@@ -118,14 +118,14 @@ const ResultDetails = () => {
                                     <td className="text-center py-1">1</td>
                                     <td className="pl-2 py-1">{getPlayerNameById(results.winner).ex_1}</td>
                                     <td className="pl-2 py-1">{calculateTotalKills(getPlayerNameById(results.winner))}</td>
-                                    <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.winner).total_prize) + parseInt(matchDetails.win_price)} ৳</td>
+                                    <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.winner).total_prize) + parseInt(matchDetails.win_price)}</td>
                                 </tr>
                                 {results.second && (
                                     <tr className="border-b text-start text-sm">
                                         <td className="rounded-bl-md text-center py-1">2</td>
                                         <td className="pl-2 py-1">{getPlayerNameById(results.second).ex_1}</td>
                                         <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.second))}</td>
-                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.second).total_prize) + parseInt(matchDetails.second_prize)} ৳</td>
+                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.second).total_prize) + parseInt(matchDetails.second_prize)}</td>
                                     </tr>
                                 )}
                                 {results.third && (
@@ -133,7 +133,7 @@ const ResultDetails = () => {
                                         <td className="rounded-bl-md text-center py-1">3</td>
                                         <td className="pl-2 py-1">{getPlayerNameById(results.third).ex_1}</td>
                                         <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.third))}</td>
-                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.third).total_prize) + parseInt(matchDetails.third_prize)} ৳</td>
+                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.third).total_prize) + parseInt(matchDetails.third_prize)}</td>
                                     </tr>
                                 )}
                                 {results.fourth && (
@@ -141,7 +141,7 @@ const ResultDetails = () => {
                                         <td className="rounded-bl-md text-center py-1">4</td>
                                         <td className="pl-2 py-1">{getPlayerNameById(results.fourth).ex_1}</td>
                                         <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.fourth))}</td>
-                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.fourth).total_prize )+ parseInt(matchDetails.fourth_prize)} ৳</td>
+                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.fourth).total_prize )+ parseInt(matchDetails.fourth_prize)}</td>
                                     </tr>
                                 )}
                                 {results.fifth && (
@@ -149,7 +149,7 @@ const ResultDetails = () => {
                                         <td className="rounded-bl-md text-center py-1">5</td>
                                         <td className="pl-2 py-1">{getPlayerNameById(results.fifth).ex_1}</td>
                                         <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.fifth))}</td>
-                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.fifth).total_prize) + parseInt(matchDetails.fifth_prize)} ৳</td>
+                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.fifth).total_prize) + parseInt(matchDetails.fifth_prize)}</td>
                                     </tr>
                                 )}
                             </tfoot>
@@ -157,7 +157,7 @@ const ResultDetails = () => {
                                 <td className="text-center text-white py-1">No</td>
                                 <td className="text-white pl-2 py-1">Players Name</td>
                                 <td className="text-white text-center py-1">Kills</td>
-                                <td className="text-white pl-2 py-1">Amount</td>
+                                <td className="text-white pl-2 py-1">Winning</td>
                             </tbody>
                         </table>
                     </div>
@@ -179,7 +179,7 @@ const ResultDetails = () => {
                                             <td className="text-center py-1">{index + 1}</td>
                                             <td className="pl-2 py-1">{result.ex_1}</td>
                                             <td className="text-center py-1">{parseInt(result.pname1_kill) + parseInt(result.pname2_kill)}</td>
-                                            <td className="pl-2 py-1">{result.total_prize} ৳</td>
+                                            <td className="pl-2 py-1">{result.total_prize}</td>
                                         </tr>
                                     ))
                                 ) : (<div>No Results Found</div>)}
@@ -190,7 +190,7 @@ const ResultDetails = () => {
                                 <td className="text-center text-white py-1">No</td>
                                 <td className="text-white pl-2 py-1">Players Name</td>
                                 <td className="text-white text-center py-1">Kills</td>
-                                <td className="text-white pl-2 py-1">Amount</td>
+                                <td className="text-white pl-2 py-1">Winning</td>
                             </tbody>
                         </table>
                     </div>

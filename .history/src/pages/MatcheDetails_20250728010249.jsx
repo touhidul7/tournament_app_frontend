@@ -93,7 +93,7 @@ const MatcheDetails = () => {
                                 {join?.pname4 && <h2 className="border-b border-b-hoverbg py-2"> {join?.pname4}</h2>}
                             </>
                         ))
-                    ) : (<div className="text-center">No Player Joined</div>)}
+                    ) : (<div>Hello World</div>)}
                 </div>
             </div>
         </div>

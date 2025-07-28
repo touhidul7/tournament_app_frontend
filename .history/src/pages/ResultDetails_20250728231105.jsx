@@ -157,7 +157,7 @@ const ResultDetails = () => {
                                 <td className="text-center text-white py-1">No</td>
                                 <td className="text-white pl-2 py-1">Players Name</td>
                                 <td className="text-white text-center py-1">Kills</td>
-                                <td className="text-white pl-2 py-1">Amount</td>
+                                <td className="text-white pl-2 py-1">Winning</td>
                             </tbody>
                         </table>
                     </div>
@@ -190,7 +190,7 @@ const ResultDetails = () => {
                                 <td className="text-center text-white py-1">No</td>
                                 <td className="text-white pl-2 py-1">Players Name</td>
                                 <td className="text-white text-center py-1">Kills</td>
-                                <td className="text-white pl-2 py-1">Amount</td>
+                                <td className="text-white pl-2 py-1">Winning</td>
                             </tbody>
                         </table>
                     </div>
