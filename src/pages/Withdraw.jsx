@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { NavLink, useOutletContext } from 'react-router';
+import { auth } from '../firebase/firebase';
+import { signOut } from 'firebase/auth';
 
 const Withdraw = () => {
     const { totalIncome, withdrawRequest } = useOutletContext();
@@ -17,21 +19,34 @@ const Withdraw = () => {
     const { register, handleSubmit, reset } = useForm();
     const tabs = ["bKash", "Rocket", "Nagad"];
 
-    console.log(totalIncome);
-
-
-    const onSubmit = (data) => {
-        console.log(typeof (data.amount))
+    // console.log(totalIncome);
+    const onSubmit = async (data) => {
+        try {
+            // Force refresh token before request
+            await auth.currentUser.getIdToken(true);
+        } catch (error) {
+            if (error.code === "auth/user-disabled") {
+                toast.error("Your account has been disabled.");
+                await signOut(auth);
+                localStorage.removeItem("user");
+                window.location.href = "/login";
+                return;
+            } else {
+                console.error("Token refresh error:", error);
+                toast.error("Something went wrong. Please try again.");
+                return;
+            }
+        }
 
         if (parseInt(data.amount) < 100) {
             toast.error("Minimum withdraw amount is 100 taka.");
             return;
         }
-        else if (parseInt(data.amount) > (totalIncome - withdrawRequest)) {
+        if (parseInt(data.amount) > (totalIncome - withdrawRequest)) {
             toast.error("Insufficient balance to withdraw.");
             return;
         }
-        else if (activeTab === null) {
+        if (activeTab === null) {
             toast.error("Please select a payment method.");
             return;
         }
@@ -44,26 +59,23 @@ const Withdraw = () => {
             status: 0,
             payment_method: activeTab,
         };
-        console.log("Deposit Payload:", withdrawPayload);
 
         const request = axios.post(`${VITE_API_BASE_URL}/withdraw-request`, withdrawPayload);
 
         toast.promise(request, {
             loading: 'Sending...',
-            success: 'Sent !',
+            success: 'Sent!',
             error: 'Something went wrong!',
         });
-        request
-            .then((response) => {
-                console.log("Response:", response);
-                if (response.status === 201) {
-                    updateData();
-                    reset();
-                    // navigate("/thankyou");
-                }
-            })
 
+        request.then((response) => {
+            if (response.status === 201) {
+                updateData();
+                reset();
+            }
+        });
     };
+
 
 
     return (
@@ -74,7 +86,7 @@ const Withdraw = () => {
                 <div className='flex items-center justify-center gap-2'>
                     <h2 className='text-lg'>Abailable Balance </h2>
                     <h2 className='text-xl'><FontAwesomeIcon icon={faBangladeshiTakaSign} />
-                     {totalIncome ? totalIncome - withdrawRequest : 0} Tk</h2>
+                        {totalIncome ? totalIncome - withdrawRequest : 0} Tk</h2>
                 </div>
             </div>
             {/* Mobile Banking list */}

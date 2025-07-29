@@ -32,7 +32,7 @@ const useAuthObserver = () => {
     const unsubscribe = onIdTokenChanged(auth, (user) => {
       if (user) {
         checkClaims(user); // immediately check
-        intervalId = setInterval(() => checkClaims(user), 30000); // every 30s
+        intervalId = setInterval(() => checkClaims(user), 60000); // every 30s
       } else {
         localStorage.removeItem("user");
         if (window.location.pathname !== "/login" && window.location.pathname !== "/signup") {
