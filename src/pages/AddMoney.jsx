@@ -19,12 +19,12 @@ const AddMoney = () => {
   };
   const navigate = useNavigate();
 
-  const{updateData}= useOutletContext();
+  const{updateData, CheckUser}= useOutletContext();
 
   /* Data Post System Here */
 
   const onSubmit = (data) => {
-    // console.log("Form Data:", data );
+    CheckUser();
 
     const depositPayload = {
       user_id: user.user.uid,

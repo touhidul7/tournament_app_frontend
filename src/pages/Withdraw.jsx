@@ -5,11 +5,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { NavLink, useOutletContext } from 'react-router';
-import { auth } from '../firebase/firebase';
-import { signOut } from 'firebase/auth';
 
 const Withdraw = () => {
-    const { totalIncome, withdrawRequest } = useOutletContext();
+    const { totalIncome, withdrawRequest, CheckUser } = useOutletContext();
 
 
     const { updateData } = useOutletContext();
@@ -21,22 +19,7 @@ const Withdraw = () => {
 
     // console.log(totalIncome);
     const onSubmit = async (data) => {
-        try {
-            // Force refresh token before request
-            await auth.currentUser.getIdToken(true);
-        } catch (error) {
-            if (error.code === "auth/user-disabled") {
-                toast.error("Your account has been disabled.");
-                await signOut(auth);
-                localStorage.removeItem("user");
-                window.location.href = "/login";
-                return;
-            } else {
-                console.error("Token refresh error:", error);
-                toast.error("Something went wrong. Please try again.");
-                return;
-            }
-        }
+        CheckUser();
 
         if (parseInt(data.amount) < 100) {
             toast.error("Minimum withdraw amount is 100 taka.");

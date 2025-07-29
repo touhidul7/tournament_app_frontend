@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router';
 import BottomNav from '../components/BottomNav';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import MainHeader from '../components/MainHeader';
 import { useCallback, useEffect, useState } from 'react';
 import PushNotification from '../components/PushNotification';
 import { ToastContainer } from 'react-toastify';
 import ScrollToTop from '../components/ScrollToTop';
+import { auth } from '../firebase/firebase';
+import { signOut } from 'firebase/auth';
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const MainLayout = () => {
@@ -17,6 +19,25 @@ const MainLayout = () => {
     const [isLoading, setIsLoading] = useState(true); // Loading state
 
     const user = JSON.parse(localStorage.getItem("user")) || {};
+
+    const CheckUser = async () => {
+        try {
+            // Force refresh token before request
+            await auth.currentUser.getIdToken(true);
+        } catch (error) {
+            if (error.code === "auth/user-disabled") {
+                toast.error("Your account has been disabled.");
+                await signOut(auth);
+                localStorage.removeItem("user");
+                window.location.href = "/login";
+                return;
+            } else {
+                console.error("Token refresh error:", error);
+                toast.error("Something went wrong. Please try again.");
+                return;
+            }
+        }
+    }
 
     const updateData = useCallback(async () => {
         setIsLoading(true); // Start loading
@@ -92,6 +113,7 @@ const MainLayout = () => {
                 <ScrollToTop />
                 <Outlet context={{
                     updateData,
+                    CheckUser,
                     deposite,
                     totalPay,
                     balance: (deposite - totalPay),

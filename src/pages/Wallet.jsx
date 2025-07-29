@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { NavLink, useOutletContext } from 'react-router';
 
 const Wallet = () => {
-  const { totalPay, deposite, updateData, withdrawRequest, totalIncome } = useOutletContext();
+  const { totalPay, deposite, updateData, withdrawRequest, totalIncome, CheckUser } = useOutletContext();
   const [showModal, setShowModal] = useState(false);
   const user = JSON.parse(localStorage.getItem("user")) || {};
   const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -18,13 +18,11 @@ const Wallet = () => {
 
 
   const onSubmit = (data) => {
-    // console.log("Form Data:", data );
-    // let getIncomeData = result.message != "No player results found for this user" ? ((result.total_prize + result.total_win_price) - result.total_income_deposit) : 0
+    CheckUser();
     let getIncomeData = totalIncome ? totalIncome - withdrawRequest : 0;
 
     if (parseInt(data?.amount) > parseInt(getIncomeData) || parseInt(data?.amount) <= 0) {
       toast.error("Insufficient balance to deposit.");
-      // navigate("/addmoney");
       return;
     }
 

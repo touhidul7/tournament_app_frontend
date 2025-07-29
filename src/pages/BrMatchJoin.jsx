@@ -7,7 +7,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 
 const BrMatchJoin = () => {
-    const { balance } = useOutletContext();
+    const { balance, CheckUser } = useOutletContext();
     const { id } = useParams();
     const navigate = useNavigate();
     const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -35,7 +35,7 @@ const BrMatchJoin = () => {
     /* Match join function */
     let multiplier = 1;
     const onSubmit = (data) => {
-
+        CheckUser();
         if (joinType == "duo") multiplier = 2;
         else if (joinType == "squad") multiplier = 4;
 
