@@ -1,33 +1,40 @@
-import { getIdTokenResult, onAuthStateChanged, signOut } from "firebase/auth";
+import { onIdTokenChanged, signOut } from "firebase/auth";
 import { useEffect } from "react";
 import { auth } from "../firebase/firebase";
+import toast from "react-hot-toast";
 
 const useAuthObserver = () => {
   useEffect(() => {
     let intervalId;
 
+    const handleDisabledUser = async () => {
+      toast.error("Your account has been disabled by the admin.");
+      await signOut(auth);
+      localStorage.removeItem("user");
+      window.location.href = "/login";
+    };
+
     const checkClaims = async (user) => {
       try {
-        const tokenResult = await getIdTokenResult(user, true); // force refresh
-
+        const tokenResult = await user.getIdTokenResult(true); // force refresh
         if (tokenResult.claims.disabled) {
-          alert("Your account has been disabled by the admin.");
-          await signOut(auth);
-          localStorage.removeItem("user");
-          window.location.href = "/login";
+          await handleDisabledUser();
         }
       } catch (error) {
-        console.error("Error checking claims:", error);
+        if (error.code === "auth/user-disabled") {
+          await handleDisabledUser(); // forcibly sign out
+        } else {
+          console.error("Error checking claims:", error);
+        }
       }
     };
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onIdTokenChanged(auth, (user) => {
       if (user) {
-        checkClaims(user); // check once immediately
-        intervalId = setInterval(() => checkClaims(user), 30000); // poll every 30s
+        checkClaims(user); // immediately check
+        intervalId = setInterval(() => checkClaims(user), 60000); // every 60s
       } else {
-        console.log("User is logged out.");
-        localStorage.removeItem("user"); // remove local user
+        localStorage.removeItem("user");
         if (window.location.pathname !== "/login" && window.location.pathname !== "/signup") {
           window.location.href = "/login";
         }
