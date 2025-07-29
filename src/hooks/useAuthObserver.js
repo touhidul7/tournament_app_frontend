@@ -28,7 +28,9 @@ const useAuthObserver = () => {
       } else {
         console.log("User is logged out.");
         localStorage.removeItem("user"); // remove local user
-        // window.location.href = "/login";
+        if (window.location.pathname !== "/login" && window.location.pathname !== "/signup") {
+          window.location.href = "/login";
+        }
         clearInterval(intervalId);
       }
     });
