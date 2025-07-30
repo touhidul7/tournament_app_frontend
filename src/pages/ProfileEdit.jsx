@@ -30,7 +30,7 @@ const ProfileEdit = () => {
                     {/* <h2 className="inset-shadow-sm inset-shadow-gray-100/70 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4">+880 1315-291293</h2> */}
                     <h2 className="inset-shadow-sm inset-shadow-gray-100/70 flex gap-2 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4">
                     <pre>Email :</pre> {user?.user?.email}</h2>
-                    <h2 className="inset-shadow-sm inset-shadow-gray-100/70 flex gap-2 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4">
+                    <h2 className="inset-shadow-sm inset-shadow-gray-100/70 flex gap-2 bg-cardbg text-white text-sm font-medium px-5 py-3 rounded-md mt-4">
                     <pre>ID    :</pre>{user?.user?.uid}</h2>
                     {/* <h1 className="text-lg text-white font-semibold text-center mt-6">Password Change</h1>
                     <input className="w-full focus:outline-none inset-shadow-sm inset-shadow-gray-100/70 bg-cardbg text-white text-md font-medium px-5 py-3 rounded-md mt-4" type="password" placeholder="Old Password" />
