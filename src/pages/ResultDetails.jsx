@@ -103,97 +103,99 @@ const ResultDetails = () => {
                             </div>
                         </div>
                     </div>
-                    {/* === Winner Details Section === */}
-                    <div className="w-full justify-items-center mt-4">
-                        <table className="w-[95%]">
-                            <thead className="w-full bg-green-500">
-                                <th className="text-md text-white py-1 rounded-t-md" colSpan={4}>
-                                    <FontAwesomeIcon className="text-md mr-2" icon={faTrophy} />
-                                    WINNER
-                                    <FontAwesomeIcon className="text-md ml-2" icon={faTrophy} />
-                                </th>
-                            </thead>
-                            <tfoot className="bg-white rounded-b-md">
-                                <tr className="border-b text-start text-sm">
-                                    <td className="text-center py-1">1</td>
-                                    <td className="pl-2 py-1">{getPlayerNameById(results.winner).ex_1}</td>
-                                    <td className="pl-2 py-1">{calculateTotalKills(getPlayerNameById(results.winner))}</td>
-                                    <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.winner).total_prize) + parseInt(matchDetails.win_price)} ৳</td>
-                                </tr>
-                                {results.second && (
+                    {results && results?.player_results?.length > 0 ? (<>
+                        {/* === Winner Details Section === */}
+                        <div className="w-full justify-items-center mt-4">
+                            <table className="w-[95%]">
+                                <thead className="w-full bg-green-500">
+                                    <th className="text-md text-white py-1 rounded-t-md" colSpan={4}>
+                                        <FontAwesomeIcon className="text-md mr-2" icon={faTrophy} />
+                                        WINNER
+                                        <FontAwesomeIcon className="text-md ml-2" icon={faTrophy} />
+                                    </th>
+                                </thead>
+                                <tfoot className="bg-white rounded-b-md">
                                     <tr className="border-b text-start text-sm">
-                                        <td className="rounded-bl-md text-center py-1">2</td>
-                                        <td className="pl-2 py-1">{getPlayerNameById(results.second).ex_1}</td>
-                                        <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.second))}</td>
-                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.second).total_prize) + parseInt(matchDetails.second_prize)} ৳</td>
+                                        <td className="text-center py-1">1</td>
+                                        <td className="pl-2 py-1">{getPlayerNameById(results.winner).ex_1}</td>
+                                        <td className="pl-2 py-1">{calculateTotalKills(getPlayerNameById(results.winner))}</td>
+                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.winner).total_prize) + parseInt(matchDetails.win_price)} ৳</td>
                                     </tr>
-                                )}
-                                {results.third && (
-                                    <tr className="border-b text-start text-sm">
-                                        <td className="rounded-bl-md text-center py-1">3</td>
-                                        <td className="pl-2 py-1">{getPlayerNameById(results.third).ex_1}</td>
-                                        <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.third))}</td>
-                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.third).total_prize) + parseInt(matchDetails.third_prize)} ৳</td>
-                                    </tr>
-                                )}
-                                {results.fourth && (
-                                    <tr className="border-b text-start text-sm">
-                                        <td className="rounded-bl-md text-center py-1">4</td>
-                                        <td className="pl-2 py-1">{getPlayerNameById(results.fourth).ex_1}</td>
-                                        <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.fourth))}</td>
-                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.fourth).total_prize )+ parseInt(matchDetails.fourth_prize)} ৳</td>
-                                    </tr>
-                                )}
-                                {results.fifth && (
-                                    <tr className="border-b text-start text-sm">
-                                        <td className="rounded-bl-md text-center py-1">5</td>
-                                        <td className="pl-2 py-1">{getPlayerNameById(results.fifth).ex_1}</td>
-                                        <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.fifth))}</td>
-                                        <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.fifth).total_prize) + parseInt(matchDetails.fifth_prize)} ৳</td>
-                                    </tr>
-                                )}
-                            </tfoot>
-                            <tbody className="bg-blue-500 text-start">
-                                <td className="text-center text-white py-1">No</td>
-                                <td className="text-white pl-2 py-1">Players Name</td>
-                                <td className="text-white text-center py-1">Kills</td>
-                                <td className="text-white pl-2 py-1">Amount</td>
-                            </tbody>
-                        </table>
-                    </div>
-                    {/* === Winner Details Section === */}
-                    {/* === Total Slots 48 (Limited) === */}
-                    <div className="w-full justify-items-center mt-4">
-                        <table className="w-[95%]">
-                            <thead className="w-full bg-green-500">
-                                <th className="text-md text-white py-1 rounded-t-md" colSpan={4}>
-                                    <FontAwesomeIcon className="text-md mr-2" icon={faClipboardCheck} />
-                                    Full Result (Only Per Kill)
-                                    <FontAwesomeIcon className="text-md ml-2" icon={faClipboardCheck} />
-                                </th>
-                            </thead>
-                            <tfoot className="bg-white">
-                                {results?.player_results?.length > 0 ? (
-                                    results.player_results.map((result, index) => (
-                                        <tr key={index} className="border-b text-start text-sm">
-                                            <td className="text-center py-1">{index + 1}</td>
-                                            <td className="pl-2 py-1">{result.ex_1}</td>
-                                            <td className="text-center py-1">{parseInt(result.pname1_kill) + parseInt(result.pname2_kill)}</td>
-                                            <td className="pl-2 py-1">{result.total_prize} ৳</td>
+                                    {results.second && (
+                                        <tr className="border-b text-start text-sm">
+                                            <td className="rounded-bl-md text-center py-1">2</td>
+                                            <td className="pl-2 py-1">{getPlayerNameById(results.second).ex_1}</td>
+                                            <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.second))}</td>
+                                            <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.second).total_prize) + parseInt(matchDetails.second_prize)} ৳</td>
                                         </tr>
-                                    ))
-                                ) : (<div>No Results Found</div>)}
+                                    )}
+                                    {results.third && (
+                                        <tr className="border-b text-start text-sm">
+                                            <td className="rounded-bl-md text-center py-1">3</td>
+                                            <td className="pl-2 py-1">{getPlayerNameById(results.third).ex_1}</td>
+                                            <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.third))}</td>
+                                            <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.third).total_prize) + parseInt(matchDetails.third_prize)} ৳</td>
+                                        </tr>
+                                    )}
+                                    {results.fourth && (
+                                        <tr className="border-b text-start text-sm">
+                                            <td className="rounded-bl-md text-center py-1">4</td>
+                                            <td className="pl-2 py-1">{getPlayerNameById(results.fourth).ex_1}</td>
+                                            <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.fourth))}</td>
+                                            <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.fourth).total_prize) + parseInt(matchDetails.fourth_prize)} ৳</td>
+                                        </tr>
+                                    )}
+                                    {results.fifth && (
+                                        <tr className="border-b text-start text-sm">
+                                            <td className="rounded-bl-md text-center py-1">5</td>
+                                            <td className="pl-2 py-1">{getPlayerNameById(results.fifth).ex_1}</td>
+                                            <td className="pl-2 py-1"> {calculateTotalKills(getPlayerNameById(results.fifth))}</td>
+                                            <td className="pl-2 py-1">{parseInt(getPlayerNameById(results.fifth).total_prize) + parseInt(matchDetails.fifth_prize)} ৳</td>
+                                        </tr>
+                                    )}
+                                </tfoot>
+                                <tbody className="bg-blue-500 text-start">
+                                    <td className="text-center text-white py-1">No</td>
+                                    <td className="text-white pl-2 py-1">Players Name</td>
+                                    <td className="text-white text-center py-1">Kills</td>
+                                    <td className="text-white pl-2 py-1">Amount</td>
+                                </tbody>
+                            </table>
+                        </div>
+                        {/* === Winner Details Section === */}
+                        {/* === Total Slots 48 (Limited) === */}
+                        <div className="w-full justify-items-center mt-4">
+                            <table className="w-[95%]">
+                                <thead className="w-full bg-green-500">
+                                    <th className="text-md text-white py-1 rounded-t-md" colSpan={4}>
+                                        <FontAwesomeIcon className="text-md mr-2" icon={faClipboardCheck} />
+                                        Full Result (Only Per Kill)
+                                        <FontAwesomeIcon className="text-md ml-2" icon={faClipboardCheck} />
+                                    </th>
+                                </thead>
+                                <tfoot className="bg-white">
+                                    {results?.player_results?.length > 0 ? (
+                                        results.player_results.map((result, index) => (
+                                            <tr key={index} className="border-b text-start text-sm">
+                                                <td className="text-center py-1">{index + 1}</td>
+                                                <td className="pl-2 py-1">{result.ex_1}</td>
+                                                <td className="text-center py-1">{parseInt(result.pname1_kill) + parseInt(result.pname2_kill)}</td>
+                                                <td className="pl-2 py-1">{result.total_prize} ৳</td>
+                                            </tr>
+                                        ))
+                                    ) : (<div>No Results Found</div>)}
 
 
-                            </tfoot>
-                            <tbody className="bg-blue-500 text-start">
-                                <td className="text-center text-white py-1">No</td>
-                                <td className="text-white pl-2 py-1">Players Name</td>
-                                <td className="text-white text-center py-1">Kills</td>
-                                <td className="text-white pl-2 py-1">Amount</td>
-                            </tbody>
-                        </table>
-                    </div>
+                                </tfoot>
+                                <tbody className="bg-blue-500 text-start">
+                                    <td className="text-center text-white py-1">No</td>
+                                    <td className="text-white pl-2 py-1">Players Name</td>
+                                    <td className="text-white text-center py-1">Kills</td>
+                                    <td className="text-white pl-2 py-1">Amount</td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </>) : (<div className="text-center font-bold text-white pt-4">Result Not Published Yet</div>)}
                 </div>
             </>) : <>Loading</>}
         </div>
