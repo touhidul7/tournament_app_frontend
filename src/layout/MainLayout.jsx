@@ -49,6 +49,19 @@ const MainLayout = () => {
 
     const user = JSON.parse(localStorage.getItem("user")) || {};
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            const blockedKeys = ["ArrowRight", "ArrowLeft", "PageUp", "PageDown"];
+            if (blockedKeys.includes(e.key)) {
+                e.preventDefault();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
+
     const CheckUser = async () => {
         try {
             // Force refresh token before request

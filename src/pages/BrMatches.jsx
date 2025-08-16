@@ -221,7 +221,7 @@ const BrMatches = () => {
       {/* === BR Matches Card Section === */}
       <section className="w-full mt-24 justify-items-center">
         {/* === Cards === */}
-        {match.map((match) => (
+        {match && match.length > 0 ? match.map((match) => (
           <div className={`w-[95%] mt-5 ${match.status == 0 ? "hidden" : "block"}`} key={match.id}>
             <div className="relative bg-cardbg rounded-lg p-2">
               <div className="absolute top-0 right-0 w-12 h-5 flex items-center justify-center bg-white text-cardbg rounded-tr-lg">
@@ -377,7 +377,7 @@ const BrMatches = () => {
               </div>
             </div>
           </div>
-        ))}
+        )) : <div className="text-center font-bold text-white pt-4">No Match Founded</div>}
 
         {/* Modal Shown Here */}
         <div className="flex justify-center gap-2 mt-4 mb-12">
