@@ -99,7 +99,7 @@ const Wallet = () => {
         </h2>
       </div>
       {/* transaction section */}
-      <NavLink to='/notifications' className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center font-light'>
+      <NavLink to='/transaction-history' className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center font-light'>
         <h2>
           View Transaction History
         </h2>
