@@ -20,7 +20,7 @@ const TransactionHistory = () => {
     setIsLoading(prev => ({ ...prev, deposits: true }));
     setError(prev => ({ ...prev, deposits: null }));
     try {
-      const response = await fetch(`${VITE_API_BASE_URL}/deposites/user/${user.user.uid}`);
+      const response = await fetch(`${VITE_API_BASE_URL}/deposites/user/history/${user.user.uid}`);
       const data = await response.json();
       setDepositData(data);
     } catch (error) {
@@ -36,7 +36,7 @@ const TransactionHistory = () => {
     setIsLoading(prev => ({ ...prev, withdraw: true }));
     setError(prev => ({ ...prev, withdraw: null }));
     try {
-      const response = await fetch(`${VITE_API_BASE_URL}/withdraw-request/user/${user.user.uid}`);
+      const response = await fetch(`${VITE_API_BASE_URL}/withdraw-request/user/history/${user.user.uid}`);
       const data = await response.json();
       setWithdrawData(data);
     } catch (error) {
@@ -73,7 +73,7 @@ const TransactionHistory = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg min-h-screen">
       {/* Tab Buttons */}
       <div className="flex justify-between mb-6">
         {tabs.map((tab, i) => (

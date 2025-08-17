@@ -81,6 +81,11 @@ const AddMoney = () => {
   let finalAmount = parseFloat(data.amount);
   let appliedPromo = null;
 
+  if(!activeTab) {
+    toast.error("Please select a payment method");
+    return;
+  }
+
   if (data.promo_code) {
     const enteredCode = data.promo_code.trim().toLowerCase();
 

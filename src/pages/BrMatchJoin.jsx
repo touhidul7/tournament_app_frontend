@@ -175,7 +175,7 @@ const BrMatchJoin = () => {
                                 <input
                                     className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out"
                                     type="text"
-                                    {...register("player2", { required: true })}
+                                    {...register("player2", { required: false })}
                                     placeholder="Player 2 Name"
                                 />
                             )}
@@ -186,13 +186,13 @@ const BrMatchJoin = () => {
                                     <input
                                         className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out"
                                         type="text"
-                                        {...register("player3", { required: true })}
+                                        {...register("player3", { required: false })}
                                         placeholder="Player 3 Name"
                                     />
                                     <input
                                         className="w-full bg-cardbg inset-shadow-sm inset-shadow-gray-100/70 px-3 py-3 text-lg font-medium rounded-md focus:outline-none hover:inset-shadow-green-500/60 transition-all duration-300 delay-75 ease-in-out"
                                         type="text"
-                                        {...register("player4", { required: true })}
+                                        {...register("player4", { required: false})}
                                         placeholder="Player 4 Name"
                                     />
                                 </>
