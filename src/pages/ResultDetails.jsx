@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   faBangladeshiTakaSign,
@@ -65,6 +66,33 @@ const ResultDetails = () => {
     if (player?.pname3_kill) total += parseInt(player.pname3_kill);
     if (player?.pname4_kill) total += parseInt(player.pname4_kill);
     return total;
+  };
+
+  // Get player kills with names in table format
+  const renderPlayerKillsTable = (userId) => {
+    const team = matchDetails.joins?.find((j) => j.user_id === userId);
+    const player = getPlayerById(userId);
+    if (!team || !player) return null;
+
+    const players = [
+      { name: team.pname1, kills: player.pname1_kill || 0 },
+      { name: team.pname2, kills: player.pname2_kill || 0 },
+      { name: team.pname3, kills: player.pname3_kill || 0 },
+      { name: team.pname4, kills: player.pname4_kill || 0 },
+    ].filter((item) => item.name);
+
+    return (
+      <table className="w-full border-collapse">
+        <tbody>
+          {players.map((item, i) => (
+            <tr key={i} className="border-b border-gray-200 last:border-b-0">
+              <td className="py-1 px-1 text-left">{item.name}</td>
+              <td className="py-1 px-1 text-right">{item.kills}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
   };
 
   return (
@@ -167,16 +195,16 @@ const ResultDetails = () => {
                       const player = getPlayerById(userId);
                       return (
                         <tr key={pos} className="border-b">
-                          <td className="text-center py-1">{index + 1}</td>
-                          <td className="pl-2 py-1">
-                            {getTeamPlayers(userId).map((name, i) => (
-                              <div key={i}>{name}</div>
-                            ))}
+                          <td className="text-center py-1 align-top">
+                            {index + 1}
                           </td>
-                          <td className="pl-2 py-1">
+                          <td className="py-1 px-1">
+                            {renderPlayerKillsTable(userId)}
+                          </td>
+                          <td className="text-center py-1 align-top">
                             {calculateTotalKills(player)}
                           </td>
-                          <td className="pl-2 py-1">
+                          <td className="text-center py-1 align-top">
                             {parseInt(player?.total_prize || 0) +
                               parseInt(matchDetails[`${pos}_prize`] || 0)}{" "}
                             ৳
@@ -189,8 +217,8 @@ const ResultDetails = () => {
                 <tfoot className="bg-blue-500 text-start">
                   <tr>
                     <td className="text-center text-white py-1">No</td>
-                    <td className="text-white pl-2 py-1">Players Name</td>
-                    <td className="text-white text-center py-1">Kills</td>
+                    <td className="text-white pl-2 py-1">Players (Kills)</td>
+                    <td className="text-white text-center py-1">Total</td>
                     <td className="text-white pl-2 py-1">Amount</td>
                   </tr>
                 </tfoot>
@@ -222,16 +250,18 @@ const ResultDetails = () => {
                   {results?.player_results?.length > 0 ? (
                     results.player_results.map((result, index) => (
                       <tr key={index} className="border-b">
-                        <td className="text-center py-1">{index + 1}</td>
-                        <td className="pl-2 py-1">
-                          {getTeamPlayers(result.user_id).map((name, i) => (
-                            <div key={i}>{name}</div>
-                          ))}
+                        <td className="text-center py-1 align-top">
+                          {index + 1}
                         </td>
-                        <td className="text-center py-1">
+                        <td className="py-1 px-1">
+                          {renderPlayerKillsTable(result.user_id)}
+                        </td>
+                        <td className="text-center py-1 align-top">
                           {calculateTotalKills(result)}
                         </td>
-                        <td className="pl-2 py-1">{result.total_prize} ৳</td>
+                        <td className="text-center py-1 align-top">
+                          {result.total_prize} ৳
+                        </td>
                       </tr>
                     ))
                   ) : (
@@ -245,9 +275,9 @@ const ResultDetails = () => {
                 <tfoot className="bg-blue-500 text-start">
                   <tr>
                     <td className="text-center text-white py-1">No</td>
-                    <td className="text-white pl-2 py-1">Players Name</td>
-                    <td className="text-white text-center py-1">Kills</td>
-                    <td className="text-white pl-2 py-1">Amount</td>
+                    <td className="text-white pl-2 py-1">Players (Kills)</td>
+                    <td className="text-white text-center py-1">Total</td>
+                    <td className="text-white pl-2 py-1">Prize</td>
                   </tr>
                 </tfoot>
               </table>
