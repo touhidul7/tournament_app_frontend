@@ -61,7 +61,7 @@ const TransactionHistory = () => {
     switch(status) {
       case "0": return <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Pending</span>;
       case "1": return <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Approved</span>;
-      case "2": return <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">Rejected</span>;
+      case "cancelled": return <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">Cancelled</span>;
       default: return <span className="bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">Unknown</span>;
     }
   };
