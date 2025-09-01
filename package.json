@@ -1,5 +1,6 @@
 {
-  "name": "tournament-app",
+  "name": "brb-tour-admin",
+  "homepage": "https://admin.brbtour.com",
   "private": true,
   "version": "0.0.0",
   "type": "module",
