@@ -136,7 +136,7 @@ const Home = () => {
                 />
                 <p className="font-semibold text-md mt-2">{cat.name}</p>
                 <p className="text-sm font-light">
-                  {cat?.matches?.length || 0}  Match Found
+                   {cat?.matches?.filter(match => match.status == 1)?.length || 0} Match Found
                 </p>
                 {" "}
                 {/* Replace with actual count if available */}

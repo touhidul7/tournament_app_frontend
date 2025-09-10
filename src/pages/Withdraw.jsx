@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { NavLink, useOutletContext } from 'react-router';
 
 const Withdraw = () => {
-    const { totalIncome, withdrawRequest, CheckUser } = useOutletContext();
+    const { totalIncome,withdrawRequestPending, withdrawRequest, CheckUser } = useOutletContext();
 
 
     const { updateData } = useOutletContext();
@@ -25,7 +25,7 @@ const Withdraw = () => {
             toast.error("Minimum withdraw amount is 100 taka.");
             return;
         }
-        if (parseInt(data.amount) > (totalIncome - withdrawRequest)) {
+        if (parseInt(data.amount) > (totalIncome - (parseInt(withdrawRequest) + parseInt(withdrawRequestPending)))) {
             toast.error("Insufficient balance to withdraw.");
             return;
         }
@@ -69,7 +69,7 @@ const Withdraw = () => {
                 <div className='flex items-center justify-center gap-2'>
                     <h2 className='text-lg'>Abailable Balance </h2>
                     <h2 className='text-xl'><FontAwesomeIcon icon={faBangladeshiTakaSign} />
-                        {totalIncome ? totalIncome - withdrawRequest : 0} Tk</h2>
+                        {totalIncome ? totalIncome - (parseInt(withdrawRequest)+parseInt(withdrawRequestPending)) : 0} Tk</h2>
                 </div>
             </div>
             {/* Mobile Banking list */}

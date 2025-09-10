@@ -19,6 +19,7 @@ const MainLayout = () => {
     const [result, setResult] = useState([]);
     const [topPlayer, setTopPlayer] = useState([]);
     const [withdrawRequest, setWithdrawRequest] = useState([]);
+    const [withdrawRequestPending, setWithdrawRequestPending] = useState([]);
     const [isLoading, setIsLoading] = useState(true); // Loading state
     const [noticeLoading, setNoticeLoading] = useState(false);
     const [settings, setSettings] = useState([]);
@@ -106,6 +107,7 @@ const MainLayout = () => {
             setResult(resultData);
             setTopPlayer(topPlayerData.top_players);
             setWithdrawRequest(withdrawData.total_withdraw);
+            setWithdrawRequestPending(withdrawData.total_withdraw_pending);
         } catch (error) {
             console.error("Error fetching data:", error);
         } finally {
@@ -128,10 +130,11 @@ const MainLayout = () => {
         total_income_deposit = 0,
     } = result || {};
 
-    const prizeSum = total_prize + total_win_price + total_second_prize + total_third_prize + total_fourth_prize + total_fifth_prize;
+    const prizeSum = parseInt(total_prize) + parseInt(total_win_price) + parseInt(total_second_prize) + parseInt(total_third_prize) + parseInt(total_fourth_prize) + parseInt(total_fifth_prize);
 
-    const totalIncome = prizeSum > 0 ? prizeSum - total_income_deposit : 0;
-
+    const totalIncome = parseInt(prizeSum) > 0 ? parseInt(prizeSum) - parseInt(total_income_deposit) : 0;
+    console.log(totalIncome);
+    
 
     // get settings
     useEffect(() => {
@@ -187,6 +190,8 @@ const MainLayout = () => {
         </>
     );
 
+    // console.log(withdrawRequestPending);
+
     return (
         <div className='max-w-md mx-auto relative'>
             {/* Show loader when data is loading */}
@@ -207,6 +212,7 @@ const MainLayout = () => {
                     topPlayer,
                     totalIncome,
                     withdrawRequest,
+                    withdrawRequestPending,
                     isLoading,
                     settings,
                     setNotifications,
@@ -216,6 +222,8 @@ const MainLayout = () => {
                 <Toaster />
                 <ToastContainer className={'z-50'} />
             </div>
+            {/* support icon */}
+            <a className='fixed bottom-0 right-0 mr-6 mb-18 w-16 z-50' href="https://brbtour.com/"><img className='w-full h-auto rounded-full' src="/image/support.png" alt="" /></a>
         </div>
     );
 };

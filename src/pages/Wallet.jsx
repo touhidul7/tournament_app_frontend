@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { NavLink, useOutletContext } from 'react-router';
 
 const Wallet = () => {
-  const { totalPay, deposite, updateData, withdrawRequest, totalIncome } = useOutletContext();
+  const { deposite, updateData, withdrawRequest, withdrawRequestPending, totalIncome } = useOutletContext();
   const [showModal, setShowModal] = useState(false);
   const user = JSON.parse(localStorage.getItem("user")) || {};
   const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -76,18 +76,18 @@ const Wallet = () => {
         </h2>
       </div>
       {/* Payed section */}
-      <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center'>
+      {/* <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center'>
         <h2>TOTAL PAYED</h2>
         <h2 className='text-lg font-semibold'>
           BDT <span className='text-green-600'>{totalPay ? totalPay : 0}</span>
         </h2>
-      </div>
+      </div> */}
       {/* Total Get Prize */}
       <div className='flex w-[96%] mx-auto bg-cardbg text-white py-2 px-2 rounded-lg justify-between items-center'>
         <h2>TOTAL INCOME</h2>
         <h2 className='text-lg font-semibold'>
           BDT <span id='incomeData' className='text-green-600'>{/* {result.message != "No player results found for this user" ? (result.total_prize + result.total_win_price) - result.total_income_deposit : 0} */}
-            {totalIncome ? totalIncome - withdrawRequest : 0}
+            {totalIncome ? totalIncome - (parseInt(withdrawRequest)+parseInt(withdrawRequestPending)) : 0}
           </span>
         </h2>
       </div>

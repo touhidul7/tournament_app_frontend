@@ -31,6 +31,7 @@ import ThankYou2 from "../pages/ThankYou2";
 import JoinThanks from "../pages/JoinThanks";
 import Notifications from "../pages/Notifications";
 import ScrollToTop from "../components/ScrollToTop";
+import MatchThankyou from "../pages/MatchThankyou";
 
 
 const MainRoutes = createBrowserRouter([
@@ -236,6 +237,14 @@ const MainRoutes = createBrowserRouter([
             element: (
                <PrivateRoute>
                   <ThankYou />
+               </PrivateRoute>
+            )
+         },
+         {
+            path: '/join-success',
+            element: (
+               <PrivateRoute>
+                  <MatchThankyou />
                </PrivateRoute>
             )
          },

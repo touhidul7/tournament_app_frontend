@@ -52,7 +52,8 @@ const MainHeader = ({ balance, settings, notifications, setNotifications }) => {
     return (
         <div>
             <div className='py-2 flex items-center justify-between border-b border-cardbg bg-cardbg'>
-                <NavLink to={`/`} className='flex items-center gap-2'>
+                <NavLink to={`/`} className='flex items-center gap-2 pl-2'>
+                <img className='w-10 h-auto rounded-full' src="/image/logo.png" alt="BRB TOUR" />
                     <h2 className='text-white font-medium text-lg ml-2'>{settings && settings.app_name}</h2>
                 </NavLink>
                 <div className='flex items-center justify-end gap-0'>

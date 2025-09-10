@@ -167,7 +167,7 @@ const ResultDetails = () => {
             </div>
 
             {/* === Winner Details Section === */}
-            <div className="w-full justify-items-center mt-4">
+          {/*   <div className="w-full justify-items-center mt-4">
               <table className="w-[95%]">
                 <thead className="w-full bg-green-500">
                   <tr>
@@ -223,7 +223,7 @@ const ResultDetails = () => {
                   </tr>
                 </tfoot>
               </table>
-            </div>
+            </div> */}
 
             {/* === Full Result Section === */}
             <div className="w-full justify-items-center mt-4">
@@ -246,7 +246,7 @@ const ResultDetails = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white text-start text-sm">
+                <tfoot className="bg-white text-start text-sm">
                   {results?.player_results?.length > 0 ? (
                     results.player_results.map((result, index) => (
                       <tr key={index} className="border-b">
@@ -271,15 +271,15 @@ const ResultDetails = () => {
                       </td>
                     </tr>
                   )}
-                </tbody>
-                <tfoot className="bg-blue-500 text-start">
+                </tfoot>
+                <tbody className="bg-blue-500 text-start">
                   <tr>
                     <td className="text-center text-white py-1">No</td>
-                    <td className="text-white pl-2 py-1">Players (Kills)</td>
-                    <td className="text-white text-center py-1">Total</td>
+                    <td className="text-white pl-2 py-1 flex justify-between w-full"><span>Players</span> <span>Kills</span></td>
+                    <td className="text-white text-center py-1">Total kills</td>
                     <td className="text-white pl-2 py-1">Prize</td>
                   </tr>
-                </tfoot>
+                </tbody>
               </table>
             </div>
           </div>

@@ -93,7 +93,7 @@ const BrMatchJoin = () => {
                     sendNotification(user.user.uid, `You have successfully joined the match: ${matchDetails.match_name}`);
                     // updateData();
                     reset();
-                    navigate(`/notifications`);
+                    navigate(`/join-success`);
                 }
             })
     };
